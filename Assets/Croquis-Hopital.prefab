@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6747039618116991190}
   m_Layer: 0
-  m_Name: Niveau-Hopital
+  m_Name: Croquis-Hopital
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
