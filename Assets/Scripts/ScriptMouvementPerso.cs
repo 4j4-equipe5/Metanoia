@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 public class ScriptMouvementPerso : MonoBehaviour
 {
-   
+    public Transform groundCheck;
     private bool veutSauter = false;
     public LayerMask maskSol;
     public bool grounded;
@@ -19,7 +19,7 @@ public class ScriptMouvementPerso : MonoBehaviour
     public Transform cameraPivot;
     private CapsuleCollider capsuleCollider;
     private InputSystem_Actions controle;
-    private float velociteMax = 10f;
+    private float velociteMax = 15f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -54,16 +54,20 @@ public class ScriptMouvementPerso : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
+        //à chaque FixedUpdate, on vérifie d'abord si le joueur est au sol
         VerifierSol();
+        //ensuite, si le joueur est au sol et qu'il appui sur la touche assignée au saut,
         if (grounded && veutSauter)
         {
-            joueurRb.AddForce(Vector3.up * 3f, ForceMode.Impulse);
+            //ajouter une force au rb
+            joueurRb.AddForce(Vector3.up * 2.5f, ForceMode.Impulse);
+            //toggle la bool qui détermine si la touche saut est enclanchée
             veutSauter = false;
         }
         //obtenir la direction des touches w a s d
         Vector2 inputMove = controle.Player.Move.ReadValue<Vector2>();
         Vector3 directionAcceleration = (transform.right * inputMove.x + transform.forward * inputMove.y).normalized;
+        //assigner velociteActuelle au linearvelocity du rb du joueur avant les modifications
         Vector3 velociteActuelle = new Vector3(joueurRb.linearVelocity.x, 0f, joueurRb.linearVelocity.z);
 
         Vector3 velociteHorizontale = new Vector3(joueurRb.linearVelocity.x, 0, joueurRb.linearVelocity.z);
@@ -71,7 +75,7 @@ public class ScriptMouvementPerso : MonoBehaviour
 
 
 
-
+        //si le joueur est a terre, on calcule la velocite avec la fonction BougerSol, sinon avec BougerAir
         if (grounded)
         {
             nouvelleVelocite = BougerSol(directionAcceleration, velociteHorizontale);
@@ -80,7 +84,9 @@ public class ScriptMouvementPerso : MonoBehaviour
         {
             nouvelleVelocite = BougerAir(directionAcceleration, velociteHorizontale);
         }
+        //le y de la velocite reste inchangé
         nouvelleVelocite.y = joueurRb.linearVelocity.y;
+        //on applique la nouvellevelocite au rb
         joueurRb.linearVelocity = nouvelleVelocite;
     }
     private void OnEnable()
@@ -89,6 +95,12 @@ public class ScriptMouvementPerso : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         controle.Player.Enable();
     }
+    /// <summary>
+    /// Fonction qui sera utilisée dans les fonctions bougerSol et BougerAir. Dans bougerAir, elle est utilisée tel quel, alors que dans BougerSol, on ajoute une réduction de vitesse en fonction du temps et dela friction du sol.
+    /// </summary>
+    /// <param name="directionAcceleration">Valeur calculée dans le fixed update. Valeur normalisée qui correspond a la direction du rb du joueur</param>
+    /// <param name="velociteActuelle">dans le fixedupdate, cette valeur est assignée avant le calcul de la nouvellevelocite et correspond au linearvelocity du rb du joueur</param>
+    /// <returns>velociteActuelle + directionAcceleration * velociteAccel</returns>
     private Vector3 GererAcceleration(Vector3 directionAcceleration, Vector3 velociteActuelle)
     {
         float velociteFuture = Vector3.Dot(velociteActuelle, directionAcceleration);
@@ -99,6 +111,12 @@ public class ScriptMouvementPerso : MonoBehaviour
         }
         return velociteActuelle + directionAcceleration * velociteAccel;
     }
+    /// <summary>
+    /// calcul une réduction de la velocite avant de retourner GererAcceleration pour quand le personnage est au sol. Appelée dans FixedUpdate pour assigner une valeur à nouvelleVelocité, qui sera ensuite la valeur de joueurRb.linearVelocity
+    /// </summary>
+    /// <param name="directionAcceleration">idem a GererAcceleration</param>
+    /// <param name="velociteActuelle">idem GererAcceleration</param>
+    /// <returns>GererAcceleration(directionAcceleration, velociteActuelle)</returns>
     private Vector3 BougerSol(Vector3 directionAcceleration, Vector3 velociteActuelle)
     {
         float vitesse = velociteActuelle.magnitude;
@@ -111,23 +129,24 @@ public class ScriptMouvementPerso : MonoBehaviour
         }
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
+    /// <summary>
+    /// retourne GererAcceleration sans la réduction de BougerSol
+    /// </summary>
+    /// <param name="directionAcceleration">idem aux autres fonctions</param>
+    /// <param name="velociteActuelle">idem</param>
+    /// <returns>GererAcceleration(directionAcceleration, velociteActuelle);</returns>
     private Vector3 BougerAir(Vector3 directionAcceleration, Vector3 velociteActuelle)
     {
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
+    /// <summary>
+    /// fonction qui retourne un bool qui détermine si le joueur est au sol
+    /// </summary>
+    /// <returns>grounded</returns>
     private bool VerifierSol()
     {
-        if (Physics.CheckSphere(transform.position, 0.5f, maskSol))
-        {
-            grounded = true;
-            Debug.Log("ground");
-        }
-        else
-        {
-            grounded = false;
-            Debug.Log("air");
-        }
-
+        grounded = Physics.CheckSphere(groundCheck.position, 0.2f, maskSol);
+        Debug.Log(grounded);
         return grounded;
     }
 }
