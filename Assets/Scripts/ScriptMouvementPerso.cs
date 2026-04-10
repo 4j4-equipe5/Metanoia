@@ -5,37 +5,80 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 public class ScriptMouvementPerso : MonoBehaviour
 {
+    //==================================================================
+    [Header("crouch")]
+    
+    private float hauteurCameraCrouch = 0.8f;
+    private float modificateurCrouchVitesse = 0.5f;
+    private float modificateurCrouchSaut = 0.5f;
+    private float hauteurCrouch = 1f;
+    private float hauteurCibleeCamera;
+    //===================================================================
+    [Header("composantsPhysiques")]
+    private CapsuleCollider capsuleCollider;
+     public Transform cameraPivot;
+     public LayerMask maskSol;
     public Transform groundCheck;
+    private Rigidbody joueurRb;
+    //====================================================================
+    [Header("variables de controle du personnage")]
+     private bool isCrouched;
+    private InputSystem_Actions controle;
     private bool veutSauter = false;
-    public LayerMask maskSol;
+   
     public bool grounded;
-    private int friction = 5;
+    private int friction = 3;
     private float acceleration = 20f;
     public float sensitivityX = 0.5f;
     public float sensitivityY = 0.5f;
     private float orientationX;
     private float orientationY;
-    private Rigidbody joueurRb;
-    public Transform cameraPivot;
-    private CapsuleCollider capsuleCollider;
-    private InputSystem_Actions controle;
-    private float velociteMax = 15f;
+    private float velociteMax;
+    private float velociteMaxNormale = 20f;
+    private float hauteurNormale = 1.6f;
+    private float jumpForce;
+    private float jumpForceNormale = 2f;
+    private float hauteurCameraNormale = 1.4f;
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
+    
+  
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         joueurRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         controle = new InputSystem_Actions();
+        jumpForce = jumpForceNormale;
+        capsuleCollider.height = hauteurNormale;
+        velociteMax = velociteMaxNormale;
+        hauteurCibleeCamera = hauteurCameraNormale;
+
     }
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
 
     void Start()
     {
-
+       
     }
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
 
     // Update is called once per frame
     void Update()
     {
+        if (controle.Player.Crouch.triggered)
+        {
+            VerifierCrouch(!isCrouched);
+        }
         if (controle.Player.Jump.triggered)
         {
             veutSauter = true;
@@ -44,26 +87,27 @@ public class ScriptMouvementPerso : MonoBehaviour
 
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
-        //l'axe horizontale est influencé par le personnage
+        //l'axe horizontale est influencï¿½ par le personnage
         transform.Rotate(Vector3.up * look.x * sensitivityX);
 
         orientationY -= look.y * sensitivityY;
         orientationY = Mathf.Clamp(orientationY, -70, 70);
-        //c'est la caméra qui est tournée par l'axe verticale
+        //c'est la camï¿½ra qui est tournï¿½e par l'axe verticale
         cameraPivot.localRotation = Quaternion.Euler(orientationY, 0f, 0f);
+        //permet de transitionner entre crouched et debout
+        cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x,
+         Mathf.Lerp(cameraPivot.localPosition.y, hauteurCibleeCamera, 8f * Time.deltaTime),
+            cameraPivot.localPosition.z
+        );
     }
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
+
     private void FixedUpdate()
     {
-        //à chaque FixedUpdate, on vérifie d'abord si le joueur est au sol
-        VerifierSol();
-        //ensuite, si le joueur est au sol et qu'il appui sur la touche assignée au saut,
-        if (grounded && veutSauter)
-        {
-            //ajouter une force au rb
-            joueurRb.AddForce(Vector3.up * 2.5f, ForceMode.Impulse);
-            //toggle la bool qui détermine si la touche saut est enclanchée
-            veutSauter = false;
-        }
+
         //obtenir la direction des touches w a s d
         Vector2 inputMove = controle.Player.Move.ReadValue<Vector2>();
         Vector3 directionAcceleration = (transform.right * inputMove.x + transform.forward * inputMove.y).normalized;
@@ -84,10 +128,21 @@ public class ScriptMouvementPerso : MonoBehaviour
         {
             nouvelleVelocite = BougerAir(directionAcceleration, velociteHorizontale);
         }
-        //le y de la velocite reste inchangé
+        //le y de la velocite reste inchangï¿½
         nouvelleVelocite.y = joueurRb.linearVelocity.y;
         //on applique la nouvellevelocite au rb
         joueurRb.linearVelocity = nouvelleVelocite;
+                //ï¿½ chaque FixedUpdate, on vï¿½rifie d'abord si le joueur est au sol
+        VerifierSol();
+        //ensuite, si le joueur est au sol et qu'il appui sur la touche assignï¿½e au saut,
+        if (grounded && veutSauter)
+        {
+ 
+            //ajouter une force au rb
+            joueurRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //toggle la bool qui dï¿½termine si la touche saut est enclanchï¿½e
+            veutSauter = false;
+        }
     }
     private void OnEnable()
     {
@@ -95,11 +150,18 @@ public class ScriptMouvementPerso : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         controle.Player.Enable();
     }
+    
+    
+    
+    //==================================================================
+    //==================================================================
+    //==================================================================
+    
     /// <summary>
-    /// Fonction qui sera utilisée dans les fonctions bougerSol et BougerAir. Dans bougerAir, elle est utilisée tel quel, alors que dans BougerSol, on ajoute une réduction de vitesse en fonction du temps et dela friction du sol.
+    /// Fonction qui sera utilisï¿½e dans les fonctions bougerSol et BougerAir. Dans bougerAir, elle est utilisï¿½e tel quel, alors que dans BougerSol, on ajoute une rï¿½duction de vitesse en fonction du temps et dela friction du sol.
     /// </summary>
-    /// <param name="directionAcceleration">Valeur calculée dans le fixed update. Valeur normalisée qui correspond a la direction du rb du joueur</param>
-    /// <param name="velociteActuelle">dans le fixedupdate, cette valeur est assignée avant le calcul de la nouvellevelocite et correspond au linearvelocity du rb du joueur</param>
+    /// <param name="directionAcceleration">Valeur calculï¿½e dans le fixed update. Valeur normalisï¿½e qui correspond a la direction du rb du joueur</param>
+    /// <param name="velociteActuelle">dans le fixedupdate, cette valeur est assignï¿½e avant le calcul de la nouvellevelocite et correspond au linearvelocity du rb du joueur</param>
     /// <returns>velociteActuelle + directionAcceleration * velociteAccel</returns>
     private Vector3 GererAcceleration(Vector3 directionAcceleration, Vector3 velociteActuelle)
     {
@@ -111,8 +173,14 @@ public class ScriptMouvementPerso : MonoBehaviour
         }
         return velociteActuelle + directionAcceleration * velociteAccel;
     }
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
+
+
     /// <summary>
-    /// calcul une réduction de la velocite avant de retourner GererAcceleration pour quand le personnage est au sol. Appelée dans FixedUpdate pour assigner une valeur à nouvelleVelocité, qui sera ensuite la valeur de joueurRb.linearVelocity
+    /// calcul une rï¿½duction de la velocite avant de retourner GererAcceleration pour quand le personnage est au sol. Appelï¿½e dans FixedUpdate pour assigner une valeur ï¿½ nouvelleVelocitï¿½, qui sera ensuite la valeur de joueurRb.linearVelocity
     /// </summary>
     /// <param name="directionAcceleration">idem a GererAcceleration</param>
     /// <param name="velociteActuelle">idem GererAcceleration</param>
@@ -129,8 +197,13 @@ public class ScriptMouvementPerso : MonoBehaviour
         }
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
+
+    //==================================================================
+    //==================================================================
+    //==================================================================
+
     /// <summary>
-    /// retourne GererAcceleration sans la réduction de BougerSol
+    /// retourne GererAcceleration sans la rï¿½duction de BougerSol
     /// </summary>
     /// <param name="directionAcceleration">idem aux autres fonctions</param>
     /// <param name="velociteActuelle">idem</param>
@@ -140,7 +213,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
     /// <summary>
-    /// fonction qui retourne un bool qui détermine si le joueur est au sol
+    /// fonction qui retourne un bool qui dï¿½termine si le joueur est au sol
     /// </summary>
     /// <returns>grounded</returns>
     private bool VerifierSol()
@@ -148,5 +221,34 @@ public class ScriptMouvementPerso : MonoBehaviour
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, maskSol);
         Debug.Log(grounded);
         return grounded;
+    }
+    /// <summary>
+    /// fonction qui gere les modification des stats quand le joueur est
+    /// accroupi
+    /// </summary>
+    /// <param name="state">bool que l'on passe pour gerer le comportement</param>
+    private void VerifierCrouch(bool state)
+    {
+        isCrouched = state;
+        if (isCrouched)
+        {
+            velociteMax = velociteMaxNormale * modificateurCrouchVitesse;
+            jumpForce = jumpForceNormale * modificateurCrouchSaut;
+            capsuleCollider.center = new Vector3(0, hauteurCrouch / 2f, 0);
+            capsuleCollider.height = hauteurCrouch;
+
+            hauteurCibleeCamera = hauteurCameraCrouch;
+          
+             
+        }
+        else
+        {
+            velociteMax = velociteMaxNormale;
+             capsuleCollider.center = new Vector3(0, hauteurNormale / 2f, 0);
+            capsuleCollider.height = hauteurNormale;
+            jumpForce = jumpForceNormale;
+            hauteurCibleeCamera = hauteurCameraNormale;
+        }
+         Debug.Log(isCrouched);
     }
 }
