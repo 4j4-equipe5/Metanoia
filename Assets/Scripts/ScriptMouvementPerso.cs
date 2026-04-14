@@ -36,6 +36,12 @@ public class ScriptMouvementPerso : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Pour mettre le jeu en pause (sinon la camÃ©ra continue de bouger)
+        if (PauseManager.IsPaused()){
+            return;
+        }
+            
+        
         if (controle.Player.Jump.triggered)
         {
             veutSauter = true;
@@ -44,24 +50,30 @@ public class ScriptMouvementPerso : MonoBehaviour
 
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
-        //l'axe horizontale est influencé par le personnage
+        //l'axe horizontale est influencï¿½ par le personnage
         transform.Rotate(Vector3.up * look.x * sensitivityX);
 
         orientationY -= look.y * sensitivityY;
         orientationY = Mathf.Clamp(orientationY, -70, 70);
-        //c'est la caméra qui est tournée par l'axe verticale
+        //c'est la camï¿½ra qui est tournï¿½e par l'axe verticale
         cameraPivot.localRotation = Quaternion.Euler(orientationY, 0f, 0f);
     }
     private void FixedUpdate()
     {
-        //à chaque FixedUpdate, on vérifie d'abord si le joueur est au sol
+        // Pour mettre le jeu en pause (sinon la camÃ©ra continue de bouger)
+        if (PauseManager.IsPaused()) {
+            return;
+        }  
+
+
+        //ï¿½ chaque FixedUpdate, on vï¿½rifie d'abord si le joueur est au sol
         VerifierSol();
-        //ensuite, si le joueur est au sol et qu'il appui sur la touche assignée au saut,
+        //ensuite, si le joueur est au sol et qu'il appui sur la touche assignï¿½e au saut,
         if (grounded && veutSauter)
         {
             //ajouter une force au rb
             joueurRb.AddForce(Vector3.up * 2.5f, ForceMode.Impulse);
-            //toggle la bool qui détermine si la touche saut est enclanchée
+            //toggle la bool qui dï¿½termine si la touche saut est enclanchï¿½e
             veutSauter = false;
         }
         //obtenir la direction des touches w a s d
@@ -84,7 +96,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         {
             nouvelleVelocite = BougerAir(directionAcceleration, velociteHorizontale);
         }
-        //le y de la velocite reste inchangé
+        //le y de la velocite reste inchangï¿½
         nouvelleVelocite.y = joueurRb.linearVelocity.y;
         //on applique la nouvellevelocite au rb
         joueurRb.linearVelocity = nouvelleVelocite;
@@ -96,10 +108,10 @@ public class ScriptMouvementPerso : MonoBehaviour
         controle.Player.Enable();
     }
     /// <summary>
-    /// Fonction qui sera utilisée dans les fonctions bougerSol et BougerAir. Dans bougerAir, elle est utilisée tel quel, alors que dans BougerSol, on ajoute une réduction de vitesse en fonction du temps et dela friction du sol.
+    /// Fonction qui sera utilisï¿½e dans les fonctions bougerSol et BougerAir. Dans bougerAir, elle est utilisï¿½e tel quel, alors que dans BougerSol, on ajoute une rï¿½duction de vitesse en fonction du temps et dela friction du sol.
     /// </summary>
-    /// <param name="directionAcceleration">Valeur calculée dans le fixed update. Valeur normalisée qui correspond a la direction du rb du joueur</param>
-    /// <param name="velociteActuelle">dans le fixedupdate, cette valeur est assignée avant le calcul de la nouvellevelocite et correspond au linearvelocity du rb du joueur</param>
+    /// <param name="directionAcceleration">Valeur calculï¿½e dans le fixed update. Valeur normalisï¿½e qui correspond a la direction du rb du joueur</param>
+    /// <param name="velociteActuelle">dans le fixedupdate, cette valeur est assignï¿½e avant le calcul de la nouvellevelocite et correspond au linearvelocity du rb du joueur</param>
     /// <returns>velociteActuelle + directionAcceleration * velociteAccel</returns>
     private Vector3 GererAcceleration(Vector3 directionAcceleration, Vector3 velociteActuelle)
     {
@@ -112,7 +124,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         return velociteActuelle + directionAcceleration * velociteAccel;
     }
     /// <summary>
-    /// calcul une réduction de la velocite avant de retourner GererAcceleration pour quand le personnage est au sol. Appelée dans FixedUpdate pour assigner une valeur à nouvelleVelocité, qui sera ensuite la valeur de joueurRb.linearVelocity
+    /// calcul une rï¿½duction de la velocite avant de retourner GererAcceleration pour quand le personnage est au sol. Appelï¿½e dans FixedUpdate pour assigner une valeur ï¿½ nouvelleVelocitï¿½, qui sera ensuite la valeur de joueurRb.linearVelocity
     /// </summary>
     /// <param name="directionAcceleration">idem a GererAcceleration</param>
     /// <param name="velociteActuelle">idem GererAcceleration</param>
@@ -130,7 +142,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
     /// <summary>
-    /// retourne GererAcceleration sans la réduction de BougerSol
+    /// retourne GererAcceleration sans la rï¿½duction de BougerSol
     /// </summary>
     /// <param name="directionAcceleration">idem aux autres fonctions</param>
     /// <param name="velociteActuelle">idem</param>
@@ -140,7 +152,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
     /// <summary>
-    /// fonction qui retourne un bool qui détermine si le joueur est au sol
+    /// fonction qui retourne un bool qui dï¿½termine si le joueur est au sol
     /// </summary>
     /// <returns>grounded</returns>
     private bool VerifierSol()
@@ -148,5 +160,12 @@ public class ScriptMouvementPerso : MonoBehaviour
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, maskSol);
         Debug.Log(grounded);
         return grounded;
+    }
+
+
+    // Permet de quitter proprement la partie
+    public void DisableControls()
+    {
+        controle.Player.Disable();
     }
 }
