@@ -50,11 +50,11 @@ public class PauseManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         // Disable input controls to prevent memory leak
-        ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
-        if (playerMovement != null)
-        {
-            playerMovement.DisableControls();
-        }
+        // ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
+        // if (playerMovement != null)
+        // {
+        //     playerMovement.DisableControls();
+        // }
 
         // Resume time before loading scene
         Time.timeScale = 1f;
