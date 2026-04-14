@@ -8,4 +8,5 @@ public class dataArmes : ScriptableObject
     public float cadence;
     public int maxReserve;
     public GameObject prefabArme;
+    public GameObject prefabMuzzleFlash;
 }

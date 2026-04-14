@@ -39,7 +39,16 @@ public class ScriptMouvementPerso : MonoBehaviour
     private float jumpForce;
     private float jumpForceNormale = 2f;
     private float hauteurCameraNormale = 1.4f;
+    //====================================================================
+    [Header("References a d'autres scripts")]
+    private ScriptGestionArme scriptGestionArme;
+    //====================================================================
+    [Header("Weapon Sway")]
 
+    private Transform socketArme;
+    private float intensiteSway = 1f;
+    private float smoothnessSway = 6f;
+    private Vector3 cibleRotationSway;
     //==================================================================
     //==================================================================
     //==================================================================
@@ -49,6 +58,7 @@ public class ScriptMouvementPerso : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        scriptGestionArme = GetComponentInChildren<ScriptGestionArme>();
         joueurRb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         controle = new InputSystem_Actions();
@@ -56,6 +66,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         capsuleCollider.height = hauteurNormale;
         velociteMax = velociteMaxNormale;
         hauteurCibleeCamera = hauteurCameraNormale;
+        socketArme = cameraPivot.Find("SocketArme");
 
     }
 
@@ -75,6 +86,12 @@ public class ScriptMouvementPerso : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AppliquerSway();
+
+        if (controle.Player.Attack.IsPressed())
+        {
+            scriptGestionArme.Tirer();
+        }
         if (controle.Player.Crouch.triggered)
         {
             VerifierCrouch(!isCrouched);
@@ -219,7 +236,7 @@ public class ScriptMouvementPerso : MonoBehaviour
     private bool VerifierSol()
     {
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, maskSol);
-        Debug.Log(grounded);
+       
         return grounded;
     }
     /// <summary>
@@ -249,6 +266,23 @@ public class ScriptMouvementPerso : MonoBehaviour
             jumpForce = jumpForceNormale;
             hauteurCibleeCamera = hauteurCameraNormale;
         }
-         Debug.Log(isCrouched);
+        
+    }
+    /// <summary>
+    /// fonction qui calcule et applique le sway du socket d'arme en fonction
+    /// du mouvement de la camera. Appelee dans update
+    /// </summary>
+    private void AppliquerSway()
+    {
+        Vector2 look = controle.Player.Look.ReadValue<Vector2>();
+
+        cibleRotationSway = new Vector3(look.y * intensiteSway,
+        look.x * intensiteSway, 0f
+        );
+
+        socketArme.localRotation = Quaternion.Lerp(
+        socketArme.localRotation,
+        Quaternion.Euler(cibleRotationSway),
+        Time.deltaTime * smoothnessSway);
     }
 }
