@@ -38,7 +38,7 @@ public class ScriptMouvementPerso : MonoBehaviour
     private float hauteurNormale = 1.6f;
     private float jumpForce;
     private float jumpForceNormale = 2f;
-    private float hauteurCameraNormale = 1.4f;
+    private float hauteurCameraNormale = 1f;
     //====================================================================
     [Header("References a d'autres scripts")]
     private ScriptGestionArme scriptGestionArme;
@@ -67,7 +67,7 @@ public class ScriptMouvementPerso : MonoBehaviour
         velociteMax = velociteMaxNormale;
         hauteurCibleeCamera = hauteurCameraNormale;
         socketArme = cameraPivot.Find("SocketArme");
-
+        
     }
 
     //==================================================================
