@@ -5,6 +5,9 @@ public class VictoryManager : MonoBehaviour
 {
     [SerializeField] private Canvas victoryCanvas;
     [SerializeField] private KeyCode victoryTriggerKey = KeyCode.V;
+    [SerializeField] public AudioSource musicAudioSource;
+    [SerializeField] public GameObject pauseMenu; // référence au menu de pause pour le désactiver lors de la victoire
+
     private bool hasVictory = false;
 
     void Update()
@@ -16,22 +19,29 @@ public class VictoryManager : MonoBehaviour
         }
     }
 
-    void TriggerVictory()
+    public void TriggerVictory()
     {
         hasVictory = true;
 
         // Disable player input
         ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false); // désactive le menu de pause si il est actif
+            PauseManager pauseManager = pauseMenu.GetComponent<PauseManager>();
+            if (pauseManager != null)
+            {
+                pauseManager.enabled = false; // désactive le script de pause pour éviter les conflits
+            }
+        }
         if (playerMovement != null)
         {
-            playerMovement.DisableControls();
+            playerMovement.DisableMovement(); // désactive complètement le script de mouvement
         }
 
-        if (victoryCanvas != null)
-        {
-            victoryCanvas.gameObject.SetActive(true);
-        }
-
+        victoryCanvas?.gameObject.SetActive(true);
+        musicAudioSource?.Stop(); // Arrête la musique si elle est trouvable
+        
         // Unlock and show cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -52,3 +62,4 @@ public class VictoryManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 }
+

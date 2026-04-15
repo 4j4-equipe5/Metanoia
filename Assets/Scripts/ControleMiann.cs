@@ -8,6 +8,8 @@ public class ControleMiann : MonoBehaviour, IDommagable
     [SerializeField] public Transform cibleMiann; // la position de la cible de Miann peut-être définie dans l'inspecteur 
     [SerializeField] public int distanceDetection = 10; // distance à laquelle Miann détecte le joueur
     [SerializeField] public Transform[] waypoints; // les points de patrouille de Miann
+    [SerializeField] public GameObject endGameScreen; // écran de fin de jeu à afficher lorsque le joueur est tué par Miann
+    [SerializeField] public GameObject menuVictoire; // référence au menu de victoire pour l'afficher lorsque le joueur gagne
     private int currentWaypointIndex = 0; // index du point de patrouille actuel    
     // ==================================================================================================
     [Header("Paramètres de Miann")]
@@ -48,6 +50,8 @@ public class ControleMiann : MonoBehaviour, IDommagable
         {
             agentMiann.isStopped = true; // arrête le NavMeshAgent avant destruction
             Destroy(gameObject); // détruit le gameobject de Miann
+           VictoryManager menuVictoire = FindFirstObjectByType<VictoryManager>(); // trouve le script de gestion du menu de victoire pour l'afficher
+           menuVictoire.TriggerVictory(); // affiche le menu de victoire lorsque Miann est tué par le joueur
         }
     }
     IEnumerator Stunned() // coroutine pour gérer le stun de Miann après avoir pris des dégâts

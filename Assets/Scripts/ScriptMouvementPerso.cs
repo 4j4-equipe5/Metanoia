@@ -6,69 +6,93 @@ using UnityEngine.UIElements;
 public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 {
     //==================================================================
+    // SECTION ACCROUPISSEMENT (CROUCH)
+    //==================================================================
     [Header("crouch")]
     
-    private float hauteurCameraCrouch = 0.8f;
-    private float modificateurCrouchVitesse = 0.5f;
-    private float modificateurCrouchSaut = 0.5f;
-    private float hauteurCrouch = 1f;
-    private float hauteurCibleeCamera;
+    private float hauteurCameraCrouch = 0.8f; // hauteur de la caméra quand le joueur est accroupi
+    private float modificateurCrouchVitesse = 0.5f; // multiplicateur de vitesse lors de l'accroupissement (50% de la vitesse normale)
+    private float modificateurCrouchSaut = 0.5f; // multiplicateur de force de saut lors de l'accroupissement (50% de la force normale)
+    private float hauteurCrouch = 1f; // hauteur du collider du joueur en position accroupie
+    private float hauteurCibleeCamera; // hauteur cible de la caméra (interpolée entre normale et accroupie)
+    //===================================================================
+    // SECTION COMPOSANTS PHYSIQUES
     //===================================================================
     [Header("composantsPhysiques")]
-    private CapsuleCollider capsuleCollider;
-     public Transform cameraPivot;
-     public LayerMask maskSol;
-    public Transform groundCheck;
-    private Rigidbody joueurRb;
+    private CapsuleCollider capsuleCollider; // collider capsule du joueur pour détecter les collisions
+    public Transform cameraPivot; // point pivot autour duquel tourne la caméra
+    public LayerMask maskSol; // masque de couche pour identifier le sol
+    public Transform groundCheck; // point de vérification de contact avec le sol
+    private Rigidbody joueurRb; // composant Rigidbody pour la physique du joueur
+    //====================================================================
+    // SECTION VARIABLES DE CONTRÔLE DU PERSONNAGE
     //====================================================================
     [Header("variables de controle du personnage")]
-     private bool isCrouched;
-    private InputSystem_Actions controle;
-    private bool veutSauter = false;
+    private bool isCrouched; // indicateur si le joueur est actuellement accroupi
+    private InputSystem_Actions controle; // système d'entrée pour gérer les contrôles
+    private bool veutSauter = false; // flag indiquant un saut demandé par le joueur
    
-    public bool grounded;
-    private int friction = 3;
-    private float acceleration = 20f;
-    public float sensitivityX = 0.5f;
-    public float sensitivityY = 0.5f;
-    private float orientationX;
-    private float orientationY;
-    private float velociteMax;
-    private float velociteMaxNormale = 20f;
-    private float hauteurNormale = 1.6f;
-    private float jumpForce;
-    private float jumpForceNormale = 2f;
-    private float hauteurCameraNormale = 1f;
+    public bool grounded; // indicateur si le joueur est au sol
+    private int friction = 3; // coefficient de friction au sol (décelération)
+    private float acceleration = 20f; // accélération du joueur
+    public float sensitivityX = 0.5f; // sensibilité horizontale (rotation du corps)
+    public float sensitivityY = 0.5f; // sensibilité verticale (rotation de la caméra)
+    private float orientationX; // rotation horizontale du corps (inutilisée pour le moment)
+    private float orientationY; // rotation verticale de la caméra (axe X)
+    private float velociteMax; // vitesse maximale actuelle du joueur
+    private float velociteMaxNormale = 20f; // vitesse maximale en position normale
+    private float hauteurNormale = 1.6f; // hauteur du collider du joueur en position normale
+    private float jumpForce; // force de saut actuelle
+    private float jumpForceNormale = 2f; // force de saut en position normale
+    private float hauteurCameraNormale = 1f; // hauteur de la caméra en position normale
+    //====================================================================
+    // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
     //====================================================================
     [Header("References a d'autres scripts")]
-    private ScriptGestionArme scriptGestionArme;
+    private ScriptGestionArme scriptGestionArme; // référence au script de gestion des armes
+    //====================================================================
+    // SECTION WEAPON SWAY (BALANCEMENT DE L'ARME)
     //====================================================================
     [Header("Weapon Sway")]
-
-    private Transform socketArme;
-    private float intensiteSway = 1f;
-    private float smoothnessSway = 6f;
-    private Vector3 cibleRotationSway;
+    
+    private Transform socketArme; // point d'attache de l'arme (socket)
+    private float intensiteSway = 1f; // intensité du balancement de l'arme
+    private float smoothnessSway = 6f; // fluidité du balancement de l'arme
+    private Vector3 cibleRotationSway; // rotation cible du balancement
+    //==================================================================
+    // SECTION STATS ET UI
     //==================================================================
     [Header("Stats joueur")]
-    [SerializeField] private int hpPlayer = 100;
+    [SerializeField] private int hpPlayer = 100; // points de vie du joueur
+    [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
+    private bool firstFrame = true; // flag pour éviter la transition lerp au démarrage
     //==================================================================
     //==================================================================
-    //==================================================================
+    //===================================================================
     
   
    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //==================================================================
+    // INITIALISATION - APPELÉE UNE FOIS AVANT LE PREMIER FRAME
+    //==================================================================
     private void Awake()
     {
+        // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
         scriptGestionArme = GetComponentInChildren<ScriptGestionArme>();
+        // Récupérer le composant Rigidbody pour appliquer les forces
         joueurRb = GetComponent<Rigidbody>();
+        // Récupérer le composant CapsuleCollider pour modifier la taille lors de l'accroupissement
         capsuleCollider = GetComponent<CapsuleCollider>();
+        // Initialiser le système d'entrée
         controle = new InputSystem_Actions();
+        // Définir les valeurs initiales (position normale)
         jumpForce = jumpForceNormale;
         capsuleCollider.height = hauteurNormale;
         velociteMax = velociteMaxNormale;
         hauteurCibleeCamera = hauteurCameraNormale;
+        // Initialiser la caméra à la bonne hauteur pour éviter le pop au démarrage
+        cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCameraNormale, cameraPivot.localPosition.z);
+        // Trouver le socket d'arme pour appliquer le balancement (sway)
         socketArme = cameraPivot.Find("SocketArme");
         
     }
@@ -115,10 +139,18 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         //c'est la cam�ra qui est tourn�e par l'axe verticale
         cameraPivot.localRotation = Quaternion.Euler(orientationY, 0f, 0f);
         //permet de transitionner entre crouched et debout
-        cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x,
-         Mathf.Lerp(cameraPivot.localPosition.y, hauteurCibleeCamera, 8f * Time.deltaTime),
-            cameraPivot.localPosition.z
-        );
+        if (firstFrame)
+        {
+            cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCibleeCamera, cameraPivot.localPosition.z);
+            firstFrame = false;
+        }
+        else
+        {
+            cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x,
+             Mathf.Lerp(cameraPivot.localPosition.y, hauteurCibleeCamera, 8f * Time.deltaTime),
+                cameraPivot.localPosition.z
+            );
+        }
     }
     
 
@@ -165,18 +197,41 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             veutSauter = false;
         }
     }
+    //==================================================================
+    // ÉVÉNEMENTS D'ACTIVATION
+    //==================================================================
     private void OnEnable()
     {
+        // Verrouiller le curseur au démarrage (mode jeu FPS)
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
+        // Activer le système d'entrée
         controle.Player.Enable();
     }
 
+    //==================================================================
+    // DÉSACTIVATION DES CONTRÔLES
+    //==================================================================
+    /// <summary>
+    /// Désactive les contrôles du joueur (pour les menus, dialogues, etc.)
+    /// </summary>
     public void DisableControls()
     {
         controle.Player.Disable();
     }
 
+    /// <summary>
+    /// Désactive complètement le mouvement du joueur (utilisé en cas de victoire, mort, etc.)
+    /// </summary>
+    public void DisableMovement()
+    {
+        controle.Player.Disable();
+        this.enabled = false; // Désactiver le script complet pour arrêter tous les calculs
+    }
+
+    /// <summary>
+    /// Réactive les contrôles du joueur
+    /// </summary>
     public void EnableControls()
     {
         controle.Player.Enable();
@@ -310,6 +365,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             Debug.Log("Player dead");
             // par exemple désactiver le GameObject
             gameObject.SetActive(false);
+            // afficher l'écran de game over
+            gameOverScreen.SetActive(true);
+            
         }
     }
 }

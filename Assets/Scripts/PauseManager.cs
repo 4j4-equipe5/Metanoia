@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private Canvas pauseCanvas;
+    //ajout fait par Emile
+    [SerializeField] private AudioSource musicAudioSource;
     private bool isPaused = false;
 
     void Update()
@@ -36,6 +39,7 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
         
         Time.timeScale = 0f;
+        musicAudioSource.Pause();
     }
 
     public void Resume()
@@ -59,6 +63,7 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
         
         Time.timeScale = 1f;
+        musicAudioSource.UnPause();
     }
 
     public void QuitToMainMenu()

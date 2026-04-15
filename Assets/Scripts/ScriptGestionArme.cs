@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
     private Transform pointMuzzleFlash;  
@@ -7,6 +8,7 @@ public class ScriptGestionArme : MonoBehaviour
     private float dernierTir;
     private float tempsEntreCoup;
     public dataArmes donnees;
+    [SerializeField] public AudioSource sonTir;
     private int reserveMunitionActuelle;
     private Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,6 +18,7 @@ public class ScriptGestionArme : MonoBehaviour
         tempsEntreCoup = 1f/donnees.cadence;
         reserveMunitionActuelle = donnees.maxReserve;
         cam = Camera.main;
+        sonTir.GetComponent<AudioSource>();
         pointMuzzleFlash = transform.Find("pointMuzzleFlash");
     }
     void Start()
@@ -61,6 +64,8 @@ public class ScriptGestionArme : MonoBehaviour
         StartCoroutine(MuzzleFlash());
         Debug.Log("tire");
 
+        // son de tir
+        sonTir.PlayOneShot(sonTir.clip);
         //on retire une cartouche de la reserve
         --reserveMunitionActuelle;
 

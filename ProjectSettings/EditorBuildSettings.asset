@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Niveau-Hopital.unity
     guid: 1cb00a48f12d4b14386e69b8eed962de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Niveau-Eglise.unity
     guid: e88607979411a3e44896f8e47f487e01
   m_configObjects:
