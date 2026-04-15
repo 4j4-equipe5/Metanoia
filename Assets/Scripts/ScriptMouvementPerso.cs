@@ -117,6 +117,7 @@ public class ScriptMouvementPerso : MonoBehaviour
             cameraPivot.localPosition.z
         );
     }
+    
 
     //==================================================================
     //==================================================================
@@ -165,6 +166,16 @@ public class ScriptMouvementPerso : MonoBehaviour
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
+        controle.Player.Enable();
+    }
+
+    public void DisableControls()
+    {
+        controle.Player.Disable();
+    }
+
+    public void EnableControls()
+    {
         controle.Player.Enable();
     }
     
