@@ -11,14 +11,13 @@ public class ControleMiann : MonoBehaviour, IDommagable
     private int currentWaypointIndex = 0; // index du point de patrouille actuel    
     // ==================================================================================================
     [Header("Paramètres de Miann")]
-    [SerializeField] public float distanceAttaque = 2f; // distance à laquelle Miann attaque le joueur
+    [SerializeField] public float distanceAttaque = 3.0f; // distance à laquelle Miann attaque le joueur
     [SerializeField] public float distancePoursuite = 5f; // distance à laquelle Miann poursuit le joueur
     private int etatMiann = 0; // 0 = patrouille, 1 = poursuite, 2 = attaque, monte mur
     private int hpMiann = 100; // points de vie de Miann
     private int degatsMiann = 10; // dégâts infligés par Miann
-    private float tempsAttaque = 1f; // temps entre les attaques de Miann
+    private float tempsAttaque = 5f; // temps entre les attaques de Miann
     private float timerAttaque = 0f; // timer pour gérer le temps entre les attaques de Miann
-    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,7 +68,8 @@ public class ControleMiann : MonoBehaviour, IDommagable
         {
             // attaque 
             etatMiann = 2; // change l'état à mode attaque
-            agentMiann.isStopped = true; // Miann arrête de bouger
+            agentMiann.SetDestination(transform.position); // Miann arrête de bouger en se fixant à sa position actuelle
+            Debug.Log("Miann attaque !");
             timerAttaque += Time.deltaTime; // le cooldown
             StartCoroutine(Attaque());
         }
@@ -98,9 +98,10 @@ public class ControleMiann : MonoBehaviour, IDommagable
             {
                 cible.PrendreDegat(degatsMiann); // inflige les dégâts à la cible
             }
+            
         }
         yield return new WaitForSeconds(tempsAttaque); // attend la prochaine frame avant de continuer l'exécution
-        etatMiann = 1; // après l'attaque, Miann retourne en mode poursuite pour continuer à suivre le joueur
+        agentMiann.isStopped = false; // Miann reprend sa poursuite après l'attaque
     }
 
     private void Patrol()

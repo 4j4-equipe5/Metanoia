@@ -78,7 +78,7 @@ public class ScriptGestionArme : MonoBehaviour
             IDommagable cible = hit.collider.GetComponent<IDommagable>();
             if(cible != null)
             {
-                cible.PrendreDegat(donnees.degats);
+                cible.PrendreDegat(donnees.degats); // ajouté un round pour arrondir les dégâts à l'entier le plus proche pour convertir en
 
             }
 
