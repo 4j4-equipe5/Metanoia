@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 9148627909147659140}
   - component: {fileID: 8061769918549687965}
   - component: {fileID: 7857299856825040409}
-  - component: {fileID: 7856256282224590301}
-  - component: {fileID: 430923129611582726}
   - component: {fileID: 3192139804614079926}
   m_Layer: 0
   m_Name: armetest
@@ -112,31 +110,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7856256282224590301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4352303564635312756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dafd9d3731515e5dab5f8df247eabfc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &430923129611582726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4352303564635312756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e126f0334a64f42396830c4e1c6bfba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  donnees: {fileID: 11400000, guid: caf6cb0ad87ae4125ad23b162876adee, type: 2}
 --- !u!114 &3192139804614079926
 MonoBehaviour:
   m_ObjectHideFlags: 0

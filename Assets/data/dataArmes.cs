@@ -9,4 +9,5 @@ public class dataArmes : ScriptableObject
     public int maxReserve;
     public GameObject prefabArme;
     public GameObject prefabMuzzleFlash;
+    public GameObject prefabImpact;
 }

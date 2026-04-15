@@ -72,6 +72,11 @@ public class ScriptGestionArme : MonoBehaviour
 
          if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
         {
+            if (donnees.prefabImpact != null) 
+            {
+                GameObject impact = Instantiate(donnees.prefabImpact, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 1f);
+            }
             //on obtient le comportement propre a l'objet pour recevoir
             //des dommages en allant chercher l'interface qu'il herite
             //pour recevoir des dommages
@@ -102,7 +107,7 @@ public class ScriptGestionArme : MonoBehaviour
         float tailleAleatoire = Random.Range(0.5f, 0.8f);
         flash.transform.localScale = Vector3.one * tailleAleatoire;
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.025f);
 
         Destroy(flash);
 
