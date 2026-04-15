@@ -19,6 +19,13 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = true;
 
+        // Disable player input so UI can be interacted with
+        ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
+        if (playerMovement != null)
+        {
+            playerMovement.DisableControls();
+        }
+
         if (pauseCanvas != null)
         {
             pauseCanvas.gameObject.SetActive(true);
@@ -34,6 +41,13 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         isPaused = false;
+
+        // Re-enable player input
+        ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
+        if (playerMovement != null)
+        {
+            playerMovement.EnableControls();
+        }
 
         if (pauseCanvas != null)
         {
