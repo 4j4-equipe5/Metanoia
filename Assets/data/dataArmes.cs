@@ -4,7 +4,7 @@ using UnityEngine;
 public class dataArmes : ScriptableObject
 {
     public string nomArme;
-    public float degats;
+    public int degats;
     public float cadence;
     public int maxReserve;
     public GameObject prefabArme;

@@ -11,5 +11,5 @@ destructible heriterons donc de IDommagable.
 */
 public interface  IDommagable
 {
-    void PrendreDegat(float degats);
+    public void PrendreDegat(int degats);
 }

@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-public class ScriptMouvementPerso : MonoBehaviour
+public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 {
     //==================================================================
     [Header("crouch")]
@@ -49,6 +49,9 @@ public class ScriptMouvementPerso : MonoBehaviour
     private float intensiteSway = 1f;
     private float smoothnessSway = 6f;
     private Vector3 cibleRotationSway;
+    //==================================================================
+    [Header("Stats joueur")]
+    [SerializeField] private int hpPlayer = 100;
     //==================================================================
     //==================================================================
     //==================================================================
@@ -295,5 +298,18 @@ public class ScriptMouvementPerso : MonoBehaviour
         socketArme.localRotation,
         Quaternion.Euler(cibleRotationSway),
         Time.deltaTime * smoothnessSway);
+    }
+    // implémentation de IDommagable pour recevoir des dégâts
+    public void PrendreDegat(int degats)
+    {
+        hpPlayer -= degats;
+        Debug.Log($"Player received {degats} dmg. HP = {hpPlayer}");
+        if (hpPlayer <= 0)
+        {
+            // simple gestion de la mort (à adapter)
+            Debug.Log("Player dead");
+            // par exemple désactiver le GameObject
+            gameObject.SetActive(false);
+        }
     }
 }
