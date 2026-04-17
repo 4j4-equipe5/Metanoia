@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 6837745459765528621}
   - component: {fileID: 3134553028619210828}
   - component: {fileID: 4795547083529683190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Salle_Anomalie_Hopital:mur_gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 5045706712511903837}
   - component: {fileID: 1508270834401210441}
   - component: {fileID: 4927139912978464484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_inter_srt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 5853349470393758637}
   - component: {fileID: 3563744502308384257}
   - component: {fileID: 4707749222641355877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Salle_initiale_Hopital:Plafond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2352,6 +2352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4814525726760222751}
   - {fileID: 6578864029259118832}
   - {fileID: 4231958205668027133}
   - {fileID: 5735237808237988039}
@@ -2481,7 +2482,7 @@ GameObject:
   - component: {fileID: 7493474851840528012}
   - component: {fileID: 8320329991569014899}
   - component: {fileID: 5743747193333589936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_Dortoire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2569,7 @@ GameObject:
   - component: {fileID: 8677873580119717247}
   - component: {fileID: 6612054228954455097}
   - component: {fileID: 618447137105106308}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_str_debut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2677,7 +2678,7 @@ GameObject:
   - component: {fileID: 4861345749157285506}
   - component: {fileID: 6862690830879414217}
   - component: {fileID: 3253300592197403806}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_droit_dbt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3079,7 +3080,7 @@ GameObject:
   - component: {fileID: 7265507030856742656}
   - component: {fileID: 168975005553219395}
   - component: {fileID: 853678061123244128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "Salle_Anomalie_Hopital:mur_Arri\xC3_re_gauche"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3626,7 +3627,7 @@ GameObject:
   - component: {fileID: 1228331343746497596}
   - component: {fileID: 1811065692061007260}
   - component: {fileID: 1437689690045861327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Salle_Anomalie_Hopital:mur_droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3763,7 +3764,7 @@ GameObject:
   - component: {fileID: 3516772952871273219}
   - component: {fileID: 3421858577719510719}
   - component: {fileID: 7252159432687570712}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_str_fin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4089,7 +4090,7 @@ GameObject:
   - component: {fileID: 5554862979867999341}
   - component: {fileID: 5138601364925986986}
   - component: {fileID: 4440227416064869381}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_Reception
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4883,7 @@ GameObject:
   - component: {fileID: 2834597170829149223}
   - component: {fileID: 716350879456129267}
   - component: {fileID: 5465239795404022659}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5209,7 +5210,7 @@ GameObject:
   - component: {fileID: 7590910284616952001}
   - component: {fileID: 946685648332106037}
   - component: {fileID: 9051499057621219581}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_inter_int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5973,7 +5974,7 @@ GameObject:
   - component: {fileID: 1219308647077261848}
   - component: {fileID: 3927808955839390421}
   - component: {fileID: 1735089868307152098}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_fn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6204,7 +6205,7 @@ GameObject:
   - component: {fileID: 9098298825070576093}
   - component: {fileID: 7027013156767892244}
   - component: {fileID: 7848711229386301014}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "Salle_initiale_Hopital:mur_Arri\xC3_re_droite"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6340,7 +6341,7 @@ GameObject:
   - component: {fileID: 6813542205250017898}
   - component: {fileID: 4110440890964878235}
   - component: {fileID: 8220048762488349358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_gauche_Milieu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6449,7 +6450,7 @@ GameObject:
   - component: {fileID: 1930881310909130676}
   - component: {fileID: 1326202943109295490}
   - component: {fileID: 1758093930872260066}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_droit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6558,7 +6559,7 @@ GameObject:
   - component: {fileID: 5492233958579686905}
   - component: {fileID: 5875306250983816792}
   - component: {fileID: 1881946411779561461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mur_Corridor_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6666,7 +6667,7 @@ GameObject:
   - component: {fileID: 8566747943318224022}
   - component: {fileID: 7799605484176610455}
   - component: {fileID: 5700350415142341945}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_MO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6874,7 +6875,7 @@ GameObject:
   - component: {fileID: 6857524558079220889}
   - component: {fileID: 7280392541550614859}
   - component: {fileID: 699856507337885426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_droit_Milieu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6984,7 +6985,7 @@ GameObject:
   - component: {fileID: 3855340127510563161}
   - component: {fileID: 5265761361044466459}
   - component: {fileID: 3569910971306425989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "Salle_Anomalie_Hopital:mur_Arri\xC3_re_droite"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7120,7 +7121,7 @@ GameObject:
   - component: {fileID: 8246527080215248909}
   - component: {fileID: 4751771755758672424}
   - component: {fileID: 2148276413449634651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Salle_initiale_Hopital:mur_gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7263,7 +7264,7 @@ GameObject:
   - component: {fileID: 1816289422819649596}
   - component: {fileID: 625759956301433534}
   - component: {fileID: 6450817111037428728}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mur_str_fin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7493,7 +7494,7 @@ GameObject:
   - component: {fileID: 7815491013851445855}
   - component: {fileID: 4835598814082941431}
   - component: {fileID: 576543773128901980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_droit_FN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8371,7 +8372,7 @@ GameObject:
   - component: {fileID: 4781842472962382362}
   - component: {fileID: 5591326573004439313}
   - component: {fileID: 8788914541901833882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_Gaucher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8601,7 +8602,7 @@ GameObject:
   - component: {fileID: 1761802531537418053}
   - component: {fileID: 5367494255565214068}
   - component: {fileID: 6154378205534775913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur_str_milieu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9422,7 +9423,7 @@ GameObject:
   - component: {fileID: 4615609863452475283}
   - component: {fileID: 2646311782679674768}
   - component: {fileID: 300239371631115823}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_Arr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9772,7 +9773,7 @@ GameObject:
   - component: {fileID: 5748109908481515992}
   - component: {fileID: 5016496448158532269}
   - component: {fileID: 955375996880073337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "Salle_initiale_Hopital:mur_Arri\xC3_re_gauche"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10002,7 +10003,7 @@ GameObject:
   - component: {fileID: 6974073226934822754}
   - component: {fileID: 7752526534584349660}
   - component: {fileID: 6506191963387770626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:mur_gauche_FN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10110,7 +10111,7 @@ GameObject:
   - component: {fileID: 4231958205668027133}
   - component: {fileID: 4396119908702029899}
   - component: {fileID: 80708769826164078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_Corridor_DO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10680,7 +10681,7 @@ GameObject:
   - component: {fileID: 8399237742578707394}
   - component: {fileID: 6528852352713475884}
   - component: {fileID: 7971419190842898088}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Salle_Anomalie_Hopital:plafond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10805,7 +10806,7 @@ GameObject:
   - component: {fileID: 6578864029259118832}
   - component: {fileID: 1395992414910025825}
   - component: {fileID: 4766177717008383981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_Corridar_SI_SA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10892,7 +10893,7 @@ GameObject:
   - component: {fileID: 6804981183627602230}
   - component: {fileID: 575872504229808341}
   - component: {fileID: 978862625909311554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mur_str_fin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11001,7 +11002,7 @@ GameObject:
   - component: {fileID: 3138677354062265311}
   - component: {fileID: 2144980842451553818}
   - component: {fileID: 8149092338759927536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Salle_initiale_Hopital:mur_droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11150,7 +11151,6 @@ Transform:
   - {fileID: 6170996316113464715}
   - {fileID: 7022810540172516179}
   - {fileID: 1211345394332648261}
-  - {fileID: 4814525726760222751}
   - {fileID: 8926416582745323275}
   - {fileID: 8212873949025244644}
   - {fileID: 7546199669300581228}
@@ -11209,12 +11209,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9191162323856109122}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1875, y: 0.040000003, z: 0.13373035}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.93750006, y: 0.20000002, z: 0.6686518}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3283924346897183169}
+  m_Father: {fileID: 1158611843770698933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5372852256668419079
 MeshFilter:
@@ -11303,7 +11303,7 @@ GameObject:
   - component: {fileID: 3068999880599915225}
   - component: {fileID: 4154615673433154869}
   - component: {fileID: 8177983266009881991}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Niveau_Hopital:Mur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11411,7 +11411,7 @@ GameObject:
   - component: {fileID: 5735237808237988039}
   - component: {fileID: 7198775940435141840}
   - component: {fileID: 5288843646890535645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plafond_Corridor_SA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
