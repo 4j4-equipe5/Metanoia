@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_UseGeometry: 0
   m_DefaultArea: 3
   m_GenerateLinks: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.19666666
   m_MinRegionArea: 23.25
-  m_NavMeshData: {fileID: 23800000, guid: d3014562b54b8d3498d3a48e767d7c92, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 22b19fa34efe3274cbabbebb3f3c1ca4, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5104143097096627660
 GameObject:
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_UseGeometry: 0
   m_DefaultArea: 3
   m_GenerateLinks: 0
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.19666666
   m_MinRegionArea: 23.25
-  m_NavMeshData: {fileID: 23800000, guid: ec26f00df482720459b60a94c75c0256, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 82f3d572bbb1b184394d1a6cae9510b6, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &6911200722819860742
 GameObject:
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_UseGeometry: 0
   m_DefaultArea: 3
   m_GenerateLinks: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 1
   m_VoxelSize: 0.24
   m_MinRegionArea: 23.25
-  m_NavMeshData: {fileID: 23800000, guid: 5c4a559070d8dc5469bde350f7883dac, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 126a2cb996981764e950510cc762e89e, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &7381055742083433706
 GameObject:
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_UseGeometry: 0
   m_DefaultArea: 3
   m_GenerateLinks: 0
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.19666666
   m_MinRegionArea: 23.25
-  m_NavMeshData: {fileID: 23800000, guid: e56770d260b03524e9a8abff7af41298, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6b9a4b78fdca0bb45bb496588594b187, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &7821554756516777364
 GameObject:
@@ -1042,15 +1042,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 23adceb368647ca43ba98d1b78068dd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.31999856
+      value: 0.46999997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23adceb368647ca43ba98d1b78068dd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23adceb368647ca43ba98d1b78068dd0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.4799995
+      value: -6.6099997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23adceb368647ca43ba98d1b78068dd0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1144,7 +1144,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8784037331888362356}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.6
+  m_Radius: 1.2
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
