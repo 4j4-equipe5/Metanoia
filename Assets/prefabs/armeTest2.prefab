@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7857299856825040409}
   - component: {fileID: 3192139804614079926}
   m_Layer: 0
-  m_Name: armetest
+  m_Name: armeTest2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e126f0334a64f42396830c4e1c6bfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotIndex: 0
-  donnees: {fileID: 11400000, guid: caf6cb0ad87ae4125ad23b162876adee, type: 2}
+  slotIndex: 1
+  donnees: {fileID: 11400000, guid: d4fbc470fff6ce04d8f5c56c167a2ae2, type: 2}
   sonTir: {fileID: 4979257149634739191, guid: f25811077c1f65d47a0b4b47ea3b79d7, type: 3}
 --- !u!1 &6358787739221502345
 GameObject:

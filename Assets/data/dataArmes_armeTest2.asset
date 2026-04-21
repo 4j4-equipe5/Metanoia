@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373677ee484ec38dfa5ba3ca0f7607e2, type: 3}
+  m_Name: dataArmes_armeTest2
+  m_EditorClassIdentifier: 
+  nomArme: test
+  degats: 12
+  cadence: 5
+  maxReserve: 200
+  prefabArme: {fileID: 4352303564635312756, guid: 6dbe17c3d3616d64cb901d2cdc886fe4, type: 3}
+  prefabMuzzleFlash: {fileID: 3290417806283166974, guid: 72b8607fd478921a1ada9555e5e73c17, type: 3}
+  prefabImpact: {fileID: 7400742969965322281, guid: e305efe0beb0ff141a1f2d5631a7dcb9, type: 3}
