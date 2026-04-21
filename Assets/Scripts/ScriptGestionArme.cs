@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    public int slotIndex = 0;
     private Transform pointMuzzleFlash;  
     private Transform socketArme;
     private float dernierTir;

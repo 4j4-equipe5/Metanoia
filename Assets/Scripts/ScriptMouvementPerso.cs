@@ -40,16 +40,20 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private float orientationX; // rotation horizontale du corps (inutilisée pour le moment)
     private float orientationY; // rotation verticale de la caméra (axe X)
     private float velociteMax; // vitesse maximale actuelle du joueur
-    private float velociteMaxNormale = 20f; // vitesse maximale en position normale
+    private float velociteMaxNormale = 30f; // vitesse maximale en position normale
     private float hauteurNormale = 1.6f; // hauteur du collider du joueur en position normale
     private float jumpForce; // force de saut actuelle
-    private float jumpForceNormale = 2f; // force de saut en position normale
-    private float hauteurCameraNormale = 1f; // hauteur de la caméra en position normale
+    private float jumpForceNormale = 2.5f; // force de saut en position normale
+    private float hauteurCameraNormale = 1.6f; // hauteur de la caméra en position normale
     //====================================================================
     // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
     //====================================================================
     [Header("References a d'autres scripts")]
     private ScriptGestionArme scriptGestionArme; // référence au script de gestion des armes
+
+    private ScriptGestionArme[] slotsArmes = new ScriptGestionArme[2];
+    private int indexArmeActive = 0;
+   
     //====================================================================
     // SECTION WEAPON SWAY (BALANCEMENT DE L'ARME)
     //====================================================================
@@ -78,7 +82,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private void Awake()
     {
         // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
-        scriptGestionArme = GetComponentInChildren<ScriptGestionArme>();
+        InitArmes();
         // Récupérer le composant Rigidbody pour appliquer les forces
         joueurRb = GetComponent<Rigidbody>();
         // Récupérer le composant CapsuleCollider pour modifier la taille lors de l'accroupissement
@@ -88,6 +92,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         // Définir les valeurs initiales (position normale)
         jumpForce = jumpForceNormale;
         capsuleCollider.height = hauteurNormale;
+        capsuleCollider.center = new Vector3(0, hauteurNormale / 2f, 0);
         velociteMax = velociteMaxNormale;
         hauteurCibleeCamera = hauteurCameraNormale;
         // Initialiser la caméra à la bonne hauteur pour éviter le pop au démarrage
@@ -127,6 +132,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         {
             veutSauter = true;
         }
+        if (controle.Player.Previous.triggered) ChangerArme(0);
+        if(controle.Player.Next.triggered) ChangerArme(1);
 
 
         //obtenir les valeurs de la souris
@@ -369,5 +376,30 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             gameOverScreen.SetActive(true);
             
         }
+    }
+
+    private void InitArmes()
+    {
+        ScriptGestionArme[] armesPresentes = GetComponentsInChildren<ScriptGestionArme>(true);
+        foreach (ScriptGestionArme arme in armesPresentes)
+        {
+            int slot = arme.slotIndex;
+            if(slot < slotsArmes.Length)
+            {
+                slotsArmes[slot] = arme;
+                arme.gameObject.SetActive(slot == indexArmeActive);
+            }
+        }
+        scriptGestionArme = slotsArmes[indexArmeActive];
+    }
+    private void ChangerArme (int index)
+    {
+        if (slotsArmes[index] == null) return;
+        if (index == indexArmeActive) return;
+
+        slotsArmes[indexArmeActive].gameObject.SetActive(false);
+        indexArmeActive = index;
+        slotsArmes[indexArmeActive].gameObject.SetActive(true);
+        scriptGestionArme = slotsArmes[indexArmeActive];
     }
 }
