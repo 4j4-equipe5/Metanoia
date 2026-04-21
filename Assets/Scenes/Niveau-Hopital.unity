@@ -560,9 +560,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1669298324}
     m_Modifications:
+    - target: {fileID: 967524836592427487, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 967524836592427487, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4375546875173990525, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375546875173990525, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500598716572699634, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5855712537280698936, guid: 75bfef2595f59a640accb56fd6f79f64, type: 3}
       propertyPath: m_Pivot.x
@@ -742,6 +758,10 @@ PrefabInstance:
     - target: {fileID: 1337513850389261314, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491117566856832491, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5574821235684882366, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
       propertyPath: m_LocalPosition.x
