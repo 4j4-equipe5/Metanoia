@@ -14,7 +14,7 @@ public class VictoryManager : MonoBehaviour
     [SerializeField] public GameObject pauseMenu; // référence au menu de pause pour le désactiver lors de la victoire
 
     private bool hasVictory = false;
-    public void AjouterMort()
+    public void AjouterMort() // ceci est seulement utiliser pour la démo, dans une version finale on pourrait vouloir faire un système de score plus complexe ou déclencher la victoire d'une autre manière
     {
         monstreMort++;
         Debug.Log("Monstre tué ! Total : " + monstreMort);
