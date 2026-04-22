@@ -485,6 +485,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1669298324}
     m_Modifications:
     - target: {fileID: 2775769182730761828, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: menuVictoire
+      value: 
+      objectReference: {fileID: 3344803979464060705}
+    - target: {fileID: 2775769182730761828, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: endGameScreen
       value: 
       objectReference: {fileID: 3344803979464060705}
@@ -807,6 +811,10 @@ PrefabInstance:
     - target: {fileID: 1337513850389261314, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491117566856832491, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5574821235684882366, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
       propertyPath: m_LocalPosition.x
