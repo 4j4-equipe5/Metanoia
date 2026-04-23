@@ -3,6 +3,8 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    private Vector3 positionInitialeArme;
+    private float vitesseRetourRecul = 10f;
     public int slotIndex = 0;
     private Transform pointMuzzleFlash;  
     private Transform socketArme;
@@ -15,6 +17,7 @@ public class ScriptGestionArme : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        positionInitialeArme = transform.localPosition;
         socketArme = transform.parent;
         tempsEntreCoup = 1f/donnees.cadence;
         reserveMunitionActuelle = donnees.maxReserve;
@@ -30,7 +33,7 @@ public class ScriptGestionArme : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     /// <summary>
     /// fonction qui retourne un bool en fonction de si assez de temps
@@ -63,6 +66,7 @@ public class ScriptGestionArme : MonoBehaviour
         //appel de la fonction qui enregistre le temps du tir
         EnregistrerTir();
         StartCoroutine(MuzzleFlash());
+       AppliquerRecul();
         Debug.Log("tire");
 
         // son de tir
@@ -98,6 +102,12 @@ public class ScriptGestionArme : MonoBehaviour
 
         }
     }
+    private void AppliquerRecul()
+    {
+       transform.localPosition = positionInitialeArme + Vector3.back*donnees.intensiteRecul;
+        StartCoroutine(RetourPositionArme());
+
+    }
 /// <summary>
 /// Co-routine qui genere un muzzleflash dans tir()
 /// </summary>
@@ -120,6 +130,24 @@ public class ScriptGestionArme : MonoBehaviour
 
         Destroy(flash);
 
+    }
+    /// <summary>
+    /// coroutine qui gere le retour de l'arme a sa position normale avec un Lerp apres le recul du coup
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RetourPositionArme()
+    {
+        while (Vector3.Distance(transform.localPosition, positionInitialeArme)> 0.001f)
+        {
+            transform.localPosition = Vector3.Lerp(
+                transform.localPosition,
+                positionInitialeArme,
+                Time.deltaTime * vitesseRetourRecul
+            ); 
+            yield return null;
+        }
+        transform.localPosition = positionInitialeArme;
+        
     }
   
 }
