@@ -1,0 +1,21 @@
+{
+  "title": "Call graph for StartNewRound",
+  "nodes": [
+    {
+      "id": "node-1776822551628",
+      "label": "StartNewRound",
+      "type": "code",
+      "symbol": {
+        "name": "StartNewRound",
+        "uri": "Assets/Scripts/ControleAIAnomalie.cs",
+        "containerName": "ControleAIAnomalie",
+        "line": 33,
+        "signature": "()"
+      },
+      "status": "normal",
+      "x": 390,
+      "y": 300
+    }
+  ],
+  "edges": []
+}

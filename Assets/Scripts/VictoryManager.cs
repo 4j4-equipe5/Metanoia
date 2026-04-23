@@ -1,15 +1,29 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class VictoryManager : MonoBehaviour
 {
+    [Header("Paramètres de victoire")]
+    [SerializeField] private int monstreMort = 0; // nombre de monstres tués, peut être utilisé pour déclencher la victoire
+    [SerializeField] private int victoireCondition = 3; // nombre de monstres à tuer pour déclencher la victoire
     [SerializeField] private Canvas victoryCanvas;
     [SerializeField] private KeyCode victoryTriggerKey = KeyCode.V;
     [SerializeField] public AudioSource musicAudioSource;
     [SerializeField] public GameObject pauseMenu; // référence au menu de pause pour le désactiver lors de la victoire
 
     private bool hasVictory = false;
+    public void AjouterMort() // ceci est seulement utiliser pour la démo, dans une version finale on pourrait vouloir faire un système de score plus complexe ou déclencher la victoire d'une autre manière
+    {
+        monstreMort++;
+        Debug.Log("Monstre tué ! Total : " + monstreMort);
+        if (monstreMort >= victoireCondition && !hasVictory)
+        {
+            TriggerVictory();
+        }
 
+    }
     void Update()
     {
         // Trigger victory with key press

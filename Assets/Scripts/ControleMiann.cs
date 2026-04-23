@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System.Runtime.Serialization;
 public class ControleMiann : MonoBehaviour, IDommagable
 {
     [Header("Références aux objets")]
@@ -15,6 +16,7 @@ public class ControleMiann : MonoBehaviour, IDommagable
     [Header("Paramètres de Miann")]
     [SerializeField] public float distanceAttaque = 3.0f; // distance à laquelle Miann attaque le joueur
     [SerializeField] public float distancePoursuite = 5f; // distance à laquelle Miann poursuit le joueur
+    [SerializeField] private static int pointVictoireDemo = 0;
     private bool isStunned = false; // indique si Miann est étourdi (stunned) après avoir pris des dégâts
     private int etatMiann = 0; // 0 = patrouille, 1 = poursuite, 2 = attaque, monte mur
     private int hpMiann = 100; // points de vie de Miann
@@ -50,8 +52,9 @@ public class ControleMiann : MonoBehaviour, IDommagable
         {
             agentMiann.isStopped = true; // arrête le NavMeshAgent avant destruction
             Destroy(gameObject); // détruit le gameobject de Miann
-           VictoryManager menuVictoire = FindFirstObjectByType<VictoryManager>(); // trouve le script de gestion du menu de victoire pour l'afficher
-           menuVictoire.TriggerVictory(); // affiche le menu de victoire lorsque Miann est tué par le joueur
+            pointVictoireDemo ++;
+            VictoryManager menuVictoire = FindFirstObjectByType<VictoryManager>(); // trouve le script de gestion du menu de victoire pour l'afficher
+            menuVictoire.AjouterMort();  
         }
     }
     IEnumerator Stunned() // coroutine pour gérer le stun de Miann après avoir pris des dégâts
@@ -101,6 +104,10 @@ public class ControleMiann : MonoBehaviour, IDommagable
             // patrouille
             etatMiann = 0;
             Patrol();
+        }
+        if (pointVictoireDemo >= 3)
+        {
+           VictoryManager menuVictoire = FindFirstObjectByType<VictoryManager>(); // trouve le script de gestion du menu de victoire pour l'afficher
         }
     }
     // Coroutine pour gérer l'attaque de Miann avec un cooldown entre les attaques et pour infliger des dégâts à la cible si elle implémente l'interface IDommagable

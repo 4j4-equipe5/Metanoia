@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    public int slotIndex = 0;
     private Transform pointMuzzleFlash;  
     private Transform socketArme;
     private float dernierTir;
@@ -68,14 +69,17 @@ public class ScriptGestionArme : MonoBehaviour
         sonTir.PlayOneShot(sonTir.clip);
         //on retire une cartouche de la reserve
         --reserveMunitionActuelle;
-
+        // 1. On crée le masque : on récupère l'index du layer "Player"
+        // Le signe '~' inverse le masque (il veut dire "Tout sauf ça")
+        int layerJoueur = LayerMask.NameToLayer("Player");
+        int masqueTir = ~(1 << layerJoueur);
         //cast un rayon en avant a partir de la camera fps
         Ray ray = new Ray(cam.transform.position,cam.transform.forward);
 
         //variable qui contient l'info des choses touchees
         RaycastHit hit;
 
-         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
+         if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueTir)) 
         {
             if (donnees.prefabImpact != null) 
             {
