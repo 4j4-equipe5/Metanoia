@@ -3,7 +3,132 @@ guid: 434594cc102421c418b7a4f4b0c83ac9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoutglowingShotgun
+    second: {fileID: 2100000, guid: f96976cbae0a1ef418f0468db9e5276c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrel_bout_shotgun
+    second: {fileID: 2100000, guid: 149cd10d7cc9c844dab4ce0e27444e94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrel_shotgun
+    second: {fileID: 2100000, guid: 7f1b4dae5a6016744bcdfdf2086b27bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boutonRondMachine
+    second: {fileID: 2100000, guid: 0773febe7553aaa49a2260a8dbda1b66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boutoncarrermachine
+    second: {fileID: 2100000, guid: f84c126b13611c94ba419d66262d9266, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glockhandle
+    second: {fileID: 2100000, guid: c603bcb4c19fb394ca11e9fe797d51f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handlemachine
+    second: {fileID: 2100000, guid: b5e71b30cb0b62b47b431ba4694dab10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: interieurAK
+    second: {fileID: 2100000, guid: a3883d39510fa034a97924f256056f04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: machine
+    second: {fileID: 2100000, guid: 4469e28c1bc455d44b772d6c073ad2e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: muzzleglock
+    second: {fileID: 2100000, guid: ba2c74c7f398d8d439af42d927531622, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: muzzleinterieur_shotgun
+    second: {fileID: 2100000, guid: a4a8613d609298247b7948a309a09135, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: openPBR_shader1
+    second: {fileID: 2100000, guid: 8a9dc19f4d2730643841e084f971f0ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panelmachine
+    second: {fileID: 2100000, guid: 712036d81fb488347ab5bd3636aba977, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: protection_handle_shotgun
+    second: {fileID: 2100000, guid: 86b5dfdfee15f3f42b223b87bd045995, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: protectionglock
+    second: {fileID: 2100000, guid: 4076990477872984f86e9e45f6a14929, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shotgun_handle
+    second: {fileID: 2100000, guid: e6f7ee55c3d71fe45ab9aca833a58379, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shotgun_reload
+    second: {fileID: 2100000, guid: ee0946646492e9d44a155b83c5a6eada, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shotgun_trigger
+    second: {fileID: 2100000, guid: a2be58f5ca573cd4a93e5995d06389a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: silencerglock
+    second: {fileID: 2100000, guid: 924bf054b0fc2c249842980d95417ddf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface30
+    second: {fileID: 2100000, guid: d42f6cae6d724b1479c7b206a1589e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: surfaceShader2
+    second: {fileID: 2100000, guid: 91846b7835ca86d4eac8592c3304f6dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top_glock
+    second: {fileID: 2100000, guid: 8eb75f12208ae594c9da16faeca766cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top_shotgun
+    second: {fileID: 2100000, guid: fef622469262c7345978628c909fd565, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: triggerglock
+    second: {fileID: 2100000, guid: c505a752dde4eb04cb7c631245efd69b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitre
+    second: {fileID: 2100000, guid: cae5d005ae00a394ea2c4ae4cdbd33f7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

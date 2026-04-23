@@ -3,7 +3,42 @@ guid: b24d428b6cb92584384c94c94b479c34
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PanneauBuffs
+    second: {fileID: 2100000, guid: 2f0ae1f04f94313488234ab374f89c6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boutonRondMachine
+    second: {fileID: 2100000, guid: dd39e446a62213749a900f769987655d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boutoncarrermachine
+    second: {fileID: 2100000, guid: 0befed31028d09041a47355dc4e58d4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panelMachineBuffs
+    second: {fileID: 2100000, guid: 5309a0c967f9ca6469f01f09b78765ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panelmachine
+    second: {fileID: 2100000, guid: 3603740f46e07fd459f612a3b114f003, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface53
+    second: {fileID: 2100000, guid: f7e4a4f3dadca10409e0272e8e2876cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitreMachineBuff
+    second: {fileID: 2100000, guid: 7c0dc9a489539b24ebfdd63fbd53f62a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
