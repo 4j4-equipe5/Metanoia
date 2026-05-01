@@ -19,3 +19,4 @@ MonoBehaviour:
   prefabArme: {fileID: 4352303564635312756, guid: 6dbe17c3d3616d64cb901d2cdc886fe4, type: 3}
   prefabMuzzleFlash: {fileID: 3290417806283166974, guid: 72b8607fd478921a1ada9555e5e73c17, type: 3}
   prefabImpact: {fileID: 7400742969965322281, guid: e305efe0beb0ff141a1f2d5631a7dcb9, type: 3}
+  intensiteRecul: 1.5

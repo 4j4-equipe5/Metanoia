@@ -24,6 +24,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     public LayerMask maskSol; // masque de couche pour identifier le sol
     public Transform groundCheck; // point de vérification de contact avec le sol
     private Rigidbody joueurRb; // composant Rigidbody pour la physique du joueur
+    private Camera camJoueur;
     //====================================================================
     // SECTION VARIABLES DE CONTRÔLE DU PERSONNAGE
     //====================================================================
@@ -47,6 +48,10 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private float hauteurCameraNormale = 1.6f; // hauteur de la caméra en position normale
     private float cooldownSaut = 0.4f;
     private float dernierSaut = 0f;
+    private float porteInteraction = 3f;
+    public LayerMask masqueInteraction;
+
+    private IInteraction cibleActuelle;
     //====================================================================
     // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
     //====================================================================
@@ -83,6 +88,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //==================================================================
     private void Awake()
     {
+
         // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
         InitArmes();
         // Récupérer le composant Rigidbody pour appliquer les forces
@@ -101,6 +107,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCameraNormale, cameraPivot.localPosition.z);
         // Trouver le socket d'arme pour appliquer le balancement (sway)
         socketArme = cameraPivot.Find("SocketArme");
+
+        camJoueur = Camera.main;
         
     }
 
@@ -410,6 +418,27 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         indexArmeActive = index;
         slotsArmes[indexArmeActive].gameObject.SetActive(true);
         scriptGestionArme = slotsArmes[indexArmeActive];
+    }
+    /// <summary>
+    /// fonction appelee dans update, qui utilise un raycast pour detecter les objets
+    /// avec lesquels le joueur peut interagir.
+    /// </summary>
+    void detecterInteraction()
+    {
+        Ray ray = new Ray(camJoueur.transform.position,camJoueur.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit,porteInteraction,masqueInteraction))
+        {
+            var objetInteractif = hit.collider.GetComponent<IInteraction>();
+
+            if(objetInteractif != null)
+            {
+                cibleActuelle = objetInteractif;
+                return;
+            }
+            
+        }
+        cibleActuelle = null;
     }
 
 }
