@@ -10,5 +10,5 @@ public interface  IInteraction
     //sans la possibilite de modification comme dans un champ public.
     //documentation sur les proprietes : https://www.w3schools.com/cs/cs_properties.php
     string InteractionLabel{get;}
-    void Interagir();
+    void Interagir(ScriptMouvementPerso joueur);
 }

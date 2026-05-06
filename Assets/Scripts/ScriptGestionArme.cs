@@ -3,6 +3,8 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    private ScriptMouvementPerso joueur;
+
     private Vector3 positionInitialeArme;
     private float vitesseRetourRecul = 10f;
     public int slotIndex = 0;
@@ -17,6 +19,7 @@ public class ScriptGestionArme : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        joueur = joueur = GetComponentInParent<ScriptMouvementPerso>();
         positionInitialeArme = transform.localPosition;
         socketArme = transform.parent;
         tempsEntreCoup = 1f/donnees.cadence;
@@ -96,7 +99,8 @@ public class ScriptGestionArme : MonoBehaviour
             IDommagable cible = hit.collider.GetComponent<IDommagable>();
             if(cible != null)
             {
-                cible.PrendreDegat(donnees.degats); // ajouté un round pour arrondir les dégâts à l'entier le plus proche pour convertir en
+                cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal));
+                
 
             }
 

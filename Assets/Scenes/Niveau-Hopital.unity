@@ -284,6 +284,108 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &978147715
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.411
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.595
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      propertyPath: m_Name
+      value: Machinebuff
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 978147717}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 978147718}
+  m_SourcePrefab: {fileID: 100100000, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+--- !u!1 &978147716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b24d428b6cb92584384c94c94b479c34, type: 3}
+  m_PrefabInstance: {fileID: 978147715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &978147717
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978147716}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0654844, y: 1.5876454, z: 0.8912982}
+  m_Center: {x: -0.05234784, y: 0, z: 0}
+--- !u!114 &978147718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978147716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6806e192acb83687a9b652ba9782374e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffsPossibles: 00000000010000000200000003000000
 --- !u!82 &980976750 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1728451061519630374, guid: f8a50a05c071c0b4caeabf8a8c3055c5, type: 3}
@@ -1111,3 +1213,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1669298324}
   - {fileID: 2119723730}
+  - {fileID: 978147715}
