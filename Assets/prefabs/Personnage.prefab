@@ -88,7 +88,14 @@ MonoBehaviour:
   grounded: 0
   sensitivityX: 0.5
   sensitivityY: 0.5
+  masqueInteraction:
+    serializedVersion: 2
+    m_Bits: 1024
+  modificateurDommageGlobal: 1
+  apPlayer: 0
+  apMax: 100
   hpPlayer: 100
+  maxHp: 100
   gameOverScreen: {fileID: 0}
 --- !u!136 &3853910874761027658
 CapsuleCollider:

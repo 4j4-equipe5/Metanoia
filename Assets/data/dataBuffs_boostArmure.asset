@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: dataBuffs_boostArmure
   m_EditorClassIdentifier: 
   type: 0
-  nomAffichage: 
-  value: 0
+  nomAffichage: Armure +
+  value: 1.5

@@ -154,6 +154,13 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         if (controle.Player.Previous.triggered) ChangerArme(0);
         if(controle.Player.Next.triggered) ChangerArme(1);
 
+      
+        
+        detecterInteraction();
+          if(controle.Player.Interact.triggered && cibleActuelle != null)
+        {
+            cibleActuelle.Interagir(this);
+        }
 
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
@@ -442,12 +449,15 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 
             if(objetInteractif != null)
             {
+               
                 cibleActuelle = objetInteractif;
+                InteractionUI.instance.Afficher(objetInteractif.InteractionLabel);
                 return;
             }
             
         }
         cibleActuelle = null;
+        InteractionUI.instance.Invisible();
     }
     /// <summary>
     /// fonction qui verifie si le buff existe deja dans la liste
@@ -471,23 +481,28 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //switch qui choisi quels effets appliquer en fonction
         switch (buff.type)
         {
+            
             case BuffDebuff.boostVitesse:
                 velociteMaxNormale *= buff.value;
                 velociteMax = velociteMaxNormale;
+                Debug.Log("buff attribue");
                 break;
             case BuffDebuff.boostVie:
                 maxHp *= buff.value;
                 hpPlayer = (int)maxHp;
+                 Debug.Log("buff attribue");
                 break;
             case BuffDebuff.boostDommage:
                 modificateurDommageGlobal *= buff.value;
+                 Debug.Log("buff attribue");
                 break;
             case BuffDebuff.boostArmure:
                 apMax *= buff.value;
                 apPlayer = (int)apMax;
-                
-                break;
+                 Debug.Log("buff attribue");
+            break;
         }
+        Debug.Log("buff applique");
     }
 
 }
