@@ -11,4 +11,5 @@ public interface  IInteraction
     //documentation sur les proprietes : https://www.w3schools.com/cs/cs_properties.php
     string InteractionLabel{get;}
     void Interagir(ScriptMouvementPerso joueur);
+    int prix {get;}
 }

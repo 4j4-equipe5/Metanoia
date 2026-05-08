@@ -157,7 +157,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
       
         
         detecterInteraction();
-          if(controle.Player.Interact.triggered && cibleActuelle != null)
+
+          if(controle.Player.Interact.triggered && cibleActuelle != null && ScriptGestionPointage.Instance.score >= cibleActuelle.prix)
         {
             cibleActuelle.Interagir(this);
         }
