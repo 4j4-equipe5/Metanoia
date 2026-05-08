@@ -5,13 +5,15 @@ using System.Runtime.Serialization;
 public class ControleMiann : MonoBehaviour, IDommagable
 {
     [Header("Références aux objets")]
+    ScriptGestionPointage pointage;
     [SerializeField] public NavMeshAgent agentMiann;
     [SerializeField] public Transform cibleMiann; // la position de la cible de Miann peut-être définie dans l'inspecteur 
     [SerializeField] public int distanceDetection = 10; // distance à laquelle Miann détecte le joueur
     [SerializeField] public Transform[] waypoints; // les points de patrouille de Miann
     [SerializeField] public GameObject endGameScreen; // écran de fin de jeu à afficher lorsque le joueur est tué par Miann
     [SerializeField] public GameObject menuVictoire; // référence au menu de victoire pour l'afficher lorsque le joueur gagne
-    private int currentWaypointIndex = 0; // index du point de patrouille actuel    
+    private int currentWaypointIndex = 0; // index du point de patrouille actuel  
+
     // ==================================================================================================
     [Header("Paramètres de Miann")]
     [SerializeField] public float distanceAttaque = 3.0f; // distance à laquelle Miann attaque le joueur
@@ -35,7 +37,15 @@ public class ControleMiann : MonoBehaviour, IDommagable
         if (cibleMiann == null)
         {
             var playerObj = GameObject.FindGameObjectWithTag("Player"); // cherche un objet avec le tag "Player"
-            if (playerObj != null) cibleMiann = playerObj.transform; // assigne la cible à la position du joueur
+            
+            if (playerObj != null)
+            {
+                cibleMiann = playerObj.transform;
+                //------------------------------------------------------------------//
+                //ajout pour calcul du pointage (jeremie)
+                pointage = playerObj.GetComponent<ScriptGestionPointage>();
+                //------------------------------------------------------------------//
+            }  // assigne la cible à la position du joueur
         }
         if (agentMiann != null) 
         {
@@ -51,8 +61,12 @@ public class ControleMiann : MonoBehaviour, IDommagable
         if (hpMiann <= 0) // si Miann à zero Pv il meurt
         {
             agentMiann.isStopped = true; // arrête le NavMeshAgent avant destruction
+            //-----------------------------------Section Pointage (jeremie)---------------------------------------//
+            pointage?.EnregistrerKill();
+            //----------------------------------------------------------------------------------------------------//
             Destroy(gameObject); // détruit le gameobject de Miann
             pointVictoireDemo ++;
+
             VictoryManager menuVictoire = FindFirstObjectByType<VictoryManager>(); // trouve le script de gestion du menu de victoire pour l'afficher
             menuVictoire.AjouterMort();  
         }
