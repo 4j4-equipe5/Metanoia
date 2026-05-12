@@ -88,6 +88,9 @@ MonoBehaviour:
   grounded: 0
   sensitivityX: 0.5
   sensitivityY: 0.5
+  masqueInteraction:
+    serializedVersion: 2
+    m_Bits: 0
   hpPlayer: 100
   gameOverScreen: {fileID: 0}
 --- !u!136 &3853910874761027658
@@ -353,7 +356,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
