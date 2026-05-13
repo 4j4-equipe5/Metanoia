@@ -40,7 +40,7 @@ public class ScriptGestionArme : MonoBehaviour
     }
     /// <summary>
     /// fonction qui retourne un bool en fonction de si assez de temps
-    /// c'est ecoule depuis le dernier coup et si il reste des munitions
+    /// s'est ecoule depuis le dernier coup et si il reste des munitions
     /// </summary>
     /// <returns></returns>
     public bool PeutTirer()
