@@ -3,9 +3,14 @@ guid: becefed4ab8d2cc47a541ca181a5bd8b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Banc_glise
+    second: {fileID: 2100000, guid: 6aab544758c242644a2f90624c6f3bbc, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

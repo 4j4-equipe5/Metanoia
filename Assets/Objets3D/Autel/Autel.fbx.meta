@@ -3,9 +3,14 @@ guid: f2bbdceeca7e3614c8f24a9c71354a9c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Autel
+    second: {fileID: 2100000, guid: ea29a85deea951e41a6aae6eacc5fdb2, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

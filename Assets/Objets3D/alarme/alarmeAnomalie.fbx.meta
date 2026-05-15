@@ -3,7 +3,12 @@ guid: 0966d45c80d33c14b9762701c586f074
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AlarmeNormale
+    second: {fileID: 2100000, guid: 44533221b90f3ae43bbbaebb9a0cca8b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

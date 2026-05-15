@@ -3,9 +3,14 @@ guid: 5dfb85b44614ff7429c716db207d388c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: civiereSol
+    second: {fileID: 2100000, guid: 84e4c01e867864d4d821c629b3bb1e07, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

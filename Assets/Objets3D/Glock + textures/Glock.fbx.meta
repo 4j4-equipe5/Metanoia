@@ -3,7 +3,42 @@ guid: 1d2c285758f3a174c9b98ab19d2a0237
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoutglowingShotgun
+    second: {fileID: 2100000, guid: c043396d68fa1094a8ef344099913e1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glockhandle
+    second: {fileID: 2100000, guid: 2bcf92486418b0a4f8b09926460bdf65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: muzzleglock
+    second: {fileID: 2100000, guid: 179c355e068ee674392431fdc5c8c848, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: protectionglock
+    second: {fileID: 2100000, guid: f056a50889c693f4490703e189c5b95f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: silencerglock
+    second: {fileID: 2100000, guid: b453b7107de51234c97c2a2b025b6e9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top_glock
+    second: {fileID: 2100000, guid: 9ac25b25089740a4d87edd3ecada2167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: triggerglock
+    second: {fileID: 2100000, guid: f1dccbe789b2d60449e327d71e38bd31, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
