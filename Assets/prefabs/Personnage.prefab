@@ -88,6 +88,9 @@ MonoBehaviour:
   grounded: 0
   sensitivityX: 0.5
   sensitivityY: 0.5
+  masqueInteraction:
+    serializedVersion: 2
+    m_Bits: 0
   hpPlayer: 100
   gameOverScreen: {fileID: 0}
 --- !u!136 &3853910874761027658
@@ -312,7 +315,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: baa608d3371c8004b95869ac2a60590d, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

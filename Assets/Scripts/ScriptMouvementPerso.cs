@@ -24,7 +24,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     public LayerMask maskSol; // masque de couche pour identifier le sol
     public Transform groundCheck; // point de vérification de contact avec le sol
     private Rigidbody joueurRb; // composant Rigidbody pour la physique du joueur
-    private Camera camJoueur;
     //====================================================================
     // SECTION VARIABLES DE CONTRÔLE DU PERSONNAGE
     //====================================================================
@@ -41,17 +40,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private float orientationX; // rotation horizontale du corps (inutilisée pour le moment)
     private float orientationY; // rotation verticale de la caméra (axe X)
     private float velociteMax; // vitesse maximale actuelle du joueur
-    private float velociteMaxNormale = 50f; // vitesse maximale en position normale
+    private float velociteMaxNormale = 30f; // vitesse maximale en position normale
     private float hauteurNormale = 1.6f; // hauteur du collider du joueur en position normale
     private float jumpForce; // force de saut actuelle
-    private float jumpForceNormale = 3f; // force de saut en position normale
+    private float jumpForceNormale = 2.5f; // force de saut en position normale
     private float hauteurCameraNormale = 1.6f; // hauteur de la caméra en position normale
-    private float cooldownSaut = 0.4f;
-    private float dernierSaut = 0f;
-    private float porteInteraction = 3f;
-    public LayerMask masqueInteraction;
-
-    private IInteraction cibleActuelle;
     //====================================================================
     // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
     //====================================================================
@@ -88,7 +81,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //==================================================================
     private void Awake()
     {
-
         // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
         InitArmes();
         // Récupérer le composant Rigidbody pour appliquer les forces
@@ -107,8 +99,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCameraNormale, cameraPivot.localPosition.z);
         // Trouver le socket d'arme pour appliquer le balancement (sway)
         socketArme = cameraPivot.Find("SocketArme");
-
-        camJoueur = Camera.main;
         
     }
 
@@ -205,14 +195,13 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
                 //� chaque FixedUpdate, on v�rifie d'abord si le joueur est au sol
         VerifierSol();
         //ensuite, si le joueur est au sol et qu'il appui sur la touche assign�e au saut,
-        if (grounded && veutSauter && Time.time > dernierSaut+cooldownSaut)
+        if (grounded && veutSauter)
         {
  
             //ajouter une force au rb
             joueurRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             //toggle la bool qui d�termine si la touche saut est enclanch�e
             veutSauter = false;
-            dernierSaut = Time.time;
         }
     }
     //==================================================================
@@ -381,16 +370,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         {
             // simple gestion de la mort (à adapter)
             Debug.Log("Player dead");
-            // par exemple désactiver le GameObject
-            gameObject.SetActive(false);
-            // afficher l'écran de game over
-            gameOverScreen.SetActive(true);
+            DisableMovement(); // désactiver les mouvements et contrôles du joueur
             
         }
     }
-/// <summary>
-/// fonction qui va chercher les deux armes dans l'inventaire du joueur dans awake
-/// </summary>
+
     private void InitArmes()
     {
         ScriptGestionArme[] armesPresentes = GetComponentsInChildren<ScriptGestionArme>(true);
@@ -405,10 +389,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
-    /// <summary>
-    /// fonction qui gere le changement d'arme
-    /// </summary>
-    /// <param name="index"></param>
     private void ChangerArme (int index)
     {
         if (slotsArmes[index] == null) return;
@@ -419,26 +399,4 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         slotsArmes[indexArmeActive].gameObject.SetActive(true);
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
-    /// <summary>
-    /// fonction appelee dans update, qui utilise un raycast pour detecter les objets
-    /// avec lesquels le joueur peut interagir.
-    /// </summary>
-    void detecterInteraction()
-    {
-        Ray ray = new Ray(camJoueur.transform.position,camJoueur.transform.forward);
-
-        if (Physics.Raycast(ray, out RaycastHit hit,porteInteraction,masqueInteraction))
-        {
-            var objetInteractif = hit.collider.GetComponent<IInteraction>();
-
-            if(objetInteractif != null)
-            {
-                cibleActuelle = objetInteractif;
-                return;
-            }
-            
-        }
-        cibleActuelle = null;
-    }
-
 }
