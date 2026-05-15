@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_LowResShader
-  m_Shader: {fileID: -6465566751694194690, guid: daad7cf44b9754e44b83e6e7a9ef51b4, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 1ee7cb0408bee7210b39ee9e127daf61, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

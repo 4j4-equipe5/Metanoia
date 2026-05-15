@@ -43,7 +43,7 @@ public class AttackState : IState
         startPosition = _ennemyRef.transform.position;
 
         Vector3 direction = (player.position - startPosition).normalized;
-        targetPosition = player.position + direction * 1f; // La position cible est légèrement devant le joueur pour éviter que l'ennemi ne se téléporte directement sur lui
+        targetPosition = player.position + direction * 1.2f; // La position cible est légèrement devant le joueur pour éviter que l'ennemi ne se téléporte directement sur lui
         _ennemyRef.attackCooldown = _ennemyRef.attackCooldownDuration; // réinitialise le cooldown de l'attaque après l'attaque
 
         timePassed = 0;
@@ -82,7 +82,7 @@ public class AttackState : IState
                 // Fin du segment : Passe au suivant
                 currentDash++;
                 startPosition = _ennemyRef.transform.position;  // Nouvelle position de départ
-                targetPosition = player.position + direction * 1f;  // Met à jour vers la dernière position du joueur
+                targetPosition = player.position + direction * 1.2f;  // Met à jour vers la dernière position du joueur
                 timePassed = 0;  // Reset timer pour le prochain segment
                 Debug.Log("Dash " + currentDash + " vers " + targetPosition);
             }
