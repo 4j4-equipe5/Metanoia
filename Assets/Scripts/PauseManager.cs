@@ -8,6 +8,9 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private Canvas pauseCanvas;
     //ajout fait par Emile
     [SerializeField] private AudioSource musicAudioSource;
+    [SerializeField] private Slider sliderX;
+    [SerializeField] private Slider sliderY;
+     private ScriptMouvementPerso joueur; 
     private bool isPaused = false;
 
     void Update()
@@ -17,11 +20,28 @@ public class PauseManager : MonoBehaviour
             Pause();
         }
     }
-
+    void Awake()
+    {
+         joueur = FindFirstObjectByType<ScriptMouvementPerso>(); 
+    }
+    public void ChangerX(float valeur)
+    {
+        if(joueur != null) joueur.sensitivityX = valeur;
+    }
+    public void ChangerY(float valeur)
+    {
+        if(joueur != null) joueur.sensitivityY = valeur;
+    }
     void Pause()
     {
         isPaused = true;
 
+
+        if(sliderX != null) sliderX.value = joueur.sensitivityX;
+        if(sliderY != null) sliderY.value = joueur.sensitivityY;
+
+        sliderX.onValueChanged.AddListener(ChangerX);
+        sliderY.onValueChanged.AddListener(ChangerY);
         // Disable player input so UI can be interacted with
         ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
         if (playerMovement != null)

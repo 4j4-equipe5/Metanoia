@@ -54,6 +54,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 //hashset pour creer la liste des buffs actifs. hashset permet de verifier
 //que la meme valeur ne se retrouve qu'une fois
     private HashSet<BuffDebuff> buffsActifs= new HashSet<BuffDebuff>();
+    private HashSet<string> armesPresentes= new HashSet<string>();
     public float modificateurDommageGlobal = 1f;
     public float apPlayer;
     public float apMax = 100f;
@@ -90,7 +91,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //==================================================================
     //===================================================================
     
-  
+    public void SetSensitivite(float x, float y)
+    {
+        sensitivityX = x;
+        sensitivityY = y;
+    }
    
     //==================================================================
     // INITIALISATION - APPELÉE UNE FOIS AVANT LE PREMIER FRAME
@@ -469,6 +474,12 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// <returns></returns>
         public bool BuffPresent(BuffDebuff type) => buffsActifs.Contains(type);
     /// <summary>
+    /// meme chose que BuffPresent, appelee dans MachineArme
+    /// </summary>
+    /// <param name="nomArme"></param>
+    /// <returns></returns>
+        public bool ArmePresente(string nomArme) => armesPresentes.Contains(nomArme);
+    /// <summary>
     /// fonction qui est appelee dans le script MachineBonus pour appliquer
     /// le buff choisi par la machine
     /// </summary>
@@ -504,6 +515,26 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             break;
         }
         Debug.Log("buff applique");
+    }
+    public void ObtenirArme(dataArmes donnees )
+    {
+        if(armesPresentes.Contains(donnees.nomArme)) return;
+
+        for(int i = 0; i < slotsArmes.Length; i++)
+        {
+            if(slotsArmes[1] == null)
+            {
+                GameObject nouvelleArme =Instantiate(donnees.prefabArme, socketArme);
+                ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
+                
+                script.slotIndex = i;
+                slotsArmes[i] = script;
+
+                nouvelleArme.SetActive(false);
+
+                armesPresentes.Add(donnees.nomArme);
+            }
+        }
     }
 
 }
