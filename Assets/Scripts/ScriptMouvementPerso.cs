@@ -25,6 +25,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     public LayerMask maskSol; // masque de couche pour identifier le sol
     public Transform groundCheck; // point de vérification de contact avec le sol
     private Rigidbody joueurRb; // composant Rigidbody pour la physique du joueur
+    private Camera camJoueur;
     //====================================================================
     // SECTION VARIABLES DE CONTRÔLE DU PERSONNAGE
     //====================================================================
@@ -41,13 +42,88 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private float orientationX; // rotation horizontale du corps (inutilisée pour le moment)
     private float orientationY; // rotation verticale de la caméra (axe X)
     private float velociteMax; // vitesse maximale actuelle du joueur
-    private float velociteMaxNormale = 30f; // vitesse maximale en position normale
+    private float velociteMaxNormale = 50f; // vitesse maximale en position normale
     private float hauteurNormale = 1.6f; // hauteur du collider du joueur en position normale
     private float jumpForce; // force de saut actuelle
-    private float jumpForceNormale = 2.5f; // force de saut en position normale
+    private float jumpForceNormale = 3f; // force de saut en position normale
     private float hauteurCameraNormale = 1.6f; // hauteur de la caméra en position normale
+    private float cooldownSaut = 0.4f;
+    private float dernierSaut = 0f;
+    private float porteInteraction = 3f;
+    public LayerMask masqueInteraction;
+//hashset pour creer la liste des buffs actifs. hashset permet de verifier
+//que la meme valeur ne se retrouve qu'une fois
+    private HashSet<BuffDebuff> buffsActifs= new HashSet<BuffDebuff>();
+    private HashSet<string> armesPresentes= new HashSet<string>();
+    public float modificateurDommageGlobal = 1f;
+    public float apPlayer;
+    public float apMax = 100f;
+
+    //public float vitesseBase = 5f;
+    private IInteraction cibleActuelle;
+    //====================================================================
+    // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
+    //====================================================================
+    [Header("References a d'autres scripts")]
+    private ScriptGestionArme scriptGestionArme; // référence au script de gestion des armes
+
+    private ScriptGestionArme[] slotsArmes = new ScriptGestionArme[2];
+    private int indexArmeActive = 0;
+   
+    //====================================================================
+    // SECTION WEAPON SWAY (BALANCEMENT DE L'ARME)
+    //====================================================================
+    [Header("Weapon Sway")]
+    
+    private Transform socketArme; // point d'attache de l'arme (socket)
+    private float intensiteSway = 1f; // intensité du balancement de l'arme
+    private float smoothnessSway = 6f; // fluidité du balancement de l'arme
+    private Vector3 cibleRotationSway; // rotation cible du balancement
+    //==================================================================
+    // SECTION STATS ET UI
+    //==================================================================
+    [Header("Stats joueur")]
+    [SerializeField] private float hpPlayer = 100f; // points de vie du joueur
+    [SerializeField] private float maxHp = 100f;
+    [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
+    private bool firstFrame = true; // flag pour éviter la transition lerp au démarrage
+    //==================================================================
+    //==================================================================
+    //===================================================================
+    
+    public void SetSensitivite(float x, float y)
+    {
+        sensitivityX = x;
+        sensitivityY = y;
+    }
+   
+    //==================================================================
+    // INITIALISATION - APPELÉE UNE FOIS AVANT LE PREMIER FRAME
+    //==================================================================
+    private void Awake()
+    {
+
+        // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
+        InitArmes();
+        // Récupérer le composant Rigidbody pour appliquer les forces
+        joueurRb = GetComponent<Rigidbody>();
+        // Récupérer le composant CapsuleCollider pour modifier la taille lors de l'accroupissement
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        // Initialiser le système d'entrée
+        controle = new InputSystem_Actions();
+        // Définir les valeurs initiales (position normale)
+        jumpForce = jumpForceNormale;
+        capsuleCollider.height = hauteurNormale;
+        capsuleCollider.center = new Vector3(0, hauteurNormale / 2f, 0);
+        velociteMax = velociteMaxNormale;
+        hauteurCibleeCamera = hauteurCameraNormale;
+        // Initialiser la caméra à la bonne hauteur pour éviter le pop au démarrage
+        cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCameraNormale, cameraPivot.localPosition.z);
+        // Trouver le socket d'arme pour appliquer le balancement (sway)
+        socketArme = cameraPivot.Find("SocketArme");
         apPlayer = apMax;
-        camJoueur = Camera.main;        
+        camJoueur = Camera.main;
+        
     }
 
     //==================================================================
@@ -151,13 +227,14 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
                 //� chaque FixedUpdate, on v�rifie d'abord si le joueur est au sol
         VerifierSol();
         //ensuite, si le joueur est au sol et qu'il appui sur la touche assign�e au saut,
-        if (grounded && veutSauter)
+        if (grounded && veutSauter && Time.time > dernierSaut+cooldownSaut)
         {
  
             //ajouter une force au rb
             joueurRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             //toggle la bool qui d�termine si la touche saut est enclanch�e
             veutSauter = false;
+            dernierSaut = Time.time;
         }
     }
     //==================================================================
@@ -326,11 +403,16 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         {
             // simple gestion de la mort (à adapter)
             Debug.Log("Player dead");
-            DisableMovement(); // désactiver les mouvements et contrôles du joueur
+            // par exemple désactiver le GameObject
+            gameObject.SetActive(false);
+            // afficher l'écran de game over
+            gameOverScreen.SetActive(true);
             
         }
     }
-
+/// <summary>
+/// fonction qui va chercher les deux armes dans l'inventaire du joueur dans awake
+/// </summary>
     private void InitArmes()
     {
         ScriptGestionArme[] armesPresentes = GetComponentsInChildren<ScriptGestionArme>(true);
@@ -345,6 +427,10 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
+    /// <summary>
+    /// fonction qui gere le changement d'arme
+    /// </summary>
+    /// <param name="index"></param>
     private void ChangerArme (int index)
     {
         if (slotsArmes[index] == null) return;
