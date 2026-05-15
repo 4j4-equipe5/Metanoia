@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 {
     //==================================================================
@@ -45,6 +46,22 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private float jumpForce; // force de saut actuelle
     private float jumpForceNormale = 2.5f; // force de saut en position normale
     private float hauteurCameraNormale = 1.6f; // hauteur de la caméra en position normale
+<<<<<<< HEAD
+=======
+    private float cooldownSaut = 0.4f;
+    private float dernierSaut = 0f;
+    private float porteInteraction = 3f;
+    public LayerMask masqueInteraction;
+//hashset pour creer la liste des buffs actifs. hashset permet de verifier
+//que la meme valeur ne se retrouve qu'une fois
+    private HashSet<BuffDebuff> buffsActifs= new HashSet<BuffDebuff>();
+    public float modificateurDommageGlobal = 1f;
+    public float apPlayer;
+    public float apMax = 100f;
+
+    //public float vitesseBase = 5f;
+    private IInteraction cibleActuelle;
+>>>>>>> 850e2a918d75a142ee10c94deb651a836da9d5f3
     //====================================================================
     // SECTION RÉFÉRENCES À D'AUTRES SCRIPTS
     //====================================================================
@@ -67,7 +84,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     // SECTION STATS ET UI
     //==================================================================
     [Header("Stats joueur")]
-    [SerializeField] private int hpPlayer = 100; // points de vie du joueur
+    [SerializeField] private float hpPlayer = 100f; // points de vie du joueur
+    [SerializeField] private float maxHp = 100f;
     [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
     private bool firstFrame = true; // flag pour éviter la transition lerp au démarrage
     //==================================================================
@@ -99,6 +117,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         cameraPivot.localPosition = new Vector3(cameraPivot.localPosition.x, hauteurCameraNormale, cameraPivot.localPosition.z);
         // Trouver le socket d'arme pour appliquer le balancement (sway)
         socketArme = cameraPivot.Find("SocketArme");
+<<<<<<< HEAD
+=======
+        apPlayer = apMax;
+        camJoueur = Camera.main;
+>>>>>>> 850e2a918d75a142ee10c94deb651a836da9d5f3
         
     }
 
@@ -135,6 +158,14 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         if (controle.Player.Previous.triggered) ChangerArme(0);
         if(controle.Player.Next.triggered) ChangerArme(1);
 
+      
+        
+        detecterInteraction();
+
+          if(controle.Player.Interact.triggered && cibleActuelle != null && ScriptGestionPointage.Instance.score >= cibleActuelle.prix)
+        {
+            cibleActuelle.Interagir(this);
+        }
 
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
@@ -399,4 +430,77 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         slotsArmes[indexArmeActive].gameObject.SetActive(true);
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
+<<<<<<< HEAD
+=======
+    /// <summary>
+    /// fonction appelee dans update, qui utilise un raycast pour detecter les objets
+    /// avec lesquels le joueur peut interagir.
+    /// </summary>
+    void detecterInteraction()
+    {
+        Ray ray = new Ray(camJoueur.transform.position,camJoueur.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit,porteInteraction,masqueInteraction))
+        {
+            var objetInteractif = hit.collider.GetComponent<IInteraction>();
+
+            if(objetInteractif != null)
+            {
+               
+                cibleActuelle = objetInteractif;
+                InteractionUI.instance.Afficher(objetInteractif.InteractionLabel);
+                return;
+            }
+            
+        }
+        cibleActuelle = null;
+        InteractionUI.instance.Invisible();
+    }
+    /// <summary>
+    /// fonction qui verifie si le buff existe deja dans la liste
+    /// cette fonction est appelee dans le script MachineBonus dans la classe Interagir()
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+        public bool BuffPresent(BuffDebuff type) => buffsActifs.Contains(type);
+    /// <summary>
+    /// fonction qui est appelee dans le script MachineBonus pour appliquer
+    /// le buff choisi par la machine
+    /// </summary>
+    /// <param name="buff">le buff qui est applique</param>
+        public void AppliquerBuff(dataBuffs buff)
+    {
+        //si BuffPresent retourne vrai sur le buff, on ne fait rien
+        if(BuffPresent(buff.type)) return;
+        //on ajoute le buff dans le Hashset buffsActifs
+        buffsActifs.Add(buff.type);
+    //switch qui choisi quels effets appliquer en fonction
+        switch (buff.type)
+        {
+            
+            case BuffDebuff.boostVitesse:
+                velociteMaxNormale *= buff.value;
+                velociteMax = velociteMaxNormale;
+                Debug.Log("buff attribue");
+                break;
+            case BuffDebuff.boostVie:
+                maxHp *= buff.value;
+                hpPlayer = (int)maxHp;
+                 Debug.Log("buff attribue");
+                break;
+            case BuffDebuff.boostDommage:
+                modificateurDommageGlobal *= buff.value;
+                 Debug.Log("buff attribue");
+                break;
+            case BuffDebuff.boostArmure:
+                apMax *= buff.value;
+                apPlayer = (int)apMax;
+                 Debug.Log("buff attribue");
+            break;
+        }
+        Debug.Log("buff applique");
+    }
+
+>>>>>>> 850e2a918d75a142ee10c94deb651a836da9d5f3
 }
