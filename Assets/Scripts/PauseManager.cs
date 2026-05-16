@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private Slider sliderX;
     [SerializeField] private Slider sliderY;
-     private ScriptMouvementPerso joueur; 
+    private ScriptMouvementPerso joueur; 
     private bool isPaused = false;
 
     void Update()

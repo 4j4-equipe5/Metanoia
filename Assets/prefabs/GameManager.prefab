@@ -526,6 +526,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 2761860716574792556}
   musicAudioSource: {fileID: 0}
+  sliderX: {fileID: 0}
+  sliderY: {fileID: 0}
 --- !u!114 &212235840689284216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,7 +791,7 @@ RectTransform:
   m_Father: {fileID: 1311839433155518249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000091552734}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2015,7 +2017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8949553468647524381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2637,7 +2639,7 @@ RectTransform:
   m_Father: {fileID: 801314985809455491}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000091552734}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2697,7 +2699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1755390814673900823
 RectTransform:
   m_ObjectHideFlags: 0
