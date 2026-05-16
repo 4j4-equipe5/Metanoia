@@ -127,7 +127,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 
     void Start()
     {
-       
+        
     }
 
     //==================================================================
@@ -505,5 +505,4 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         Debug.Log("buff applique");
     }
-
 }
