@@ -14,4 +14,9 @@ public class HoverHachures : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         Hover.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        Hover.SetActive(false);
+    }
 }

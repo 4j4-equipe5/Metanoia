@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3853910874761027658}
   - component: {fileID: 1595974615891697914}
   - component: {fileID: 8750453225958523535}
-  - component: {fileID: 4354002184645975914}
+  - component: {fileID: 2733796913585356000}
   m_Layer: 9
   m_Name: Personnage
   m_TagString: Player
@@ -91,7 +91,7 @@ MonoBehaviour:
   sensitivityY: 0.5
   masqueInteraction:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   modificateurDommageGlobal: 1
   apPlayer: 0
   apMax: 100
@@ -245,7 +245,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4354002184645975914
+--- !u!114 &2733796913585356000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,7 +373,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
