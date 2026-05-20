@@ -7,6 +7,8 @@ TagManager:
   - Lumiere-calme
   - Monstre
   - Wapoint
+  - Undefined
+  - Projectile
   layers:
   - Default
   - TransparentFX
