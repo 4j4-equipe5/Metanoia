@@ -14,7 +14,7 @@ using UnityEngine.AI;
 /// 6. Projectile = lance une boule de feu
 /// 7. meurt 
 /// </summary>
-public class Cerveau_Miann : MonoBehaviour
+public class Cerveau_Miann : MonoBehaviour, IDommagable
 {
     // Prend le script du FSM et les refs de MIANn
     private StateMachine stateMachine; // script 
@@ -24,6 +24,8 @@ public class Cerveau_Miann : MonoBehaviour
     private bool toucheMur;
     private bool estAuSol;
     private float wallRunContinuationTime = 0f; // Timer pour continuer wallrun après perte de mur
+
+    private int vieActuelle;
     void Awake()
     {
         // Recupere les composant du gameObject
@@ -39,7 +41,7 @@ public class Cerveau_Miann : MonoBehaviour
         var projectileAttack = new ProjectileAttackState(ennemyRef); // Etat d'attaque à distance : utilise le NavMeshAgent pour se déplacer et lancer des projectiles
         // TODO: ACTIVE QUAND FINI LE SCRIPT
         // DeathState peut seulement être activer quand les scripts vont être intégrer dans la scène principale
-        // var death = new DeathState(ennemyRef.player, ennemyRef.degats); // Etat de mort : joue une animation de mort et désactive l'ennemi
+        //var death = new DeathState(ennemyRef); // Etat de mort : joue une animation de mort et désactive l'ennemi
         
         // TODO:  StunnedState :
         // - Sert à arrêter le Agent et aussi empêche d'attaquer, patrol, chase, jump et plus
@@ -49,7 +51,7 @@ public class Cerveau_Miann : MonoBehaviour
         //      -> Ennemy prend aucun damageThresold ( empêche de spam stun)
         //      -> Si le joueur utilise le fusil à pompe => RAGDOLLL LL L  L L
         //      -> En dessous de trois reviens à la normal
-        // var stunned = new StunnedState(agentMiann); // Etat d'étourdissement : joue une animation d'étourdissement et empêche l'ennemi de bouger
+        var stunned = new StunnedState(ennemyRef); // Etat d'étourdissement : joue une animation d'étourdissement et empêche l'ennemi de bouger
         var attack = new AttackState(ennemyRef); // Etat d'attaque au corps à corps : utilise le NavMeshAgent pour se déplacer et attaquer le joueur
 
         //2. Définition des transitions
@@ -117,7 +119,6 @@ public class Cerveau_Miann : MonoBehaviour
         // Après projectile → retour chase
         At(projectileAttack, chase, () => projectileAttack.IsComplete); // Si le joueur est à plus de la distance d'attaque à distance après une attaque, retourner à l'état de poursuite
 
-        /*
 
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         //  GLOBAL =================================================================
@@ -135,8 +136,7 @@ public class Cerveau_Miann : MonoBehaviour
             !ennemyRef.isStunned &&
             distance >= ennemyRef.detectionRange); // Si le joueur est à plus de la distance de détection après le stun, retourner à la patrouille
 
-        AtAny(death, () => ennemyRef.isDead); // Si l'ennemi est mort, passer à l'état de mort
-        */
+        //AtAny(death, () => ennemyRef.isDead); // Si l'ennemi est mort, passer à l'état de mort
         // 3. État de départ
         stateMachine.SetState(patrol); // L'état de départ est la patrouille, mais tu peux le changer si tu veux que Miann commence dans un autre état
     }
@@ -163,6 +163,35 @@ public class Cerveau_Miann : MonoBehaviour
         CooldownUpdate(); // Met à jour le cooldown du saut à chaque frame
         stateMachine.Tick(); // Appelle la méthode Tick du FSM à chaque frame
 
+    }
+
+    // IMPLEMENTATION DE L'INTERFACE IDOMMAGABLE
+    public void PrendreDegat(int degats)
+    {
+        if (ennemyRef.isDead) return;
+
+        if (ennemyRef.isStunned)
+        {
+            degats  *= 2; // Si l'ennemi est étourdi, les dégâts sont doublés
+            ennemyRef.damageThreshold += degats * 0.005f; // Augmente le seuil de dégâts pour prolonger l'étourdissement
+            debug.Log("!!! Bonus DMG : " + degats + " !!!");
+        }
+        else
+        {
+            ennemyRef.damageThreshold += degats * 0.1f; // Augmente le seuil de dégâts pour potentiellement étourdir l'ennemi
+        }
+        ennemyRef.vieEnnemie -= degats; // la vie - les dégats de l'arme du joueur ( pistol ou Shotgun)
+        if (ennemyRef.vieEnnemie <= 0)
+        {
+            ennemyRef.isDead = true;
+            return;
+        }
+        // gestion du Stun : si le seuil de dégâts dépasse 3, l'ennemi n'est pas étourdi
+        if (!ennemyRef.isStunned &&
+            ennemyRef.damageThreshold >= 3f)
+        {
+            ennemyRef.isStunned = true;
+        }
     }
     private void CooldownUpdate()
     {

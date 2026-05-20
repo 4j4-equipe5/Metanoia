@@ -130,11 +130,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //==================================================================
     //==================================================================
 
-    void Start()
-    {
-       
-    }
-
     //==================================================================
     //==================================================================
     //==================================================================
@@ -533,6 +528,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
                 nouvelleArme.SetActive(false);
 
                 armesPresentes.Add(donnees.nomArme);
+                break;
             }
         }
     }

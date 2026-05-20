@@ -39,6 +39,7 @@ public class EnnemyReferences : MonoBehaviour
     public float attackCooldownDuration = 1f;
     public float projectileCooldown;
     public float projectileCooldownDuration;
+    public float thresholdDecaySpeed = 1.5f;
     // MIANN SEULEMENT
     public float jumpCooldown; // temps de recharge courant du saut
     public float jumpCooldownDuration = 2f; // durée de recharge après une attaque de saut
@@ -64,6 +65,8 @@ public class EnnemyReferences : MonoBehaviour
 
     // Stats de l'ennemi : modifiable dans le futur 
     [Header("Combat stats")]
+    public int vieEnnemie;
+    public float damageThreshold;
     public float attackDamage = 10f; //placeholder
     public float degats = 10f; // placeholder
     [Header("Etat")]
