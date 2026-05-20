@@ -3,9 +3,14 @@ guid: 4fdc99292ab44a0409b2e35f8a9caef7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: moniteurAnomalie
+    second: {fileID: 2100000, guid: 02bea5e283bd67f4cbafd35e200dda8c, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
