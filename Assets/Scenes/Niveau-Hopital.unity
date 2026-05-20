@@ -338,11 +338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VolumeSlider: {fileID: 7620455974482442936}
---- !u!4 &1462217335 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7230027020461466987, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
-  m_PrefabInstance: {fileID: 717748305824950162}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1669298323
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +370,7 @@ Transform:
   - {fileID: 2092888843}
   - {fileID: 8297949591317405070}
   - {fileID: 1553179307155889530}
-  - {fileID: 1462217335}
+  - {fileID: 717748305824950163}
   - {fileID: 980976751}
   - {fileID: 6045883169137474966}
   - {fileID: 3462111034412168843}
@@ -671,6 +666,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+--- !u!4 &717748305824950163 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1968625790489811909, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+  m_PrefabInstance: {fileID: 717748305824950162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1553179307155889530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3303544525603005604, guid: f25811077c1f65d47a0b4b47ea3b79d7, type: 3}
@@ -1113,9 +1113,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5308240431067939135, guid: b469c94145baec74599d993580cc17ac, type: 3}
+      propertyPath: m_Intensity
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 6035318961339935397, guid: b469c94145baec74599d993580cc17ac, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511013539763177705, guid: b469c94145baec74599d993580cc17ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.95
       objectReference: {fileID: 0}
     - target: {fileID: 7310969865546339135, guid: b469c94145baec74599d993580cc17ac, type: 3}
       propertyPath: m_AngularDrag
@@ -1124,6 +1132,10 @@ PrefabInstance:
     - target: {fileID: 7658910862643909340, guid: b469c94145baec74599d993580cc17ac, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586962878044846081, guid: b469c94145baec74599d993580cc17ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 8870004328432641577, guid: b469c94145baec74599d993580cc17ac, type: 3}
       propertyPath: m_UseMotor

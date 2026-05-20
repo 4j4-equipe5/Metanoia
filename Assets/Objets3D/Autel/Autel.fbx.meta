@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Autel
-    second: {fileID: 2100000, guid: ea29a85deea951e41a6aae6eacc5fdb2, type: 2}
+      name: No Name
+    second: {fileID: 2100000, guid: 541006cba9f1b3f4da9ef08d3af889b3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
