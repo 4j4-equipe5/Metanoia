@@ -3,9 +3,29 @@ guid: e5c61f7f28ed6e74c8bc24bcb9f7323e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: goldhorloge
+    second: {fileID: 2100000, guid: cf0c590750d196a418af2eb8e77edd98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: horloge
+    second: {fileID: 2100000, guid: 7a5a7194a53090b40a7cc7d7a3af955d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: horlogeDetail1
+    second: {fileID: 2100000, guid: 5c60763e67167cb4fbd1e38d90166a59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface44
+    second: {fileID: 2100000, guid: 5e3431fe2cd6ab54dac67e9f77c21543, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
