@@ -16,6 +16,7 @@ public class ScriptGestionArme : MonoBehaviour
     [SerializeField] public AudioSource sonTir;
     private int reserveMunitionActuelle;
     private Camera cam;
+    public bool estObtenue = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
