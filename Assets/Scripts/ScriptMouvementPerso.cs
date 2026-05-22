@@ -84,6 +84,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     // SECTION STATS ET UI
     //==================================================================
     [Header("Stats joueur")]
+   
     public float hpPlayer = 100f; // points de vie du joueur
     [SerializeField] private float maxHp = 100f;
     [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
@@ -340,6 +341,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     {
         return GererAcceleration(directionAcceleration, velociteActuelle);
     }
+
+    
     /// <summary>
     /// fonction qui retourne un bool qui d�termine si le joueur est au sol
     /// </summary>
@@ -350,6 +353,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
        
         return grounded;
     }
+
+
     /// <summary>
     /// fonction qui gere les modification des stats quand le joueur est
     /// accroupi
@@ -379,6 +384,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         
     }
+
+
+
     /// <summary>
     /// fonction qui calcule et applique le sway du socket d'arme en fonction
     /// du mouvement de la camera. Appelee dans update
@@ -396,6 +404,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         Quaternion.Euler(cibleRotationSway),
         Time.deltaTime * smoothnessSway);
     }
+
+
+
     // implémentation de IDommagable pour recevoir des dégâts
     public void PrendreDegat(int degats)
     {
@@ -412,6 +423,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             
         }
     }
+
+
+
 /// <summary>
 /// fonction qui va chercher les deux armes dans l'inventaire du joueur dans awake
 /// </summary>
@@ -434,6 +448,8 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
+
+
     /// <summary>
     /// fonction qui gere le changement d'arme
     /// </summary>
@@ -448,6 +464,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         slotsArmes[indexArmeActive].gameObject.SetActive(true);
         scriptGestionArme = slotsArmes[indexArmeActive];
     }
+
+
+
     /// <summary>
     /// fonction appelee dans update, qui utilise un raycast pour detecter les objets
     /// avec lesquels le joueur peut interagir.
@@ -472,6 +491,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         cibleActuelle = null;
         InteractionUI.instance.Invisible();
     }
+
+
+
     /// <summary>
     /// fonction qui verifie si le buff existe deja dans la liste
     /// cette fonction est appelee dans le script MachineBonus dans la classe Interagir()
@@ -486,6 +508,22 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// <param name="nomArme"></param>
     /// <returns></returns>
         public bool ArmePresente(string nomArme) => armesPresentes.Contains(nomArme);
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+///                 Proprietes pour usage dans d'autres scripts                //////
+/// ////////////////////////////////////////////////////////////////////////////////
+/// <summary>
+/// proprietes des valeurs des stats vie, armure, armeactive et munition pour le UI
+/// </summary>
+         public float Vie => hpPlayer;
+         public float Armure => apPlayer;
+         public int MunActuelle => scriptGestionArme != null? scriptGestionArme.reserveMunitionActuelle:0;
+         public int IndexArmeActive => indexArmeActive;
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+
     /// <summary>
     /// fonction qui est appelee dans le script MachineBonus pour appliquer
     /// le buff choisi par la machine
@@ -523,6 +561,12 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
         Debug.Log("buff applique");
     }
+
+    /// <summary>
+    /// gere l'attribution de l'arme dans son slot, pour si on decide
+    /// d'avoir plus d'une arme de chaque type
+    /// </summary>
+    /// <param name="donnees"></param>
     public void ObtenirArme(dataArmes donnees )
     {
         if(armesPresentes.Contains(donnees.nomArme)) return;
