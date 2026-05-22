@@ -43,14 +43,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         // DeathState peut seulement être activer quand les scripts vont être intégrer dans la scène principale
         //var death = new DeathState(ennemyRef); // Etat de mort : joue une animation de mort et désactive l'ennemi
         
-        // TODO:  StunnedState :
-        // - Sert à arrêter le Agent et aussi empêche d'attaquer, patrol, chase, jump et plus
-        // - Seulement activer par un damageThresold qui revient tanquilement à zero
-        //      par exemple : plus au que 3 déclanche le damage thresold
-        //      -> Ennemy prend plus de dégats
-        //      -> Ennemy prend aucun damageThresold ( empêche de spam stun)
-        //      -> Si le joueur utilise le fusil à pompe => RAGDOLLL LL L  L L
-        //      -> En dessous de trois reviens à la normal
+        
         var stunned = new StunnedState(ennemyRef); // Etat d'étourdissement : joue une animation d'étourdissement et empêche l'ennemi de bouger
         var attack = new AttackState(ennemyRef); // Etat d'attaque au corps à corps : utilise le NavMeshAgent pour se déplacer et attaquer le joueur
 
@@ -174,7 +167,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         {
             degats  *= 2; // Si l'ennemi est étourdi, les dégâts sont doublés
             ennemyRef.damageThreshold += degats * 0.005f; // Augmente le seuil de dégâts pour prolonger l'étourdissement
-            debug.Log("!!! Bonus DMG : " + degats + " !!!");
+            Debug.Log("!!! Bonus DMG : " + degats + " !!!");
         }
         else
         {
