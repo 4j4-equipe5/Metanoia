@@ -3,20 +3,23 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    
     private ScriptMouvementPerso joueur;
 
     private Vector3 positionInitialeArme;
     private float vitesseRetourRecul = 10f;
     public int slotIndex = 0;
-    private Transform pointMuzzleFlash;  
+    
     private Transform socketArme;
     private float dernierTir;
     private float tempsEntreCoup;
     public dataArmes donnees;
     [SerializeField] public AudioSource sonTir;
-    private int reserveMunitionActuelle;
+    public int reserveMunitionActuelle;
     private Camera cam;
     public bool estObtenue = false;
+   
+    [SerializeField] private Transform pointMuzzleFlash;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -26,12 +29,13 @@ public class ScriptGestionArme : MonoBehaviour
         tempsEntreCoup = 1f/donnees.cadence;
         reserveMunitionActuelle = donnees.maxReserve;
         cam = Camera.main;
-        sonTir.GetComponent<AudioSource>();
-        pointMuzzleFlash = transform.Find("pointMuzzleFlash");
+        
+        
+        
     }
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -119,6 +123,8 @@ public class ScriptGestionArme : MonoBehaviour
 /// <returns></returns>
     private IEnumerator MuzzleFlash()
     {
+          Debug.Log($"prefabMuzzleFlash: {donnees.prefabMuzzleFlash}");
+        Debug.Log($"pointMuzzleFlash: {pointMuzzleFlash}");
         if(donnees.prefabMuzzleFlash == null)
         {
             yield break;

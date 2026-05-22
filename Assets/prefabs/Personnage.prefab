@@ -91,7 +91,7 @@ MonoBehaviour:
   sensitivityY: 0.5
   masqueInteraction:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   modificateurDommageGlobal: 1
   apPlayer: 0
   apMax: 100
@@ -601,6 +601,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7251063609829523243}
     m_Modifications:
+    - target: {fileID: 3996173314845693602, guid: 861913dede52bab13936163daefecd1b, type: 3}
+      propertyPath: estObtenue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5056422688778380283, guid: 861913dede52bab13936163daefecd1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.643

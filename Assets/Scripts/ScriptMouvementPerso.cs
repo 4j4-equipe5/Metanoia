@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 {
+    public static ScriptMouvementPerso Instance;
     //==================================================================
     // SECTION ACCROUPISSEMENT (CROUCH)
     //==================================================================
@@ -56,7 +57,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     private HashSet<BuffDebuff> buffsActifs= new HashSet<BuffDebuff>();
     private HashSet<string> armesPresentes= new HashSet<string>();
     public float modificateurDommageGlobal = 1f;
-    public float apPlayer;
+    public float apPlayer = 0;
     public float apMax = 100f;
 
     //public float vitesseBase = 5f;
@@ -83,7 +84,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     // SECTION STATS ET UI
     //==================================================================
     [Header("Stats joueur")]
-    [SerializeField] private float hpPlayer = 100f; // points de vie du joueur
+    public float hpPlayer = 100f; // points de vie du joueur
     [SerializeField] private float maxHp = 100f;
     [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
     private bool firstFrame = true; // flag pour éviter la transition lerp au démarrage
@@ -99,9 +100,10 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
    
     //==================================================================
     // INITIALISATION - APPELÉE UNE FOIS AVANT LE PREMIER FRAME
-    //==================================================================
+    //=======================================using TMPro;===========================
     private void Awake()
     {
+        Instance = this;
 
         // Récupérer le composant ScriptGestionArme dans les enfants de ce GameObject
         InitArmes();
@@ -415,14 +417,19 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 /// </summary>
     private void InitArmes()
     {
-        ScriptGestionArme[] armesPresentes = GetComponentsInChildren<ScriptGestionArme>(true);
-        foreach (ScriptGestionArme arme in armesPresentes)
+        ScriptGestionArme[] armesEnfants = GetComponentsInChildren<ScriptGestionArme>(true);
+        foreach (ScriptGestionArme arme in armesEnfants)
         {
             int slot = arme.slotIndex;
             if(slot < slotsArmes.Length)
             {
-                slotsArmes[slot] = arme;
-                arme.gameObject.SetActive(slot == indexArmeActive);
+                if (arme.estObtenue)
+                {
+                    slotsArmes[slot] = arme;
+                    armesPresentes.Add(arme.donnees.nomArme);
+                }
+                arme.gameObject.SetActive(slot == indexArmeActive && arme.estObtenue);
+
             }
         }
         scriptGestionArme = slotsArmes[indexArmeActive];
