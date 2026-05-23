@@ -41,7 +41,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         var projectileAttack = new ProjectileAttackState(ennemyRef); // Etat d'attaque à distance : utilise le NavMeshAgent pour se déplacer et lancer des projectiles
         // TODO: ACTIVE QUAND FINI LE SCRIPT
         // DeathState peut seulement être activer quand les scripts vont être intégrer dans la scène principale
-        //var death = new DeathState(ennemyRef); // Etat de mort : joue une animation de mort et désactive l'ennemi
+        var death = new DeathState(ennemyRef); // Etat de mort : joue une animation de mort et désactive l'ennemi
         
         
         var stunned = new StunnedState(ennemyRef); // Etat d'étourdissement : joue une animation d'étourdissement et empêche l'ennemi de bouger
@@ -130,6 +130,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
             distance >= ennemyRef.detectionRange); // Si le joueur est à plus de la distance de détection après le stun, retourner à la patrouille
 
         //AtAny(death, () => ennemyRef.isDead); // Si l'ennemi est mort, passer à l'état de mort
+        AtAny(death, () => ennemyRef.vieEnnemie <= 0); // Si la vie de l'ennemi est à 0 ou moins, passer à l'état de mort
         // 3. État de départ
         stateMachine.SetState(patrol); // L'état de départ est la patrouille, mais tu peux le changer si tu veux que Miann commence dans un autre état
     }
@@ -151,6 +152,10 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         else
         {
             wallRunContinuationTime += Time.deltaTime; // Incrémente le timer
+        }
+        if (ennemyRef.isDead == true)
+        {
+            Destroy(this.gameObject);
         }
         estAuSol = EstAuSol(); // Vérifie si l'ennemi est au sol à chaque frame
         CooldownUpdate(); // Met à jour le cooldown du saut à chaque frame
@@ -174,11 +179,6 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
             ennemyRef.damageThreshold += degats * 0.1f; // Augmente le seuil de dégâts pour potentiellement étourdir l'ennemi
         }
         ennemyRef.vieEnnemie -= degats; // la vie - les dégats de l'arme du joueur ( pistol ou Shotgun)
-        if (ennemyRef.vieEnnemie <= 0)
-        {
-            ennemyRef.isDead = true;
-            return;
-        }
         // gestion du Stun : si le seuil de dégâts dépasse 3, l'ennemi n'est pas étourdi
         if (!ennemyRef.isStunned &&
             ennemyRef.damageThreshold >= 3f)
@@ -199,6 +199,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         if  (ennemyRef.projectileCooldown > 0)
         {
             ennemyRef.projectileCooldown -= Time.deltaTime; // Réduit le cooldown de l'attaque à distance au fil du temps
+            return; // 
         }
     }
     private bool ToucheMur() // Fonction pour vérifier si l'ennemi touche un mur

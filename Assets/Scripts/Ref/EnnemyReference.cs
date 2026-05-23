@@ -5,6 +5,9 @@ public class EnnemyReferences : MonoBehaviour
     // TODO: !!! Si temps organise les ref mieux !!!
     [Header("reférences à Ennemi")]
     public NavMeshAgent agent;
+    public Animator animEnnemi;
+    public Rigidbody rbEnnemi;
+    public ForceFreezeHips forceFreezeHips;
     [Header("Cible")]
     public Transform player;
     
@@ -69,6 +72,7 @@ public class EnnemyReferences : MonoBehaviour
     public float damageThreshold;
     public float attackDamage = 10f; //placeholder
     public float degats = 10f; // placeholder
+    public float forceDeRagdoll = 20f; // placeholder, à ajuster selon les besoins pour la force du ragdoll lors du stun
     [Header("Etat")]
     public bool isStunned;
     public bool isDead;
