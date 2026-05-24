@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System.Collections;
 public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 {
+    private Vector3 positionSocketNormale;
+    private bool EnAnim = false;
     public static ScriptMouvementPerso Instance;
     //==================================================================
     // SECTION ACCROUPISSEMENT (CROUCH)
@@ -68,7 +71,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     [Header("References a d'autres scripts")]
     private ScriptGestionArme scriptGestionArme; // référence au script de gestion des armes
 
-    private ScriptGestionArme[] slotsArmes = new ScriptGestionArme[2];
+    private ScriptGestionArme[] slotsArmes = new ScriptGestionArme[3];
     private int indexArmeActive = 0;
    
     //====================================================================
@@ -126,7 +129,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         socketArme = cameraPivot.Find("SocketArme");
         apPlayer = apMax;
         camJoueur = Camera.main;
-        
+        positionSocketNormale = socketArme.localPosition;
     }
 
     //==================================================================
@@ -142,7 +145,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     {
         AppliquerSway();
 
-        if (controle.Player.Attack.IsPressed())
+        if (controle.Player.Attack.IsPressed()&& !EnAnim)
         {
             scriptGestionArme.Tirer();
         }
@@ -154,8 +157,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         {
             veutSauter = true;
         }
-        if (controle.Player.Previous.triggered) ChangerArme(0);
-        if(controle.Player.Next.triggered) ChangerArme(1);
+        if (controle.Player.Next.triggered) ChangerArme((indexArmeActive +1) % slotsArmes.Length);
+        if(controle.Player.Previous.triggered) ChangerArme((indexArmeActive -1 + slotsArmes.Length) % slotsArmes.Length);
+        
 
       
         
@@ -465,20 +469,71 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 
 
     /// <summary>
-    /// fonction qui gere le changement d'arme
+    /// fonction qui gere le changement d'arme appelee dans update
     /// </summary>
-    /// <param name="index"></param>
+    /// <param name="index">c'est l'index de l'arme vers laquelle le input demande d'aller.
+    /// Dans update, on l'incremente ou decremente en fonction de la touche
+    /// </param>
     private void ChangerArme (int index)
     {
         if (slotsArmes[index] == null) return;
+        if (!slotsArmes[index].estObtenue) return;
         if (index == indexArmeActive) return;
 
+        StartCoroutine(AnimationChangementArme(index));
+    }
+    /// <summary>
+    /// coroutine utilisee dans ChangerArme pour permettre l'animation du
+    /// changement d'arme.
+    /// </summary>
+    /// <param name="index">meme valeur que celle passee a ChangerArme</param>
+    /// <returns></returns>
+    private IEnumerator AnimationChangementArme(int index)
+    {
+        foreach (ScriptGestionArme arme in slotsArmes)
+        {
+            if(arme != null) arme.peutRecevoirInput = false;
+        }
+            
+        EnAnim = true;
+        //valeurs utiles pour l'anim
+        Transform transformSocket = socketArme;
+       
+        Vector3 positionBasse = positionSocketNormale + Vector3.down * 0.5f;
+        
+        //animation vers le bas avec un Lerp
+        float timer = 0f;
+        //tant que le timer de la fin de l'anim n'est pas fini, on l'incremente et on continue le Lerp
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime *8f;
+            transformSocket.localPosition = Vector3.Lerp(positionSocketNormale, positionBasse, timer);
+            yield return null;
+
+        }
+        //une fois arrive au point bas que l'on souhaite, on fait le changement
+        slotsArmes[indexArmeActive].NettoyerFlash();
         slotsArmes[indexArmeActive].gameObject.SetActive(false);
         indexArmeActive = index;
         slotsArmes[indexArmeActive].gameObject.SetActive(true);
         scriptGestionArme = slotsArmes[indexArmeActive];
-    }
 
+        //on remonte l'arme
+        timer = 0f;
+        while(timer < 1f)
+        {
+            timer += Time.deltaTime *8f;
+            transformSocket.localPosition = Vector3.Lerp(positionBasse,positionSocketNormale,timer);
+            yield return null;
+        }
+        transformSocket.localPosition = positionSocketNormale;
+        EnAnim = false;
+        foreach (ScriptGestionArme arme in slotsArmes)
+        {
+            if(arme != null) arme.peutRecevoirInput = true;
+        }
+ 
+    }
 
 
     /// <summary>

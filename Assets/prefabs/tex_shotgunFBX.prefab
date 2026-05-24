@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1459401133062556962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4625542077982847474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547698942797048506}
+  m_Layer: 0
+  m_Name: portEjection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &547698942797048506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625542077982847474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.373, y: 0.9, z: -2.787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1459401133062556962}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1426071959971719881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +120,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 96a41442213c74b428af82b71f33b165, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8349555439548348357}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 96a41442213c74b428af82b71f33b165, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 547698942797048506}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 96a41442213c74b428af82b71f33b165, type: 3}
       insertIndex: -1
@@ -119,9 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e126f0334a64f42396830c4e1c6bfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  peutRecevoirInput: 1
   slotIndex: 1
   donnees: {fileID: 11400000, guid: 1d968e0c5881607a4873df3313f1940f, type: 2}
   sonTir: {fileID: 3722084216042753180}
+  reserveMunitionActuelle: 0
   estObtenue: 0
   pointMuzzleFlash: {fileID: 8349555439548348357}
 --- !u!82 &3722084216042753180

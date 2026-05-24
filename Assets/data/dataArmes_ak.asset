@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomArme: ak
   degats: 30
-  cadence: 4
+  cadence: 6
   maxReserve: 475
   prefabArme: {fileID: 2474317785911731772, guid: 37671ee2ad0a2db3b963e8f12781f4fb, type: 3}
   prefabMuzzleFlash: {fileID: 3290417806283166974, guid: 72b8607fd478921a1ada9555e5e73c17, type: 3}
   prefabImpact: {fileID: 7400742969965322281, guid: e305efe0beb0ff141a1f2d5631a7dcb9, type: 3}
   intensiteRecul: 2
+  nombreProjectile: 1
+  dispersion: 0
+  prefabCartouche: {fileID: 7304219660458787497, guid: 4ac0c219a773753e5842ae4855e2b4b1, type: 3}
