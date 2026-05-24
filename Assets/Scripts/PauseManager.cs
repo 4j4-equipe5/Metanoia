@@ -36,12 +36,14 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = true;
 
+        if(joueur != null)
+        {
+            if(sliderX != null) sliderX.value = joueur.sensitivityX;
+            if(sliderY != null) sliderY.value = joueur.sensitivityY;
+        }
 
-        if(sliderX != null) sliderX.value = joueur.sensitivityX;
-        if(sliderY != null) sliderY.value = joueur.sensitivityY;
-
-        sliderX.onValueChanged.AddListener(ChangerX);
-        sliderY.onValueChanged.AddListener(ChangerY);
+        if(sliderX != null) sliderX.onValueChanged.AddListener(ChangerX);
+        if(sliderY != null) sliderY.onValueChanged.AddListener(ChangerY);
         // Disable player input so UI can be interacted with
         ScriptMouvementPerso playerMovement = FindFirstObjectByType<ScriptMouvementPerso>();
         if (playerMovement != null)

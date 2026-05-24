@@ -2829,8 +2829,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290493417
-  m_fontColor: {r: 0.9137255, g: 0.73333335, b: 0.73333335, a: 1}
+    rgba: 4284506230
+  m_fontColor: {r: 0.4641509, g: 0.377451, b: 0.377451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5174,7 +5174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5180376542555666253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5353,7 +5353,6 @@ GameObject:
   - component: {fileID: 3426976302249117456}
   - component: {fileID: 8992015523779591938}
   - component: {fileID: 8246216524631928420}
-  - component: {fileID: 1130700051877946735}
   - component: {fileID: 3036276890247924176}
   m_Layer: 5
   m_Name: Button difficile
@@ -5420,19 +5419,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1130700051877946735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7617012443384251250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 736bf7fce0f55f04abd98a33de4d6137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hover: {fileID: 908714519402849726}
 --- !u!114 &3036276890247924176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5472,7 +5458,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 8246216524631928420}
   m_OnClick:
     m_PersistentCalls:
@@ -6504,6 +6490,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 6313598765992373220}
     m_Modifications:
     - target: {fileID: 2790168100206158953, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2790168100206158953, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -6512,7 +6502,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3811618776620926741, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811618776620926741, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811618776620926741, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5764651798458986082, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
@@ -6526,6 +6524,30 @@ PrefabInstance:
     - target: {fileID: 6090213196446409828, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7553770324788817367, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 7553770324788817367, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286359573864481808, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30.000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286359573864481808, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30.000183
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636309734861169656, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636309734861169656, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 8753874414146840429, guid: cf0bf50813ec661409ae254434e00a5a, type: 3}
       propertyPath: m_Pivot.x
