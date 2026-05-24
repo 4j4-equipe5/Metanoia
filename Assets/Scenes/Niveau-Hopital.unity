@@ -580,6 +580,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8573673558181568638, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8784037331888362356, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: m_IsActive
       value: 0
