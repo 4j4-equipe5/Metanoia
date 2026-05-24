@@ -11,4 +11,7 @@ public class dataArmes : ScriptableObject
     public GameObject prefabMuzzleFlash;
     public GameObject prefabImpact;
     public float intensiteRecul; 
+    public int nombreProjectile = 1;
+    public float dispersion = 0f;
+    public GameObject prefabCartouche;
 }
