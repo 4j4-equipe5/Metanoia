@@ -162,7 +162,15 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         {
             cibleActuelle.Interagir(this);
         }
-
+        //Ajout Emile : PlaceHolder pour la tv
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log($"[TEST PHYSIQUE] La touche E fonctionne ! Cible : {(cibleActuelle != null ? cibleActuelle.InteractionLabel : "Aucune")}");
+            if (cibleActuelle != null)
+            {
+                cibleActuelle.Interagir(this);
+            }
+        }
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
         //l'axe horizontale est influenc� par le personnage
@@ -184,6 +192,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
              Mathf.Lerp(cameraPivot.localPosition.y, hauteurCibleeCamera, 8f * Time.deltaTime),
                 cameraPivot.localPosition.z
             );
+        }
+                // À mettre juste avant le "if (controle.Player.Interact.triggered..."
+        if (controle.Player.Interact.triggered)
+        {
+            Debug.Log($"[Input] Touche d'interaction enfoncée ! Cible actuelle : {(cibleActuelle != null ? cibleActuelle.InteractionLabel : "Aucune")}");
         }
     }
     
@@ -242,6 +255,12 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         UnityEngine.Cursor.visible = false;
         // Activer le système d'entrée
         controle.Player.Enable();
+
+            // SÉCURITÉ : On active explicitement l'action d'interaction
+        if (controle.Player.Interact != null)
+        {
+            controle.Player.Interact.Enable();
+        }
     }
 
     //==================================================================

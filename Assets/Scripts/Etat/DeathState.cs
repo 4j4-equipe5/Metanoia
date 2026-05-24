@@ -53,7 +53,7 @@ public class DeathState : IState
 
     public void Tick()
     {
-        timePassed = Time.deltaTime;
+        timePassed += Time.deltaTime;
 
         if (timePassed >= 5f && !_ennemyRef.isDead)
         {
