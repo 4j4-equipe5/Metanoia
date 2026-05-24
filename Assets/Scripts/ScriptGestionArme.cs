@@ -200,20 +200,13 @@ public class ScriptGestionArme : MonoBehaviour
        Rigidbody rbCartouche = cartouche.GetComponent<Rigidbody>();
        if(rbCartouche != null)
         {
-            Vector3 forceEjection = cam.transform.right * 1f + cam.transform.up * 1f + cam.transform.forward * 0.5f;
-            rbCartouche.AddForce(forceEjection, ForceMode.Impulse);
-
-            rbCartouche.AddTorque(Random.insideUnitSphere * 1f, ForceMode.Impulse);
+        Vector3 forceEjection = cam.transform.right * 10f  
+                                    + cam.transform.up * 10f;      
+        rbCartouche.AddForce(forceEjection, ForceMode.Impulse);
+        rbCartouche.AddTorque(Random.insideUnitSphere * 150f, ForceMode.Impulse);
         }
         Destroy(cartouche, 2f);
     }
-    void OnDrawGizmos()
-{
-    if (portEjection != null)
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(portEjection.position, 0.05f);
-    }
-}
+
   
 }
