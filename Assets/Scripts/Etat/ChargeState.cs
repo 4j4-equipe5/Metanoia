@@ -36,7 +36,7 @@ public class ChargeState : IState
         _ennemyRef.agent.isStopped = true; // Arrête le NavMeshAgent pour le Charge
         _ennemyRef.agent.enabled = false; // Désactive le NavMeshAgent pour permettre un contrôle total de l'ennemi pendant le charge
         //Animation Charge
-        Debug.Log("Avarice charge le joueur !");
+        //Debug.Log("Avarice charge le joueur !");
         startPosition = _ennemyRef.transform.position;
         Vector3 direction = (_player.position - startPosition).normalized;
         targetPosition = _player.position + direction * 1f; // La position cible est légèrement devant le joueur pour éviter que l'ennemi ne se téléporte directement sur lui

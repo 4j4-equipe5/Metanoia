@@ -49,7 +49,7 @@ public class JumpAttackState : IState
         IsComplete = false;
         _ennemyRef.jumpCooldown = _ennemyRef.jumpCooldownDuration; // réinitialise le cooldown du saut après l'attaque
 
-        Debug.Log("!! Miann commence son starter : jumpAttack !!");
+        //Debug.Log("!! Miann commence son starter : jumpAttack !!");
     }
 
     /** Dans le tick :

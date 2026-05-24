@@ -1,28 +1,31 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
+using System.Collections;
 
 /// <summary>
+/// 
 /// Fait par Emile Lucas Wilson
-/// Etat qui déclanche la mort d'un ennemie 
-///     - Ragdoll
-///     - Ajout de points
-///
-/// </summary>
-public class DeathState : IState
+/// Cette état met ennemi en stun : 
+/// EN STUN
+///     - Ennemi va en ragdoll ( force dépendant de l'arme et la direction et plus)
+///     - Ennemi prend plus de dégats
+/// <summary>
+public class StunnedState : IState
 {
-    // Référence 
+    //Ref
     private EnnemyReferences _ennemyRef;
     private Transform player;
-    float timePassed;
+
     Vector3 startPosition;
 
     // Constructeur
-    public DeathState (EnnemyReferences ennemyRef)
+    public StunnedState (EnnemyReferences ennemyRef)
     {
         _ennemyRef = ennemyRef;
         player = ennemyRef.player;
     }
+
     public void OnEnter()
     {
         _ennemyRef.agent.isStopped = true; // Arrête le NavMeshAgent pour le Stun
@@ -45,26 +48,28 @@ public class DeathState : IState
         // On applique une force de ragdoll dans la direction du joueur, avec une magnitude dépendant de l'arme utilisée
         // Placeholder, à ajuster selon les besoins pour la force du ragdoll
         Vector3 force = direction * _ennemyRef.forceDeRagdoll; // + une composante verticale pour faire lever l'ennemi un peu dans les airs
-
-
-        // TODO: Ajout des Points
-        timePassed = 0f;
+        _ennemyRef.rbEnnemi.AddForce(force, ForceMode.Impulse);
     }
-
     public void Tick()
     {
-        timePassed += Time.deltaTime;
-
-        if (timePassed >= 5f && !_ennemyRef.isDead)
+        // le DamageThreshold revient tranquilement en dessous de trois
+        _ennemyRef.damageThreshold -= Time.deltaTime * 0.5f;
+        _ennemyRef.damageThreshold = Mathf.Max(0, _ennemyRef.damageThreshold);
+        if (_ennemyRef.damageThreshold < 0.5f)
         {
-            _ennemyRef.isDead = true;
+            _ennemyRef.isStunned = false;
         }
     }
     public void OnExit()
     {
+        _ennemyRef.agent.enabled = true; // Réactive le NavMeshAgent après l'attaque
+        _ennemyRef.agent.isStopped = false; // Permet au NavMeshAgent de reprendre le contrôle du mouvement
+        _ennemyRef.animEnnemi.enabled = true; // Réactive l'Animator après l'attaque
+        _ennemyRef.forceFreezeHips.enabled = true; // Réactive le script de freeze des hanches après l'attaque
+        Debug.Log("Ennemi n'est plus stunned");
     }
     public Color GizmoColor()
     {
-        return Color.black;
+        return Color.gray;
     }
 }
