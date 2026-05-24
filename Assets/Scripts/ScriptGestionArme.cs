@@ -3,7 +3,9 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
-    
+    [SerializeField] private Transform portEjection;
+    private GameObject flashActuel;
+    public bool peutRecevoirInput = true;
     private ScriptMouvementPerso joueur;
 
     private Vector3 positionInitialeArme;
@@ -50,7 +52,7 @@ public class ScriptGestionArme : MonoBehaviour
     /// <returns></returns>
     public bool PeutTirer()
     {
-        return Time.time >= dernierTir+ tempsEntreCoup && reserveMunitionActuelle > 0;
+        return peutRecevoirInput && Time.time >= dernierTir+ tempsEntreCoup && reserveMunitionActuelle > 0;
     }
     /// <summary>
     /// fonction qui enregistre le temps au moment du dernier tir
@@ -73,6 +75,7 @@ public class ScriptGestionArme : MonoBehaviour
 
         //appel de la fonction qui enregistre le temps du tir
         EnregistrerTir();
+        EjecterCartouche();
         StartCoroutine(MuzzleFlash());
        AppliquerRecul();
         Debug.Log("tire");
@@ -85,31 +88,45 @@ public class ScriptGestionArme : MonoBehaviour
         // Le signe '~' inverse le masque (il veut dire "Tout sauf ça")
         int layerJoueur = LayerMask.NameToLayer("Player");
         int masqueTir = ~(1 << layerJoueur);
-        //cast un rayon en avant a partir de la camera fps
-        Ray ray = new Ray(cam.transform.position,cam.transform.forward);
 
-        //variable qui contient l'info des choses touchees
-        RaycastHit hit;
-
-         if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueTir)) 
+        for(int i = 0; i<donnees.nombreProjectile; i++)
         {
-            if (donnees.prefabImpact != null) 
+              Vector3 direction = cam.transform.forward;
+            if (donnees.nombreProjectile > 1)
             {
-                GameObject impact = Instantiate(donnees.prefabImpact, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impact, 1f);
+              
+                direction += new Vector3(Random.Range(-donnees.dispersion, donnees.dispersion),
+                                    Random.Range(-donnees.dispersion, donnees.dispersion),
+                                    0f
+            );
+            direction.Normalize(); 
             }
-            //on obtient le comportement propre a l'objet pour recevoir
-            //des dommages en allant chercher l'interface qu'il herite
-            //pour recevoir des dommages
-            IDommagable cible = hit.collider.GetComponent<IDommagable>();
-            if(cible != null)
+            Ray ray = new Ray(cam.transform.position, direction);
+        //variable qui contient l'info des choses touchees
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, masqueTir)) 
             {
-                cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal));
-                
+                if (donnees.prefabImpact != null) 
+                {
+                    GameObject impact = Instantiate(donnees.prefabImpact, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 1f);
+                }
+                //on obtient le comportement propre a l'objet pour recevoir
+                //des dommages en allant chercher l'interface qu'il herite
+                //pour recevoir des dommages
+                IDommagable cible = hit.collider.GetComponent<IDommagable>();
+                if(cible != null)
+                {
+                    cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal));
+                    
+
+                }
 
             }
-
         }
+        //cast un rayon en avant a partir de la camera fps
+      
     }
     private void AppliquerRecul()
     {
@@ -123,24 +140,31 @@ public class ScriptGestionArme : MonoBehaviour
 /// <returns></returns>
     private IEnumerator MuzzleFlash()
     {
-          Debug.Log($"prefabMuzzleFlash: {donnees.prefabMuzzleFlash}");
-        Debug.Log($"pointMuzzleFlash: {pointMuzzleFlash}");
         if(donnees.prefabMuzzleFlash == null)
         {
             yield break;
         }
-        GameObject flash = Instantiate(donnees.prefabMuzzleFlash, pointMuzzleFlash.position, pointMuzzleFlash.rotation);
+        flashActuel = Instantiate(donnees.prefabMuzzleFlash, pointMuzzleFlash.position, pointMuzzleFlash.rotation);
 
         float rotationAleatoire = Random.Range(0f, 360f);
-        flash.transform.Rotate(0f, 0f, rotationAleatoire);
+        flashActuel.transform.Rotate(0f, 0f, rotationAleatoire);
 
         float tailleAleatoire = Random.Range(0.5f, 0.8f);
-        flash.transform.localScale = Vector3.one * tailleAleatoire;
+        flashActuel.transform.localScale = Vector3.one * tailleAleatoire;
 
         yield return new WaitForSeconds(0.025f);
 
-        Destroy(flash);
+        Destroy(flashActuel);
+        flashActuel = null;
 
+    }
+    public void NettoyerFlash()
+    {
+        if(flashActuel != null)
+        {
+            Destroy(flashActuel);
+            flashActuel = null;
+        }
     }
     /// <summary>
     /// coroutine qui gere le retour de l'arme a sa position normale avec un Lerp apres le recul du coup
@@ -160,5 +184,36 @@ public class ScriptGestionArme : MonoBehaviour
         transform.localPosition = positionInitialeArme;
         
     }
+    /// <summary>
+    /// fonction pour l'instantiation des cartouches vides. Non fonctionnelle
+    /// actuellement
+    /// </summary>
+    private void EjecterCartouche()
+    {
+       if(donnees.prefabCartouche == null || portEjection == null) return; 
+        GameObject cartouche = Instantiate(
+            donnees.prefabCartouche,
+            portEjection.position,
+            portEjection.rotation
+        );
+
+       Rigidbody rbCartouche = cartouche.GetComponent<Rigidbody>();
+       if(rbCartouche != null)
+        {
+            Vector3 forceEjection = cam.transform.right * 1f + cam.transform.up * 1f + cam.transform.forward * 0.5f;
+            rbCartouche.AddForce(forceEjection, ForceMode.Impulse);
+
+            rbCartouche.AddTorque(Random.insideUnitSphere * 1f, ForceMode.Impulse);
+        }
+        Destroy(cartouche, 2f);
+    }
+    void OnDrawGizmos()
+{
+    if (portEjection != null)
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(portEjection.position, 0.05f);
+    }
+}
   
 }

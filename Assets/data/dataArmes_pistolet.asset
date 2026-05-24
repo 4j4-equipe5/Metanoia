@@ -20,3 +20,6 @@ MonoBehaviour:
   prefabMuzzleFlash: {fileID: 3290417806283166974, guid: 72b8607fd478921a1ada9555e5e73c17, type: 3}
   prefabImpact: {fileID: 7400742969965322281, guid: e305efe0beb0ff141a1f2d5631a7dcb9, type: 3}
   intensiteRecul: 1
+  nombreProjectile: 1
+  dispersion: 0
+  prefabCartouche: {fileID: 3587069625105676534, guid: c7666d8ecf00777cd8134d7dc85024a9, type: 3}
