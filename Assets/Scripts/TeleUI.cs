@@ -38,7 +38,7 @@ public class TeleUI : MonoBehaviour
 
     public void ActionBoutonMoins()
     {
-        if (numeroPiece > 1)
+        if (numeroPiece > 0)
         {
             numeroPiece--;
             MettreAJourEcran();
