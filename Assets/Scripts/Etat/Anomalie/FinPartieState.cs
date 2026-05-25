@@ -20,32 +20,11 @@ public class FinPartieState : IState
 
     public void OnEnter()
     {
-        // Debug.Log("[FIN PARTIE] Le joueur a complété les 5 rounds. Phase finale enclenchée.");
+        Debug.Log("[FIN PARTIE] Le joueur a complété les 5 rounds. Phase finale enclenchée.");
 
-        // // 1. SAM ANNONCE l'ouverture de la porte
-        // if (_anomalieRef.samAudioSource != null && _anomalieRef.samSonFinPartie != null)
-        // {
-        //     _anomalieRef.samAudioSource.PlayOneShot(_anomalieRef.samSonFinPartie);
-        // }
-        // else
-        // {
-        //     Debug.LogWarning("[FIN PARTIE] Clip audio de SAM ou AudioSource manquant dans AnomalieReference !");
-        // }
-
-        // // 2. L'animation de l'ouverture de porte commence
-        // // On va chercher l'Animator de la porte finale via tes références
-        // if (_anomalieRef.animatorPorteFinale != null)
-        // {
-        //     // Assure-toi d'avoir un paramètre Trigger nommé "Ouvrir" (ou autre) dans ton Animator Unity
-        //     _anomalieRef.animatorPorteFinale.SetTrigger("Ouvrir"); 
-        //     Debug.Log("[FIN PARTIE] Trigger d'animation envoyé à la porte finale.");
-        // }
-        // else
-        // {
-        //     Debug.LogWarning("[FIN PARTIE] L'Animator de la porte finale est manquant dans AnomalieReference !");
-        // }
+        _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.Fin);
+        _anomalieRef.porteAscenseur.SetTrigger("porteOuverte"); // Remplace "Ouvrir" par le nom exact dans ton Animator
     }
-
     public void Tick()
     {
         // C'est tout !!! Pas besoin de logique en boucle ici.
