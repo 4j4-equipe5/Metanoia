@@ -77,7 +77,7 @@ public class ScriptGestionArme : MonoBehaviour
         EnregistrerTir();
         EjecterCartouche();
         StartCoroutine(MuzzleFlash());
-       AppliquerRecul();
+        AppliquerRecul();
         Debug.Log("tire");
 
         // son de tir

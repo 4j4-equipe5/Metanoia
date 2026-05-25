@@ -48,6 +48,7 @@ public class DeathState : IState
 
 
         // TODO: Ajout des Points
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Mort);
         timePassed = 0f;
     }
 

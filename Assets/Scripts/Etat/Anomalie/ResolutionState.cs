@@ -33,7 +33,7 @@ public class ResolutionState : IState
             // TODO: POINTS et SAM
             _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeA);
             _anomalieRef.scriptStressLighting.SetStressLevel(0); // reset le stress lighting calme
-            //Points Gagner
+            //Points Gagner * 3
         }
         else
         {
@@ -47,10 +47,11 @@ public class ResolutionState : IState
                 // SAM ANNONCE RANK B
                 //Points Gagner
                 _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeB);
+                // points fois 2
                 break;
                 case 2:
                 // SAM ANNONCE RANK C
-                //Points Gagner
+                //Points Gagner 
                 _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeC);
                 break;
                 case 3:
@@ -59,12 +60,10 @@ public class ResolutionState : IState
                 // SAM Son erreur
                     _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.Error);
                 break;
-                break;
                 case 6: 
                 // Sam Son erreur grave
                     _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.erreurMoyen);
                     break;
-                break;
                 case 7:
                 default:
                 // Sam Son erreur majeur

@@ -155,6 +155,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         }
         if (ennemyRef.isDead == true)
         {
+            gestionPointage.EnregistrerKill();
             Destroy(this.gameObject);
         }
         estAuSol = EstAuSol(); // Vérifie si l'ennemi est au sol à chaque frame
