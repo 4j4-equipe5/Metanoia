@@ -75,11 +75,15 @@ public class ScriptGestionArme : MonoBehaviour
 
         //appel de la fonction qui enregistre le temps du tir
         EnregistrerTir();
+        //appel de la fonction qui ejecte une cartouche
         EjecterCartouche();
+        //coroutine du muzzleflash
         StartCoroutine(MuzzleFlash());
+        //applique l'effet visuel de recul sur l'arme, pas le recul de la cam
        AppliquerRecul();
-        Debug.Log("tire");
-
+       //applique le recul de la camera
+       joueur.AppliquerOffsetReculCamera(joueur.recupRecul,donnees.reculParTir);
+        
         // son de tir
         sonTir.PlayOneShot(sonTir.clip);
         //on retire une cartouche de la reserve
@@ -88,13 +92,13 @@ public class ScriptGestionArme : MonoBehaviour
         // Le signe '~' inverse le masque (il veut dire "Tout sauf ça")
         int layerJoueur = LayerMask.NameToLayer("Player");
         int masqueTir = ~(1 << layerJoueur);
-
+        //on cast le ray en fonction du nombre de projectile par coup, cela permet de donner un effet chevrotine au shotgun
         for(int i = 0; i<donnees.nombreProjectile; i++)
         {
               Vector3 direction = cam.transform.forward;
             if (donnees.nombreProjectile > 1)
             {
-              
+              //si plusieur projectiles par coup (chevrotine), dispersion aleatoire
                 direction += new Vector3(Random.Range(-donnees.dispersion, donnees.dispersion),
                                     Random.Range(-donnees.dispersion, donnees.dispersion),
                                     0f
@@ -158,6 +162,9 @@ public class ScriptGestionArme : MonoBehaviour
         flashActuel = null;
 
     }
+    /// <summary>
+    /// fonction qui retire les flash de la map. Elle doit etre appelee pour eviter les bugs ou le flash reste instantie si le joueur change d'arme trop vite
+    /// </summary>
     public void NettoyerFlash()
     {
         if(flashActuel != null)
@@ -185,8 +192,7 @@ public class ScriptGestionArme : MonoBehaviour
         
     }
     /// <summary>
-    /// fonction pour l'instantiation des cartouches vides. Non fonctionnelle
-    /// actuellement
+    /// fonction pour l'instantiation des cartouches vides. 
     /// </summary>
     private void EjecterCartouche()
     {

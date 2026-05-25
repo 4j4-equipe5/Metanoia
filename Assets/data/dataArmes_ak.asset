@@ -23,3 +23,4 @@ MonoBehaviour:
   nombreProjectile: 1
   dispersion: 0
   prefabCartouche: {fileID: 7304219660458787497, guid: 4ac0c219a773753e5842ae4855e2b4b1, type: 3}
+  reculParTir: 8

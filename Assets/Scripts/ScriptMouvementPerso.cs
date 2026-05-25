@@ -79,19 +79,26 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     //====================================================================
     [Header("Weapon Sway")]
     
-    private Transform socketArme; // point d'attache de l'arme (socket)
-    private float intensiteSway = 1f; // intensité du balancement de l'arme
-    private float smoothnessSway = 6f; // fluidité du balancement de l'arme
-    private Vector3 cibleRotationSway; // rotation cible du balancement
+    private Transform socketArme;
+    private float intensiteSway = 1f; 
+    private float smoothnessSway = 6f; 
+    private Vector3 cibleRotationSway;
     //==================================================================
     // SECTION STATS ET UI
     //==================================================================
     [Header("Stats joueur")]
    
-    public float hpPlayer = 100f; // points de vie du joueur
+    public float hpPlayer = 100f; 
     [SerializeField] private float maxHp = 100f;
-    [SerializeField] public GameObject gameOverScreen; // écran de game over à afficher à la mort
-    private bool firstFrame = true; // flag pour éviter la transition lerp au démarrage
+    [SerializeField] public GameObject gameOverScreen; 
+    private bool firstFrame = true; 
+    //==================================================================
+    // gestion recul
+    //==================================================================
+    private float reculAcumul = 0f;
+    private float reculMax = 10f;
+    public float recupRecul = 3f;
+    
     //==================================================================
     //==================================================================
     //===================================================================
@@ -185,8 +192,10 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 
         orientationY -= look.y * sensitivityY;
         orientationY = Mathf.Clamp(orientationY, -70, 70);
+        reculAcumul = Mathf.Lerp(reculAcumul, 0f, recupRecul*Time.deltaTime);
+
         //c'est la cam�ra qui est tourn�e par l'axe verticale
-        cameraPivot.localRotation = Quaternion.Euler(orientationY, 0f, 0f);
+        cameraPivot.localRotation = Quaternion.Euler(orientationY+reculAcumul, 0f, 0f);
         //permet de transitionner entre crouched et debout
         if (firstFrame)
         {
@@ -656,6 +665,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
                 break;
             }
         }
+    }
+    public void AppliquerOffsetReculCamera(float recupRecul, float reculParTir)
+    {
+        reculAcumul = Mathf.Min(reculAcumul + reculParTir, reculMax);
+        
     }
 
 }
