@@ -14,7 +14,8 @@ public class AnomalieReference : MonoBehaviour
     [SerializeField] public List<GameObject> normalObjets; // liste des objets normal à gérer et sert comme valeur initiale pour le cerveau
     [SerializeField] public List<GameObject> miannList;
     [SerializeField] public List<GameObject> miannSpawnPoints;  
-    
+    public SonManager sonManager; // référence au script de gestion du son
+    [SerializeField] public StressLighting scriptStressLighting; // référence au script de gestion du stress lighting
     public Transform player;
     [SerializeField] public Transform spawnCorridor; 
 

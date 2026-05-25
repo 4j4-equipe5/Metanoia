@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &3754092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7558238214149932503, guid: 4ef95c79e6a721e4cb3e1e3d5ebc9f78, type: 3}
+  m_PrefabInstance: {fileID: 2210578740391227113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f30e6451f2ae5478c253c6f16392bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &99360692 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9005605996566207779, guid: 4cf495b3129b20d4a88274091d5e6a23, type: 3}
@@ -649,7 +660,6 @@ Transform:
   - {fileID: 4111072844941038600}
   - {fileID: 8297949591317405070}
   - {fileID: 1553179307155889530}
-  - {fileID: 1343201826983705687}
   - {fileID: 980976751}
   - {fileID: 6045883169137474966}
   - {fileID: 3462111034412168843}
@@ -1160,7 +1170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9197434416156113017}
-  m_Father: {fileID: 1669298324}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1377822207257289642
 Transform:
@@ -2475,6 +2485,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7981701214849247564, guid: f25811077c1f65d47a0b4b47ea3b79d7, type: 3}
+      propertyPath: estObtenue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8750453225958523535, guid: f25811077c1f65d47a0b4b47ea3b79d7, type: 3}
       propertyPath: Mute
       value: 0
@@ -3034,6 +3048,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1553179307155889530}
     - target: {fileID: 4910431739489850981, guid: aa1d4ea03cffe5b469204051b4bfbd47, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 980976753}
+    - target: {fileID: 4910431739489850981, guid: aa1d4ea03cffe5b469204051b4bfbd47, type: 3}
       propertyPath: scriptTeleUI
       value: 
       objectReference: {fileID: 486405597}
@@ -3049,6 +3067,10 @@ PrefabInstance:
       propertyPath: porteTeleportation
       value: 
       objectReference: {fileID: 1379675310}
+    - target: {fileID: 4910431739489850981, guid: aa1d4ea03cffe5b469204051b4bfbd47, type: 3}
+      propertyPath: scriptStressLighting
+      value: 
+      objectReference: {fileID: 3754092}
     - target: {fileID: 4910431739489850981, guid: aa1d4ea03cffe5b469204051b4bfbd47, type: 3}
       propertyPath: 'miannList.Array.data[0]'
       value: 
@@ -3409,3 +3431,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1669298324}
+  - {fileID: 1343201826983705687}

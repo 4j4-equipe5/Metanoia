@@ -144,10 +144,18 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     void Update()
     {
         AppliquerSway();
-
+        
         if (controle.Player.Attack.IsPressed()&& !EnAnim)
         {
-            scriptGestionArme.Tirer();
+        
+            if (scriptGestionArme != null)
+            {
+                scriptGestionArme.Tirer();
+            }
+            else
+            {
+                Debug.LogWarning("[ATTENTION] Le joueur essaie de tirer mais n'a aucune arme équipée !");
+            }
         }
         if (controle.Player.Crouch.triggered)
         {
@@ -636,26 +644,36 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// d'avoir plus d'une arme de chaque type
     /// </summary>
     /// <param name="donnees"></param>
-    public void ObtenirArme(dataArmes donnees )
-    {
-        if(armesPresentes.Contains(donnees.nomArme)) return;
+public void ObtenirArme(dataArmes donnees)
+{
+    if (armesPresentes.Contains(donnees.nomArme)) return;
 
-        for(int i = 0; i < slotsArmes.Length; i++)
+    for (int i = 0; i < slotsArmes.Length; i++)
+    {   
+        if (slotsArmes[i] == null)
         {
-            if(slotsArmes[1] == null)
+            GameObject nouvelleArme = Instantiate(donnees.prefabArme, socketArme);
+            ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
+            
+            script.slotIndex = i;
+            script.estObtenue = true; // On valide qu'elle est bien acquise
+            slotsArmes[i] = script;
+
+            armesPresentes.Add(donnees.nomArme);
+            if (i == indexArmeActive)
             {
-                GameObject nouvelleArme =Instantiate(donnees.prefabArme, socketArme);
-                ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
-                
-                script.slotIndex = i;
-                slotsArmes[i] = script;
-
-                nouvelleArme.SetActive(false);
-
-                armesPresentes.Add(donnees.nomArme);
-                break;
+                nouvelleArme.SetActive(true);
+                scriptGestionArme = script;
             }
+            else
+            {
+                nouvelleArme.SetActive(false);
+            }
+
+            Debug.Log($"[INVENTAIRE] Arme {donnees.nomArme} instanciée avec succès dans le slot {i}");
+            break; // On quitte la boucle une fois le slot trouvé
         }
     }
+}
 
 }

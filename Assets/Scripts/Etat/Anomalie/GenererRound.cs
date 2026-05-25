@@ -32,10 +32,33 @@ public class GenererRound : IState
         _anomalieRef.reponseJoueur = 0;
         ResetRoom(); // Nettoir la pièce de des anomalies du round précédent
         _anomalieRef.scriptTeleUI.ResetTele();
+        
         // 2. Gestion du danger
         _anomalieRef.roundsActuel ++;
         GererSpawnEnnemis();
-        
+        // La lumière de stress augmente en fonction du nombre d'erreur que le joueur a accumulé, par exemple :
+        switch(_anomalieRef.pointsErreur)
+        {
+            case 0:
+            case 1:
+            case 2:
+                _anomalieRef.scriptStressLighting.SetStressLevel(0); // stress lighting niveau 0
+                break;
+            case 3:
+                _anomalieRef.scriptStressLighting.SetStressLevel(1); // stress lighting niveau 1
+                break;
+            case 4:
+            case 5:
+                _anomalieRef.scriptStressLighting.SetStressLevel(2); // stress lighting niveau 2
+                break;
+            case 6:
+                _anomalieRef.scriptStressLighting.SetStressLevel(3); // stress lighting niveau 3
+                break;
+            case 7:
+            default:
+                _anomalieRef.scriptStressLighting.SetStressLevel(4); // stress lighting niveau max
+                 break;
+        }
         // 3. Gestion des anomalies... décide qu'elle anomalie spawn
         SpawnAnomalie();
 
