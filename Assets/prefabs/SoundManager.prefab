@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9151604150710782847
+--- !u!1 &1272503175572029964
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8456616652680814744}
-  - component: {fileID: 1728451061519630374}
+  - component: {fileID: 4655880388527887714}
+  - component: {fileID: 8440132885056691182}
+  - component: {fileID: 1064059951425034972}
+  - component: {fileID: 2177198727465673846}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -17,37 +19,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8456616652680814744
+--- !u!4 &4655880388527887714
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9151604150710782847}
+  m_GameObject: {fileID: 1272503175572029964}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1728451061519630374
+--- !u!82 &8440132885056691182
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9151604150710782847}
+  m_GameObject: {fileID: 1272503175572029964}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 2ba9d60e01bef7248919078950506ce1, type: 3}
+  m_Resource: {fileID: 8300000, guid: 77df1d058509aac449145896347f33d1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.79
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -129,3 +131,49 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1064059951425034972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272503175572029964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c170fb46100f0d4a96486a7442b29fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeSlider: {fileID: 0}
+--- !u!114 &2177198727465673846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272503175572029964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53839ebc651746489f92eb1bbd33097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sonSam:
+  - {fileID: 8300000, guid: 4b0279f0426e07f4b8c4e4210619c9aa, type: 3}
+  - {fileID: 8300000, guid: dd18342a3a552af418f8cdfdce60f16a, type: 3}
+  - {fileID: 8300000, guid: 50555666976b3e54fbb5438796859c79, type: 3}
+  - {fileID: 8300000, guid: 8a4d800c8e9580c449a1155a286cee78, type: 3}
+  - {fileID: 8300000, guid: 808668ef31c6fb845837a60321384bf0, type: 3}
+  - {fileID: 8300000, guid: 0e95acd7296fe254a9a452429489f7d1, type: 3}
+  - {fileID: 8300000, guid: 8223886ae985b384fb147d3c3a6fe32b, type: 3}
+  - {fileID: 8300000, guid: 21d7fbe6fd05ba645aca621b830d11cd, type: 3}
+  - {fileID: 8300000, guid: 51efe0508902fc540a0ace8c98c85a93, type: 3}
+  - {fileID: 8300000, guid: 4b84108f35f58ad4c87be70d84078c04, type: 3}
+  - {fileID: 8300000, guid: 8a4d800c8e9580c449a1155a286cee78, type: 3}
+  sonLoto: []
+  sonMiann:
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 2a80a74761415d943be9b7b5c7be77ea, type: 3}
+  - {fileID: 8300000, guid: b510b2f7e8100944b9e19ad43343ca59, type: 3}
+  - {fileID: 8300000, guid: b510b2f7e8100944b9e19ad43343ca59, type: 3}
+  - {fileID: 8300000, guid: e8c9e928fc13aae478601f01ab3ffc81, type: 3}
+  - {fileID: 8300000, guid: 9657fe3bb529706468e674a18d6b25e8, type: 3}
+  - {fileID: 0}

@@ -9,6 +9,7 @@ TagManager:
   - Wapoint
   - Undefined
   - Projectile
+  - Elevator
   layers:
   - Default
   - TransparentFX

@@ -48,6 +48,8 @@ public class AttackState : IState
 
         timePassed = 0;
         IsComplete = false;
+
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Attaque);
     }
     public void Tick()
     {
@@ -71,6 +73,7 @@ public class AttackState : IState
                 // Dash vers la position vers le joueur
                 // Lerp pour un mouvement plus fluide vers la cible, ajout de +1 pour qu'il dépassse légèrement la position du joueur et éviter les problèmes de collision ou de synchronisation avec le NavMeshAgent
                 _ennemyRef.transform.position = Vector3.Lerp(startPosition, targetPosition, acceleration);
+
                 return;
             }
             else
@@ -90,8 +93,22 @@ public class AttackState : IState
         else
         {
             IsComplete = true;
+            // Une fois que le combo est terminé, on vérifie si le joueur est dans la zone d'attaque pour appliquer les dégâts
+            Collider[] hitColliders = Physics.OverlapSphere(_ennemyRef.transform.position, 1.5f); // Rayon de l'attaque
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.CompareTag("Player"))
+                {
+                     IDommagable cible = hitCollider.GetComponent<IDommagable>();
+                    if (cible != null)
+                    {
+                            cible.PrendreDegat(_ennemyRef.attackDamage);
+                            Debug.Log("Le joueur a été touché par l'attaque de Miann !");
+                    }
+                }
+            }
         }
-
+        
 
     }
     public Color GizmoColor()

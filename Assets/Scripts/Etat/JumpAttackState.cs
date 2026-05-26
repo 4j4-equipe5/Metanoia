@@ -49,6 +49,7 @@ public class JumpAttackState : IState
         IsComplete = false;
         _ennemyRef.jumpCooldown = _ennemyRef.jumpCooldownDuration; // réinitialise le cooldown du saut après l'attaque
 
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Saut);
         //Debug.Log("!! Miann commence son starter : jumpAttack !!");
     }
 
@@ -71,7 +72,7 @@ public class JumpAttackState : IState
     {
         timePassed += Time.deltaTime; // Incrémente le temps écoulé depuis le début de l'état
         float progress = timePassed / _ennemyRef.jumpDuration; // Calcule le progrès du saut  
-
+        // si le joueur touche pendant le saut, il
         if(progress < 1f)
         {
 
@@ -91,6 +92,20 @@ public class JumpAttackState : IState
         }
         else
         {
+            // une fois le saut complété, on peut faire les dégâts au joueur s'il est dans la zone d'attaque
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _ennemyRef.jumpAttackRange); // Vérifie les collisions dans une sphère autour de Miann
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.CompareTag("Player"))
+                {
+                    IDommagable cible = hitCollider.GetComponent<IDommagable>();
+                    if (cible != null)
+                    {
+                        cible.PrendreDegat(_ennemyRef.jumpDamage); // Applique les dégâts du saut au joueur
+                        Debug.Log("Le joueur a été touché par le saut de Miann !");
+                    }
+                }
+            }
             IsComplete = true;
         }
     }
@@ -105,5 +120,6 @@ public class JumpAttackState : IState
         agent.enabled = true; // réactive la navigation
         agent.Warp(transform.position); // met à jour la position du NavMeshAgent pour correspondre à la position actuelle de Miann
         agent.isStopped = false; // réactive le mouvement du NavMeshAgent
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.FinSaut);
     }
 }

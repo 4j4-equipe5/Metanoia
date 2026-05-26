@@ -49,6 +49,7 @@ public class StunnedState : IState
         // Placeholder, à ajuster selon les besoins pour la force du ragdoll
         Vector3 force = direction * _ennemyRef.forceDeRagdoll; // + une composante verticale pour faire lever l'ennemi un peu dans les airs
         _ennemyRef.rbEnnemi.AddForce(force, ForceMode.Impulse);
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Stunned);
     }
     public void Tick()
     {

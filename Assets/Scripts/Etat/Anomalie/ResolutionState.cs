@@ -33,8 +33,9 @@ public class ResolutionState : IState
             ScriptGestionPointage.Instance.PointageAnomalie(_anomalieRef.anomalieCount);
             // Joueur reçois des points
             // TODO: POINTS et SAM
-
-
+            _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeA);
+            _anomalieRef.scriptStressLighting.SetStressLevel(0); // reset le stress lighting calme
+            //Points Gagner * 3
         }
         else
         {
@@ -47,26 +48,32 @@ public class ResolutionState : IState
                 case 1:
                 // SAM ANNONCE RANK B
                 //Points Gagner
+                _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeB);
+                // points fois 2
                 break;
                 case 2:
                 // SAM ANNONCE RANK C
-                //Points Gagner
+                //Points Gagner 
+                _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeC);
                 break;
                 case 3:
                 case 4:
                 case 5:
                 // SAM Son erreur
+                    _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.Error);
                 break;
                 case 6: 
                 // Sam Son erreur grave
-                break;
+                    _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.erreurMoyen);
+                    break;
                 case 7:
                 default:
+                // Sam Son erreur majeur
+                    _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.erreurMajeur);
                 //SON SAM DANGER
                 break;
                 
             }
-            // TODO: SON SAM
         }
     }
     public void Tick()

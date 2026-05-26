@@ -3,11 +3,13 @@ using UnityEngine.AI;
 public class EnnemyReferences : MonoBehaviour
 {
     // TODO: !!! Si temps organise les ref mieux !!!
+    public ScriptGestionPointage gestionPointage;
     [Header("reférences à Ennemi")]
     public NavMeshAgent agent;
     public Animator animEnnemi;
     public Rigidbody rbEnnemi;
     public ForceFreezeHips forceFreezeHips;
+    public SonManager sonManager;
     [Header("Cible")]
     public Transform player;
     
@@ -70,7 +72,9 @@ public class EnnemyReferences : MonoBehaviour
     [Header("Combat stats")]
     public int vieEnnemie;
     public float damageThreshold;
-    public float attackDamage = 10f; //placeholder
+    public int attackDamage = 10; //placeholder
+    public int projectileDamage = 7; // placeholder
+    public int jumpDamage = 15; // placeholder, à ajuster selon les besoins pour les dégâts du saut de l'ennemi
     public float degats = 10f; // placeholder
     public float forceDeRagdoll = 20f; // placeholder, à ajuster selon les besoins pour la force du ragdoll lors du stun
     [Header("Etat")]

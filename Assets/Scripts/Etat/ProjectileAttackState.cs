@@ -34,6 +34,7 @@ public class ProjectileAttackState : IState
         IsComplete = false; // Réinitialise l'état de lancement du projectile 
         Debug.Log("L'ennemi lance un projectile vers le joueur !"); 
         LaunchProjectile();
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Projectile);
     }
     
     private void LaunchProjectile()
@@ -109,6 +110,11 @@ public class ProjectileAttackState : IState
                 {
                     Debug.Log("Touché pendant le vol !");
                     // Applique les dégâts ici
+                    IDommagable cible = frameHit.collider.GetComponent<IDommagable>();
+                    if (cible != null)
+                    {
+                        cible.PrendreDegat(_ennemyRef.projectileDamage);
+                    }
                 }
                 break; // Sort de la boucle car on a touché quelque chose
             }

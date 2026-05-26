@@ -449,6 +449,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             gameOverScreen.SetActive(true);
             
         }
+    
     }
 
 
@@ -645,28 +646,38 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// d'avoir plus d'une arme de chaque type
     /// </summary>
     /// <param name="donnees"></param>
-    public void ObtenirArme(dataArmes donnees )
+public void ObtenirArme(dataArmes donnees) 
+{
+    if(armesPresentes.Contains(donnees.nomArme)) return;
+
+    for(int i = 0; i < slotsArmes.Length; i++)
     {
-        if(armesPresentes.Contains(donnees.nomArme)) return;
-
-        for(int i = 0; i < slotsArmes.Length; i++)
+        if(slotsArmes[i] == null)
         {
-            if(slotsArmes[1] == null)
+            GameObject nouvelleArme = Instantiate(donnees.prefabArme, socketArme);
+            ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
+            
+            script.slotIndex = i;
+            slotsArmes[i] = script;
+
+            // On ajoute le nom de l'arme pour le système anti-doublon
+            armesPresentes.Add(donnees.nomArme);
+            if (i == indexArmeActive)
             {
-                GameObject nouvelleArme =Instantiate(donnees.prefabArme, socketArme);
-                ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
-                
-                script.slotIndex = i;
-                slotsArmes[i] = script;
-
-                nouvelleArme.SetActive(false);
-
-                armesPresentes.Add(donnees.nomArme);
-                break;
+                nouvelleArme.SetActive(true);
+                scriptGestionArme = script;
+                script.estObtenue = true;
+                script.peutRecevoirInput = true;
             }
+            else
+            {
+                nouvelleArme.SetActive(false);
+            }
+            break;
         }
     }
-    public void AppliquerOffsetReculCamera(float recupRecul, float reculParTir)
+}
+public void AppliquerOffsetReculCamera(float recupRecul, float reculParTir)
     {
         reculAcumul = Mathf.Min(reculAcumul + reculParTir, reculMax);
         
