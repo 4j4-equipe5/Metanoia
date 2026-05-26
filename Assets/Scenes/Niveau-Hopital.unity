@@ -229,6 +229,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7499887697381189135, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
   m_PrefabInstance: {fileID: 8839901559698882151}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &870732020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6711681448432263661, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+  m_PrefabInstance: {fileID: 5279070348667539944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53839ebc651746489f92eb1bbd33097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1144036435 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3515985862831429059, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
@@ -1356,18 +1367,34 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
+    - target: {fileID: 3724065131209163702, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 870732020}
     - target: {fileID: 3895852477536524927, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
+    - target: {fileID: 3895852477536524927, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 870732020}
     - target: {fileID: 4346598803195241119, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
+    - target: {fileID: 4346598803195241119, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 870732020}
     - target: {fileID: 5009142999638128742, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
+    - target: {fileID: 5009142999638128742, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 870732020}
     - target: {fileID: 5690988030743072621, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: m_Name
       value: AiManager
@@ -1376,6 +1403,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
+    - target: {fileID: 6818894606227085313, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: sonManager
+      value: 
+      objectReference: {fileID: 870732020}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
