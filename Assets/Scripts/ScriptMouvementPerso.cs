@@ -433,9 +433,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         if (hpPlayer <= 0)
         {
             // simple gestion de la mort (à adapter)
-            Debug.Log("Player dead");
-            // par exemple désactiver le GameObject
-            gameObject.SetActive(false);
+            Debug.Log("Player dead"); 
+            DisableControls();
+            DisableMovement();
             // afficher l'écran de game over
             gameOverScreen.SetActive(true);
             
