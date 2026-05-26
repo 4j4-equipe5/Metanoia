@@ -15,7 +15,7 @@ MonoBehaviour:
   nomArme: pistolet
   degats: 10
   cadence: 3
-  maxReserve: 700
+  maxReserve: 70
   prefabArme: {fileID: 5577660901045844289, guid: 861913dede52bab13936163daefecd1b, type: 3}
   prefabMuzzleFlash: {fileID: 3290417806283166974, guid: 72b8607fd478921a1ada9555e5e73c17, type: 3}
   prefabImpact: {fileID: 7400742969965322281, guid: e305efe0beb0ff141a1f2d5631a7dcb9, type: 3}
