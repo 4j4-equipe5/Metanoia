@@ -98,6 +98,7 @@ MonoBehaviour:
   hpPlayer: 100
   maxHp: 100
   gameOverScreen: {fileID: 0}
+  recupRecul: 3
 --- !u!136 &3853910874761027658
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -519,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6976550657279966019, guid: 45c3ab02797ae70c1bbb404703b37e2d, type: 3}
       propertyPath: estObtenue
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -589,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8384627267822997153, guid: 37671ee2ad0a2db3b963e8f12781f4fb, type: 3}
       propertyPath: estObtenue
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
