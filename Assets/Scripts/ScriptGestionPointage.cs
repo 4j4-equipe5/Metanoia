@@ -5,6 +5,7 @@ public class ScriptGestionPointage : MonoBehaviour
     [Header("Score")]
     private static int scoreTotal = 0;
     private int pointsKillEnnemi = 100;
+    private int pointsAnomalie = 500;
     public static ScriptGestionPointage Instance;
     [Header("Combo")]
     private static int incrementCombo = 0;
@@ -53,8 +54,15 @@ public class ScriptGestionPointage : MonoBehaviour
         if(incrementCombo >= 10) return 8f;
         return 1f;
     }
+    public void PointageAnomalie(int nbAnomalieTrouvee)
+    {
+        int pointsGagnes = nbAnomalieTrouvee * pointsAnomalie;
+        scoreTotal += pointsGagnes;
+    }
     //proprietes que le HUD va aller chercher sans toucher au variables privees
     public int score => scoreTotal;
     public int combo => incrementCombo;
     public int multi => (int)CalculerMultiplicateur();
+
+
 }
