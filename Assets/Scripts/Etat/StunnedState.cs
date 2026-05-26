@@ -28,7 +28,11 @@ public class StunnedState : IState
 
     public void OnEnter()
     {
-        _ennemyRef.agent.isStopped = true; // Arrête le NavMeshAgent pour le Stun
+        // Vérifie que l'agent est valide et sur le NavMesh avant de le arrêter
+        if (_ennemyRef.agent != null && _ennemyRef.agent.isOnNavMesh)
+        {
+            _ennemyRef.agent.isStopped = true; // Arrête le NavMeshAgent pour le Stun
+        }
         _ennemyRef.agent.enabled = false; // Désactive le NavMeshAgent pour permettre un contrôle total de l'ennemi pendant le Stun
         _ennemyRef.animEnnemi.enabled = false; // Désactive l'Animator pour le Stun
         _ennemyRef.forceFreezeHips.enabled = false; // Désactive le script de freeze des hanches pour permettre au ragdoll de réagir correctement
