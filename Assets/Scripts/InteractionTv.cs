@@ -10,13 +10,14 @@ using UnityEngine;
 /// </summary>
 public class InteractionTv : MonoBehaviour, IInteraction
 {
+    
     //ref
     public enum TypeBouton {Plus, Moins, Enter}
 
     [Header("Configuration des boutons")]
     [SerializeField] private TeleUI scriptTele; // Glisse le script principal de ta TV ici
     [SerializeField] private TypeBouton fonctionDuBouton; 
-    [SerializeField] private string labelAffiche = "Interagir avec le bouton";
+    [SerializeField] private string labelAffiche = "(garder appuyer)Interagir avec le bouton";
 
     public string InteractionLabel => labelAffiche;
 

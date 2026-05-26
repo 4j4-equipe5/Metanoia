@@ -177,14 +177,7 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             cibleActuelle.Interagir(this);
         }
         //Ajout Emile : PlaceHolder pour la tv
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log($"[TEST PHYSIQUE] La touche E fonctionne ! Cible : {(cibleActuelle != null ? cibleActuelle.InteractionLabel : "Aucune")}");
-            if (cibleActuelle != null)
-            {
-                cibleActuelle.Interagir(this);
-            }
-        }
+
         //obtenir les valeurs de la souris
         Vector2 look = controle.Player.Look.ReadValue<Vector2>();
         //l'axe horizontale est influenc� par le personnage
@@ -490,7 +483,9 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// </param>
     private void ChangerArme (int index)
     {
+          Debug.Log($"ChangerArme({index}) - slot null: {slotsArmes[index] == null}");
         if (slotsArmes[index] == null) return;
+        Debug.Log($"script null: {slotsArmes[index] == null}, estObtenue: {slotsArmes[index].estObtenue}, nom: {slotsArmes[index].gameObject.name}");
         if (!slotsArmes[index].estObtenue) return;
         if (index == indexArmeActive) return;
 
@@ -652,34 +647,32 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
     /// <param name="donnees"></param>
 public void ObtenirArme(dataArmes donnees) 
 {
-    if(armesPresentes.Contains(donnees.nomArme)) return;
+    if (armesPresentes.Contains(donnees.nomArme)) return;
 
-    for(int i = 0; i < slotsArmes.Length; i++)
+    ScriptGestionArme[] armes = GetComponentsInChildren<ScriptGestionArme>(true);
+
+    foreach (var arme in armes)
     {
-        if(slotsArmes[i] == null)
+        if (arme.donnees.nomArme == donnees.nomArme)
         {
-            GameObject nouvelleArme = Instantiate(donnees.prefabArme, socketArme);
-            ScriptGestionArme script = nouvelleArme.GetComponent<ScriptGestionArme>();
-            
-            script.slotIndex = i;
-            slotsArmes[i] = script;
-
-            // On ajoute le nom de l'arme pour le système anti-doublon
+            arme.estObtenue = true;
             armesPresentes.Add(donnees.nomArme);
-            if (i == indexArmeActive)
+
+            int slot = arme.slotIndex;
+            slotsArmes[slot] = arme;
+
+            
+            if (slot == indexArmeActive)
             {
-                nouvelleArme.SetActive(true);
-                scriptGestionArme = script;
-                script.estObtenue = true;
-                script.peutRecevoirInput = true;
+                arme.gameObject.SetActive(true);
+                scriptGestionArme = arme;
             }
-            else
-            {
-                nouvelleArme.SetActive(false);
-            }
-            break;
+
+          
+            return;
         }
     }
+
 }
 public void AppliquerOffsetReculCamera(float recupRecul, float reculParTir)
     {

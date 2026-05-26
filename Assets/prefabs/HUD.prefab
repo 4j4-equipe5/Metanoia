@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 7052758247099354841}
   - component: {fileID: 2925198414432951211}
   - component: {fileID: 194991013782478867}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ConteneurScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.1999512, y: -37}
+  m_AnchoredPosition: {x: -128, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2925198414432951211
@@ -469,7 +469,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -40
+  m_Spacing: -33.48
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -2090,7 +2090,7 @@ GameObject:
   - component: {fileID: 5021330351433112390}
   - component: {fileID: 3355210170439639192}
   - component: {fileID: 3174974149820218374}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextCombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2146,8 +2146,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
+  m_sharedMaterial: {fileID: 5460666566643116809, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2999,7 +2999,7 @@ GameObject:
   - component: {fileID: 1586455769957098620}
   - component: {fileID: 3039603380535055898}
   - component: {fileID: 4442029821545466842}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3055,8 +3055,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
+  m_sharedMaterial: {fileID: 5460666566643116809, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3211,7 +3211,7 @@ GameObject:
   - component: {fileID: 3430226491663480171}
   - component: {fileID: 4295051269445586189}
   - component: {fileID: 7809935704099148014}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextMultiplicateur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3267,8 +3267,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
+  m_sharedMaterial: {fileID: 5460666566643116809, guid: 2de11489b174e9a479817b56bbcf1bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
