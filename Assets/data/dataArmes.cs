@@ -14,4 +14,6 @@ public class dataArmes : ScriptableObject
     public int nombreProjectile = 1;
     public float dispersion = 0f;
     public GameObject prefabCartouche;
+    public float reculParTir;
+    public GameObject prefabSang;
 }
