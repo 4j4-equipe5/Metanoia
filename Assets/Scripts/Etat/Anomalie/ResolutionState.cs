@@ -23,7 +23,6 @@ public class ResolutionState : IState
     public void OnEnter()
     {
         isComplete = false;
-        _anomalieRef.roundsActuel ++;
         // permet d'ouvrir la porte
         _anomalieRef.scriptPorteSortie.AutoriserOuverture();
         // Verification de la reponse du Joueur
