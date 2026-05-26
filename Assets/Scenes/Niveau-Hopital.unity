@@ -335,6 +335,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5279070348667539946}
     - target: {fileID: 2796329411961385617, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: degats
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796329411961385617, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1553179307155889530}
@@ -346,6 +350,10 @@ PrefabInstance:
       propertyPath: gestionPointage
       value: 
       objectReference: {fileID: 5279070348667539946}
+    - target: {fileID: 2796329411961385617, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: projectileDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3462116039554683955, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: player
       value: 
@@ -413,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 8606059499933191739, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
       propertyPath: m_Name
       value: AiManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207082532515850642, guid: cfd24ba52f1369949aba5025048580f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -664,6 +676,18 @@ PrefabInstance:
     - target: {fileID: 3241390696602728112, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: tempsTotalUnite
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691957518481656075, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_UseMotor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691957518481656075, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_Spring.spring
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691957518481656075, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_Spring.targetPosition
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4196281948607853736, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_IsActive
