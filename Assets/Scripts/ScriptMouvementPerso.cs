@@ -440,7 +440,11 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
             DisableMovement();
             // afficher l'écran de game over
             gameOverScreen.SetActive(true);
-            
+            VictoryManager victoryManager = FindFirstObjectByType<VictoryManager>();
+            if (victoryManager != null)
+            {
+                victoryManager.TriggerVictory();
+            }
         }
     
     }
