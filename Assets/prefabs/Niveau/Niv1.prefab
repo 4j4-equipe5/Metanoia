@@ -172,7 +172,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2225383381505981253}
+    - target: {fileID: 3045027745326516249, guid: b469c94145baec74599d993580cc17ac, type: 3}
+      propertyPath: tempsTotalUnite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7480222318036274308, guid: b469c94145baec74599d993580cc17ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.635273
