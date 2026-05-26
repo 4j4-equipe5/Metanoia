@@ -563,6 +563,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4631115613391676617, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: scriptStressCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631115613391676617, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: 'miannList.Array.data[0]'
       value: 
       objectReference: {fileID: 5363960347575658658}
@@ -674,8 +678,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 4392266515376640927, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7899507232267910230, guid: f6f08543334073b4eaed5695b6345637, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2352653016475177959, guid: f6f08543334073b4eaed5695b6345637, type: 3}
