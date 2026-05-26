@@ -170,10 +170,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8a4d800c8e9580c449a1155a286cee78, type: 3}
   sonLoto: []
   sonMiann:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 174c9bd2129d30648bad66642a15c946, type: 3}
   - {fileID: 8300000, guid: 2a80a74761415d943be9b7b5c7be77ea, type: 3}
   - {fileID: 8300000, guid: b510b2f7e8100944b9e19ad43343ca59, type: 3}
   - {fileID: 8300000, guid: b510b2f7e8100944b9e19ad43343ca59, type: 3}
   - {fileID: 8300000, guid: e8c9e928fc13aae478601f01ab3ffc81, type: 3}
   - {fileID: 8300000, guid: 9657fe3bb529706468e674a18d6b25e8, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 174c9bd2129d30648bad66642a15c946, type: 3}
