@@ -6,8 +6,8 @@ using System.Linq;
 public class MachineBonus : MonoBehaviour, IInteraction
 {
     [SerializeField] private dataBuffs[] buffsPossibles;
-    public string InteractionLabel {get;} = "Tentez votre chance [10000]";
-    public int prix {get;} = 10000;
+    public string InteractionLabel {get;} = "Tentez votre chance [1000]";
+    public int prix {get;} = 1000;
 
     /// <summary>
     /// classe Interagir qui est necessaire pour l'interface IInteraction

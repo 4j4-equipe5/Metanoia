@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dataArmes_ak
   m_EditorClassIdentifier: 
   nomArme: ak
-  degats: 30
+  degats: 15
   cadence: 6
   maxReserve: 475
   prefabArme: {fileID: 2474317785911731772, guid: 37671ee2ad0a2db3b963e8f12781f4fb, type: 3}
