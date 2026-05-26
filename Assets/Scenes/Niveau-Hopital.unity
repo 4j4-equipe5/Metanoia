@@ -556,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241390696602728112, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: tempsTotalUnite
-      value: 90
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4196281948607853736, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_IsActive

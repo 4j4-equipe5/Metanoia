@@ -31,9 +31,12 @@ public class TeleUI : MonoBehaviour
 
     public void ActionBoutonPlus()
     {
-        numeroPiece++;
-        MettreAJourEcran();
-        Debug.Log("PLUS");
+        if(numeroPiece < 12)
+        {
+            numeroPiece++;
+            MettreAJourEcran();
+            Debug.Log("PLUS"); 
+        }
     }
 
     public void ActionBoutonMoins()
