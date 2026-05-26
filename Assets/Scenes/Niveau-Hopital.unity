@@ -669,6 +669,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3067290380289138675, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3149309367566592054, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_Name
       value: Niv1
@@ -688,6 +692,22 @@ PrefabInstance:
     - target: {fileID: 3691957518481656075, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_Spring.targetPosition
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882661459263356163, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5279070348667539947}
+    - target: {fileID: 3882661459263356163, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSensitivity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882661459263356163, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SliderSensitivity, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882661459263356163, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4196281948607853736, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_IsActive
@@ -733,6 +753,10 @@ PrefabInstance:
       propertyPath: 'miannSpawnPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 99218238810918170}
+    - target: {fileID: 5088691663196308732, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5529156008774645110, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -789,6 +813,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5781019095364920519, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206167046792584283, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922914080843129161, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8535752014703337466, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -803,6 +839,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535752014703337466, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729495181307332037, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -929,6 +969,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34c3cd2bb822e60ba9f20ace25fe64ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5279070348667539947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5756589260340245605, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+  m_PrefabInstance: {fileID: 5279070348667539944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa853a5a82087c42b644430d94fbc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5375056050028619263 stripped
