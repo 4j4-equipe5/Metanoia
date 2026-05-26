@@ -15,5 +15,5 @@ public class dataArmes : ScriptableObject
     public float dispersion = 0f;
     public GameObject prefabCartouche;
     public float reculParTir;
-    
+    public GameObject prefabSang;
 }

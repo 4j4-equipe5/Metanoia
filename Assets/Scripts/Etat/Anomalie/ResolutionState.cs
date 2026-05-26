@@ -10,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class ResolutionState : IState
 {
+  
     //Ref
     private AnomalieReference _anomalieRef;
     public bool isComplete {get; private set;}
@@ -29,6 +30,7 @@ public class ResolutionState : IState
         // Verification de la reponse du Joueur
         if (_anomalieRef.reponseJoueur == _anomalieRef.anomalieCount)
         {
+            ScriptGestionPointage.Instance.PointageAnomalie(_anomalieRef.anomalieCount);
             // Joueur reçois des points
             // TODO: POINTS et SAM
 

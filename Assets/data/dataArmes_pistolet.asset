@@ -24,3 +24,4 @@ MonoBehaviour:
   dispersion: 0
   prefabCartouche: {fileID: 3587069625105676534, guid: c7666d8ecf00777cd8134d7dc85024a9, type: 3}
   reculParTir: 3
+  prefabSang: {fileID: 3129770399985230568, guid: 5ab90bc8c6aeef2d5a3a45eb839c9f14, type: 3}

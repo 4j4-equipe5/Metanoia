@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.Serialization;
 public class ScriptGestionArme : MonoBehaviour
 {
+    
     [SerializeField] private Transform portEjection;
     private GameObject flashActuel;
     public bool peutRecevoirInput = true;
@@ -120,10 +121,17 @@ public class ScriptGestionArme : MonoBehaviour
                 //des dommages en allant chercher l'interface qu'il herite
                 //pour recevoir des dommages
                 IDommagable cible = hit.collider.GetComponent<IDommagable>();
+                //ajout d'une tache de sang sur l'ennemi
                 if(cible != null)
                 {
                     cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal));
-                    
+                    if(donnees.prefabSang != null)
+                    {
+                    GameObject sang = Instantiate(donnees.prefabSang, hit.point, Quaternion.LookRotation(hit.normal));
+                    sang.transform.SetParent(hit.collider.transform);
+                    Destroy(sang, 5f);                       
+                    }
+
 
                 }
 
