@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScriptGestionPointage : MonoBehaviour
 {
     [Header("Score")]
-    private static int scoreTotal = 0;
+    private static int scoreTotal = 3000;
     private int pointsKillEnnemi = 100;
     private int pointsAnomalie = 500;
     public static ScriptGestionPointage Instance;
@@ -58,6 +58,15 @@ public class ScriptGestionPointage : MonoBehaviour
     {
         int pointsGagnes = nbAnomalieTrouvee * pointsAnomalie;
         scoreTotal += pointsGagnes;
+    }
+    /// <summary>
+    /// fonction qui retire les points au joueur apres achat. Appelee
+    /// dans le script des machines
+    /// </summary>
+    /// <param name="valeurRetiree"></param>
+        public void RetirerPoint(int valeurRetiree)
+    {
+       scoreTotal -= valeurRetiree; 
     }
     //proprietes que le HUD va aller chercher sans toucher au variables privees
     public int score => scoreTotal;

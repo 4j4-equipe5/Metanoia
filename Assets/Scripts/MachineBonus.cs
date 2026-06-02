@@ -26,6 +26,8 @@ public class MachineBonus : MonoBehaviour, IInteraction
         var buffChoisi = disponibles[Random.Range(0, disponibles.Length)];
         //appel classe AppliquerBuff dans scriptgestionjoueur avec le buffchoisi en argument
         joueur.AppliquerBuff(buffChoisi);
+        //appel de la fonction qui retire les points au joueur
+        ScriptGestionPointage.Instance.RetirerPoint(prix);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,3 +41,4 @@ public class MachineBonus : MonoBehaviour, IInteraction
         
     }
 }
+

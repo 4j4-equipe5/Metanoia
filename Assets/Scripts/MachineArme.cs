@@ -23,5 +23,6 @@ public class MachineArme : MonoBehaviour, IInteraction
 
         dataArmes armeChoisi = disponibles[Random.Range(0, disponibles.Length)];
         joueur.ObtenirArme(armeChoisi);
+        ScriptGestionPointage.Instance.RetirerPoint(prix);
     }
 }
