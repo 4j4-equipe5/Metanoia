@@ -124,7 +124,8 @@ public class ScriptGestionArme : MonoBehaviour
                 //ajout d'une tache de sang sur l'ennemi
                 if(cible != null)
                 {
-                    cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal));
+                    float forceRecul = donnees.forceArme * 2f; // Placeholder, à ajuster selon les besoins pour la force de recul
+                    cible.PrendreDegat((int)(donnees.degats * joueur.modificateurDommageGlobal), hit, forceRecul);
                     if(donnees.prefabSang != null)
                     {
                     GameObject sang = Instantiate(donnees.prefabSang, hit.point, Quaternion.LookRotation(hit.normal));

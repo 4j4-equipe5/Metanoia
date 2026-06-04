@@ -77,7 +77,9 @@ public class EnnemyReferences : MonoBehaviour
     public int projectileDamage = 7; // placeholder
     public int jumpDamage = 15; // placeholder, à ajuster selon les besoins pour les dégâts du saut de l'ennemi
     public float degats = 10f; // placeholder
-    public float forceDeRagdoll = 20f; // placeholder, à ajuster selon les besoins pour la force du ragdoll lors du stun
+    public float forceSaut;
+    public float forceCharge;
+    public float forceAttaque;
     [Header("Etat")]
     public bool isStunned;
     public bool isDead;
@@ -85,5 +87,8 @@ public class EnnemyReferences : MonoBehaviour
     [Header("Layers")]
     public LayerMask murLayer;
 
-
+    [Header("Données du dernier impact")]
+    public Vector3 directionDernierImpact;
+    public float forceDernierRecul;
+    public Vector3 pointDernierImpact;
 }

@@ -102,8 +102,18 @@ public class AttackState : IState
                      IDommagable cible = hitCollider.GetComponent<IDommagable>();
                     if (cible != null)
                     {
-                            cible.PrendreDegat(_ennemyRef.attackDamage);
-                            Debug.Log("Le joueur a été touché par l'attaque de Miann !");
+                        // 1. Instanciation d'une variable locale pour le RaycastHit de l'attaque
+                        RaycastHit attackHit = new RaycastHit();
+
+                        // 2. Calcul du vecteur de recul 
+                        Vector3 directionRecul = (hitCollider.transform.position - _ennemyRef.transform.position).normalized;
+
+                        // 3. Configuration de la normal inversée pour que le recul pousse le joueur dans la direction opposée à Miann
+                        attackHit.normal = -directionRecul;
+                        attackHit.point = hitCollider.transform.position; // Point d'impact pour le recul
+
+                        cible.PrendreDegat(_ennemyRef.attackDamage, attackHit, _ennemyRef.forceAttaque); // Applique les dégâts de l'attaque au joueur et la force de recul
+                        Debug.Log("Le joueur a été touché par l'attaque de Miann !");
                     }
                 }
             }

@@ -19,7 +19,6 @@ public class StunnedState : IState
     private EnnemyReferences _ennemyRef;
     private Transform player;
 
-    Vector3 startPosition;
 
     // Constructeur
     public StunnedState (EnnemyReferences ennemyRef)
@@ -42,11 +41,17 @@ public class StunnedState : IState
         // Ragdoll : Different 
         foreach (GameObject joint in _ennemyRef.joints)
         {
-            Rigidbody rb = joint.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = false; // Rend les rigidbodies non-kinematic pour permettre au ragdoll de réagir aux forces
-            }
+            joint.GetComponent<Rigidbody>().isKinematic = false; // Rend les rigidbodies non-kinematic pour permettre au ragdoll de réagir aux forces
+        }
+        Rigidbody rbHips = _ennemyRef.joints[0].GetComponent<Rigidbody>(); // Supposons que le premier joint est les hanches
+        if (rbHips != null)
+        {
+            Vector3 directionRecul = _ennemyRef.directionDernierImpact; // Direction du recul basée sur le dernier impact
+            directionRecul.y = 0.4f; //
+            directionRecul.Normalize();
+
+            // Utilise la force de recul enregistrée dans les références de l'ennemi
+            rbHips.AddForce(directionRecul * _ennemyRef.forceDernierRecul, ForceMode.Impulse);
         }
         _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Stunned);
     }
@@ -64,11 +69,7 @@ public class StunnedState : IState
     {
         foreach (GameObject joint in _ennemyRef.joints)
         {
-            Rigidbody rb = joint.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true; // Rend les rigidbodies kinematic pour désactiver le ragdoll
-            }
+            joint.GetComponent<Rigidbody>().isKinematic = true; // Rend les rigidbodies kinematic pour désactiver le ragdoll
         }
         _ennemyRef.agent.enabled = true; // Réactive le NavMeshAgent après l'attaque
         _ennemyRef.agent.isStopped = false; // Permet au NavMeshAgent de reprendre le contrôle du mouvement

@@ -428,10 +428,15 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
 
 
     // implémentation de IDommagable pour recevoir des dégâts
-    public void PrendreDegat(int degats)
+    public void PrendreDegat(int degats, RaycastHit hit, float forceRecul)
     {
         hpPlayer -= degats;
         Debug.Log($"Player received {degats} dmg. HP = {hpPlayer}");
+
+        // Ajout d'Emile : Appliquer une force de recul au joueur
+        Vector3 directionRecul = -hit.normal;
+        directionRecul.y = 0.4f; // Ajouter une composante verticale pour éviter que le joueur ne soit projeté directement au sol
+        joueurRb.AddForce(directionRecul.normalized * forceRecul, ForceMode.Impulse);
         if (hpPlayer <= 0)
         {
             // simple gestion de la mort (à adapter)
@@ -448,8 +453,6 @@ public class ScriptMouvementPerso : MonoBehaviour, IDommagable
         }
     
     }
-
-
 
 /// <summary>
 /// fonction qui va chercher les deux armes dans l'inventaire du joueur dans awake

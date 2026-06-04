@@ -113,7 +113,7 @@ public class ProjectileAttackState : IState
                     IDommagable cible = frameHit.collider.GetComponent<IDommagable>();
                     if (cible != null)
                     {
-                        cible.PrendreDegat(_ennemyRef.projectileDamage);
+                        cible.PrendreDegat(_ennemyRef.projectileDamage, frameHit, 0.1f); // Applique les dégâts du projectile au joueur et une petite force de recul
                     }
                 }
                 break; // Sort de la boucle car on a touché quelque chose

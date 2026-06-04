@@ -101,7 +101,17 @@ public class JumpAttackState : IState
                     IDommagable cible = hitCollider.GetComponent<IDommagable>();
                     if (cible != null)
                     {
-                        cible.PrendreDegat(_ennemyRef.jumpDamage); // Applique les dégâts du saut au joueur
+                        //1. Instancier une variable locale pour le RaycastHit du saut
+                        RaycastHit jumpHit = new RaycastHit();
+
+                        //2. Calcul du vecteur de recul 
+                        Vector3 directionRecul = (hitCollider.transform.position - transform.position).normalized;
+                        //3. Configuration de la normal inversée pour que le recul pousse le joueur dans la direction opposée à Miann
+                        jumpHit.normal = -directionRecul;
+                        jumpHit.point = hitCollider.transform.position; // Point d'impact pour le recul
+
+                        //4. Utilisation de la variable locale jumpHit pour appliquer les dégâts et le recul au joueur
+                        cible.PrendreDegat(_ennemyRef.jumpDamage, jumpHit, _ennemyRef.forceSaut); // Applique les dégâts du saut au joueur et la force de recul
                         Debug.Log("Le joueur a été touché par le saut de Miann !");
                     }
                 }

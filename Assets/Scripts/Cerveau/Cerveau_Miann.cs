@@ -169,8 +169,11 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
     }
 
     // IMPLEMENTATION DE L'INTERFACE IDOMMAGABLE
-    public void PrendreDegat(int degats)
-    {
+    public void PrendreDegat(int degats, RaycastHit hit, float forceRecul)
+    {   
+        ennemyRef.directionDernierImpact = -hit.normal; // Stocke la direction du dernier impact
+        ennemyRef.forceDernierRecul = forceRecul; // Stocke la force du dernier recul
+        ennemyRef.pointDernierImpact = hit.point; // Stocke le point du dernier impact
         if (ennemyRef.isDead) return;
 
         if (ennemyRef.isStunned)

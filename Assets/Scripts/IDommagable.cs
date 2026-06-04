@@ -1,3 +1,4 @@
+using UnityEngine;
 /*
 ce script contient un interface. Les interfaces sont utiles en raison
 du fait que une seule classe parente peut etre heritee. Comme les scripts
@@ -11,5 +12,8 @@ destructible heriterons donc de IDommagable.
 */
 public interface  IDommagable
 {
-    public void PrendreDegat(int degats);
+    // Modif par : Emile
+    // j'ajoute un RaycastHit en parametre pour que les ennemis puissent réagir différemment selon la partie du corps touchée (ex: headshot vs body shot)
+    // + un float pour la force du tir / attaque de monstre, qui peut être utilisé pour appliquer une force de recul plus importante sur les ennemis plus légers ou pour faire tomber des objets destructibles
+    public void PrendreDegat(int degats, RaycastHit hit, float forceRecul);
 }

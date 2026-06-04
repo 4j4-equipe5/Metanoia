@@ -29,7 +29,10 @@ public class DeathState : IState
         _ennemyRef.agent.enabled = false; // Désactive le NavMeshAgent pour permettre un contrôle total de l'ennemi pendant le Stun
         _ennemyRef.animEnnemi.enabled = false; // Désactive l'Animator pour le Stun
         _ennemyRef.forceFreezeHips.enabled = false; // Désactive le script de freeze des hanches pour permettre au ragdoll de réagir correctement
-        Debug.Log("Ennemi est stunned");
+        // Son de mort
+        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Mort);
+        
+        Debug.Log("Ennemi est mort");
         startPosition = _ennemyRef.transform.position;
         // On veut récupérer la Direction pour le ragdoll suit la direction du joueur
         Vector3 direction = (startPosition - player.position).normalized;
@@ -41,17 +44,22 @@ public class DeathState : IState
         // Ajout du recul pour projeter l'ennemi vers le haut
         direction.y = 0.7f; // Placeholder, à ajuster selon les besoins pour la composante verticale du recul
         direction.Normalize();
-        // On applique une force de ragdoll dans la direction du joueur, avec une magnitude dépendant de l'arme utilisée
-        // Placeholder, à ajuster selon les besoins pour la force du ragdoll
-        Vector3 force = direction * _ennemyRef.forceDeRagdoll; // + une composante verticale pour faire lever l'ennemi un peu dans les airs
-        
         // Applique la force de ragdoll à tous les joints de l'ennemi
         foreach (GameObject joint in _ennemyRef.joints)
         {
             joint.GetComponent<Rigidbody>().isKinematic = false; // Rend les rigidbodies non-kinematic pour permettre au ragdoll de réagir aux forces
-            joint.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse); // Applique la force de ragdoll à chaque joint
-        }
 
+        }
+        Rigidbody rbHips = _ennemyRef.joints[0].GetComponent<Rigidbody>(); // Supposons que le premier joint est les hanches
+        if (rbHips != null)
+        {
+            Vector3 directionRecul = _ennemyRef.directionDernierImpact; // Direction du recul basée sur le dernier impact
+            directionRecul.y = 4f; //
+            directionRecul.Normalize();
+
+            // Utilise la force de recul enregistrée dans les références de l'ennemi
+            rbHips.AddForce(directionRecul * _ennemyRef.forceDernierRecul * 2, ForceMode.Impulse);
+        }
         // TODO: Ajout des Points
         timePassed = 0f;
     }
@@ -60,7 +68,7 @@ public class DeathState : IState
     {
         timePassed += Time.deltaTime;
 
-        if (timePassed >= 5f && !_ennemyRef.isDead)
+        if (timePassed >= 1f && !_ennemyRef.isDead)
         {
             _ennemyRef.isDead = true;
         }
