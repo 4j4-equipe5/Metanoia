@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8440132885056691182}
   - component: {fileID: 1064059951425034972}
   - component: {fileID: 2177198727465673846}
+  - component: {fileID: 8499586030163965921}
+  - component: {fileID: 6042021171575481562}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -47,7 +49,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 77df1d058509aac449145896347f33d1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.79
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -177,3 +179,37 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e8c9e928fc13aae478601f01ab3ffc81, type: 3}
   - {fileID: 8300000, guid: 9657fe3bb529706468e674a18d6b25e8, type: 3}
   - {fileID: 8300000, guid: 174c9bd2129d30648bad66642a15c946, type: 3}
+--- !u!169 &8499586030163965921
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272503175572029964}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1814461
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!170 &6042021171575481562
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272503175572029964}
+  m_Enabled: 1
+  m_DistortionLevel: 0.7

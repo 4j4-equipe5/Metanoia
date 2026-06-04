@@ -29,7 +29,7 @@ public class ResolutionState : IState
         // Verification de la reponse du Joueur
         if (_anomalieRef.reponseJoueur == _anomalieRef.anomalieCount)
         {
-            ScriptGestionPointage.Instance.PointageAnomalie(_anomalieRef.anomalieCount);
+            _anomalieRef.gestionPointage.PointageAnomalie(_anomalieRef.reponseJoueur * 2); // points gagner fois 2
             // Joueur reçois des points
             // TODO: POINTS et SAM
             _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeA);
@@ -47,12 +47,16 @@ public class ResolutionState : IState
                 case 1:
                 // SAM ANNONCE RANK B
                 //Points Gagner
+                _anomalieRef.gestionPointage.PointageAnomalie(_anomalieRef.reponseJoueur); // points gagner diviser par 2
+
                 _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeB);
                 // points fois 2
                 break;
                 case 2:
                 // SAM ANNONCE RANK C
                 //Points Gagner 
+                _anomalieRef.gestionPointage.PointageAnomalie(_anomalieRef.reponseJoueur / 2); // points gagner diviser par 2
+                 _anomalieRef.scriptStressLighting.SetStressLevel(1); // stress lighting niveau 1
                 _anomalieRef.sonManager.SamSon(SonManager.IdSonSam.GradeC);
                 break;
                 case 3:

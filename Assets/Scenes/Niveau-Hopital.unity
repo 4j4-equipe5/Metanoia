@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &383484236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5961234183272744855, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+  m_PrefabInstance: {fileID: 5279070348667539944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &443964384 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 663de34357a1e7f488b286839ae6aa2e, type: 3}
@@ -750,10 +755,22 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3905527040161472117, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: DopplerLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4196281948607853736, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4631115613391676617, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: angleThreshold
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631115613391676617, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      propertyPath: gestionPointage
+      value: 
+      objectReference: {fileID: 5279070348667539946}
     - target: {fileID: 4631115613391676617, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       propertyPath: 'miannList.Array.data[0]'
       value: 
@@ -914,6 +931,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5961234183272744855, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5279070348667539952}
+    - targetCorrespondingSourceObject: {fileID: 5961234183272744855, guid: f6f08543334073b4eaed5695b6345637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5279070348667539954}
     - targetCorrespondingSourceObject: {fileID: 2352653016475177959, guid: f6f08543334073b4eaed5695b6345637, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5533178156900616944}
@@ -1019,7 +1042,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6711681448432263661, guid: f6f08543334073b4eaed5695b6345637, type: 3}
   m_PrefabInstance: {fileID: 5279070348667539944}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 383484236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c53839ebc651746489f92eb1bbd33097, type: 3}
@@ -1047,6 +1070,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa853a5a82087c42b644430d94fbc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!169 &5279070348667539952
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383484236}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.017735334
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!165 &5279070348667539954
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383484236}
+  m_Enabled: 1
+  m_CutoffFrequency: 8000
+  m_HighpassResonanceQ: 1
 --- !u!1 &5375056050028619263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1049025523404546634, guid: cfd24ba52f1369949aba5025048580f3, type: 3}

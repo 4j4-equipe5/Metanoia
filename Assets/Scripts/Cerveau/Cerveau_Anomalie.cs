@@ -49,7 +49,7 @@ public class Cerveau_Anomalie : MonoBehaviour
         At(resolution, genererRound, () => resolution.isComplete && anomalieRef.roundsActuel < 6);
         // Étape D : Après la 5ieme résolution on finie le jeu
         At(resolution, finPartie, () => resolution.isComplete && anomalieRef.roundsActuel >= 6 );
-
+        
         stateMachine.SetState(genererRound);
     }
 

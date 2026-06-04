@@ -3,7 +3,7 @@ using UnityEngine.AI;
 public class EnnemyReferences : MonoBehaviour
 {
     // TODO: !!! Si temps organise les ref mieux !!!
-    public ScriptGestionPointage gestionPointage;
+    public ScriptGestionPointage gestionPointage; // POUR JÉ 
     [Header("reférences à Ennemi")]
     public NavMeshAgent agent;
     public Animator animEnnemi;
