@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScriptGestionPointage : MonoBehaviour
 {
     [Header("Score")]
-    private static int scoreTotal = 3000;
+    private static int scoreTotal = 0;
     private int pointsKillEnnemi = 100;
     private int pointsAnomalie = 500;
     public static ScriptGestionPointage Instance;

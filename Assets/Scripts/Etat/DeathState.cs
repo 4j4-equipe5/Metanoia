@@ -30,7 +30,6 @@ public class DeathState : IState
         _ennemyRef.animEnnemi.enabled = false; // Désactive l'Animator pour le Stun
         _ennemyRef.forceFreezeHips.enabled = false; // Désactive le script de freeze des hanches pour permettre au ragdoll de réagir correctement
         Debug.Log("Ennemi est stunned");
-
         startPosition = _ennemyRef.transform.position;
         // On veut récupérer la Direction pour le ragdoll suit la direction du joueur
         Vector3 direction = (startPosition - player.position).normalized;
@@ -45,10 +44,15 @@ public class DeathState : IState
         // On applique une force de ragdoll dans la direction du joueur, avec une magnitude dépendant de l'arme utilisée
         // Placeholder, à ajuster selon les besoins pour la force du ragdoll
         Vector3 force = direction * _ennemyRef.forceDeRagdoll; // + une composante verticale pour faire lever l'ennemi un peu dans les airs
-
+        
+        // Applique la force de ragdoll à tous les joints de l'ennemi
+        foreach (GameObject joint in _ennemyRef.joints)
+        {
+            joint.GetComponent<Rigidbody>().isKinematic = false; // Rend les rigidbodies non-kinematic pour permettre au ragdoll de réagir aux forces
+            joint.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse); // Applique la force de ragdoll à chaque joint
+        }
 
         // TODO: Ajout des Points
-        _ennemyRef.sonManager.SonMiann(SonManager.IdSonMiann.Mort);
         timePassed = 0f;
     }
 

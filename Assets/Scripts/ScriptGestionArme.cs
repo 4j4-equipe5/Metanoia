@@ -120,7 +120,7 @@ public class ScriptGestionArme : MonoBehaviour
                 //on obtient le comportement propre a l'objet pour recevoir
                 //des dommages en allant chercher l'interface qu'il herite
                 //pour recevoir des dommages
-                IDommagable cible = hit.collider.GetComponent<IDommagable>();
+                IDommagable cible = hit.collider.GetComponentInParent<IDommagable>();
                 //ajout d'une tache de sang sur l'ennemi
                 if(cible != null)
                 {

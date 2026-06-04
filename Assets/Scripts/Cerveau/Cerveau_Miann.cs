@@ -33,14 +33,18 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         agentMiann = GetComponent<NavMeshAgent>();
         //Initialisation de la FSM
         stateMachine = new StateMachine();
+
+        // Kinematic les joints pour le ragdoll
+        foreach (GameObject joint in ennemyRef.joints)
+        {
+            joint.GetComponent<Rigidbody>().isKinematic = true; // Rend les rigidbodies kinematic pour désactiver le ragdoll
+        }
         //1. Déclaration des états spécifique à Mian    n
         var patrol = new PatrolState(agentMiann, ennemyRef.waypoints); // Etat de base : patrouille
         var chase = new ChaseState(ennemyRef);
         var wallRun = new WallRunState(ennemyRef); // Etat de déplacement sur les murs : utilise le NavMeshAgent pour se déplacer sur les murs
         var jumpAttack = new JumpAttackState(ennemyRef); // Etat d'attaque de saut : utilise les vector3 lerp pour creer un arche
         var projectileAttack = new ProjectileAttackState(ennemyRef); // Etat d'attaque à distance : utilise le NavMeshAgent pour se déplacer et lancer des projectiles
-        // TODO: ACTIVE QUAND FINI LE SCRIPT
-        // DeathState peut seulement être activer quand les scripts vont être intégrer dans la scène principale
         var death = new DeathState(ennemyRef); // Etat de mort : joue une animation de mort et désactive l'ennemi
         
         
@@ -118,7 +122,7 @@ public class Cerveau_Miann : MonoBehaviour, IDommagable
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         
         // Stun
-        AtAny(stunned, () => ennemyRef.isStunned); // Si l'ennemi est étourdi, passer à l'état d'étourdissement
+        AtAny(stunned, () => ennemyRef.isStunned && !ennemyRef.isDead); // Si l'ennemi est étourdi, passer à l'état d'étourdissement et que l'ennemi n'est pas mort
 
         // Sortie du stun
         At(stunned, chase, () =>

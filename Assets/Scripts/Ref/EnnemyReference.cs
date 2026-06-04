@@ -10,6 +10,7 @@ public class EnnemyReferences : MonoBehaviour
     public Rigidbody rbEnnemi;
     public ForceFreezeHips forceFreezeHips;
     public SonManager sonManager;
+    public GameObject[] joints;
     [Header("Cible")]
     public Transform player;
     
